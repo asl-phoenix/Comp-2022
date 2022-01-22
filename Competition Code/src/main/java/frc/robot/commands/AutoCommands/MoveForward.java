@@ -16,7 +16,7 @@ public class MoveForward extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(swerve);
     this.swerve = swerve;
-    this.d = d;
+    this.d = swerve.cmToPulses(d);
   }
 
   // Called when the command is initially scheduled.
