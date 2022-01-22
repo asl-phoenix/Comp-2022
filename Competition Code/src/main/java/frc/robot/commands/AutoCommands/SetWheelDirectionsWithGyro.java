@@ -4,22 +4,25 @@
 
 package frc.robot.commands.AutoCommands;
 
+import frc.robot.subsystems.Gyro;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SwerveRotaters;
 
-public class SetWheelDirections extends CommandBase {
+public class SetWheelDirectionsWithGyro extends CommandBase {
 
   SwerveRotaters rotators;
+  Gyro gyro;
   double fR, fL, bR, bL;
 
   /** Creates a new SetWheelDirections. */
-  public SetWheelDirections(SwerveRotaters rotators, double fR, double fL, double bR, double bL) {
+  public SetWheelDirectionsWithGyro(SwerveRotaters rotators, Gyro gyro, double fR, double fL, double bR, double bL) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.rotators = rotators;
-    this.fR = fR;
-    this.fL = fL;
-    this.bR = bR;
-    this.bL = bL;
+    this.gyro = gyro;
+    this.fR = rotators.angleToPulse(fR, gyro.getYaw());
+    this.fL = rotators.angleToPulse(fL, gyro.getYaw());
+    this.bR = rotators.angleToPulse(bR, gyro.getYaw());
+    this.bL = rotators.angleToPulse(bL, gyro.getYaw());
     addRequirements(rotators);
   }
 

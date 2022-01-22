@@ -116,13 +116,28 @@ public class SwerveRotaters extends SubsystemBase {
     else swerveSwitch = true;
   }
 
-
   //This function gives the current angle that the provided encoder is pointing.
+  public double angleToPulse(double angle){
+    return angle*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360;
+  }
+
+  public double angleToPulse(double angle, double yaw){
+    return angle(angle, yaw)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360;
+  }
+
   public double angleToPulse(double horizontal, double vertical, double yaw){
     return angle(horizontal, vertical, yaw)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360;
   }
 
   // This function provides the goal angle that is trying to be reached by the wheels.
+  private double angle(double angle, double yaw){
+    // This uses the yaw of the robot in order to calculate the angle we want to turn relative to the front
+    // of the robot, which is the 0 point of the encoders. 
+    if (angle>=yaw) angle -= yaw;
+    else angle = 360 - (yaw-angle); 
+    return (angle%360);
+  }
+
   private double angle(double horizontal, double vertical, double yaw){
     double angle = 0;
     angle = Math.toDegrees(Math.atan(-horizontal/vertical));
