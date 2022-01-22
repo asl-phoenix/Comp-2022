@@ -16,10 +16,10 @@ public class SetWheelDirections extends CommandBase {
   public SetWheelDirections(SwerveRotaters rotators, double fR, double fL, double bR, double bL) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.rotators = rotators;
-    this.fR = fR;
-    this.fL = fL;
-    this.bR = bR;
-    this.bL = bL;
+    this.fR = rotators.angleToPulse(fR);
+    this.fL = rotators.angleToPulse(fL);
+    this.bR = rotators.angleToPulse(bR);
+    this.bL = rotators.angleToPulse(bL);
     addRequirements(rotators);
   }
 
