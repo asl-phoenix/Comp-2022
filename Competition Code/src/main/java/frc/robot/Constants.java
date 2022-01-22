@@ -71,7 +71,7 @@ public final class Constants {
     public static final int kSlotIdx = 0;
 	public static final int kPIDLoopIdx = 0;
     public static final int kTimeoutMs = 30;
-    public static final Gains kGains = new Gains(0.1, 0.0, 0.0, 0.0, 0, 0.0); //coamnds 
+    public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.0, 0, 0.0); //coamnds 
     public static final Gains jGains = new Gains(0.1,0.0,0.0,0.0,0, 0.0); // spinners
     public static final double ERROR_TOLERANCE = 25;
     public static final double ROTATOR_ERROR_TOLERANCE = 25;
