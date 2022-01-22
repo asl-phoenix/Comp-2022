@@ -16,30 +16,28 @@ import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 
 import frc.robot.Constants;
 
-public class Shooter extends SubsystemBase {
+public class Catapult extends SubsystemBase {
   /** Creates a new Shooter. */
 
   //Motors
-  private WPI_TalonFX shooter_motor_1;
-  private WPI_TalonFX shooter_motor_2;
+  private WPI_TalonSRX catapult_motor_1, catapult_motor_2
 
-  //Piston
-  private DoubleSolenoid shooter_piston;
+  //P
+  private DoubleSolenoid shooter_p;
 
   //Constant Variables
 
 
-  public Shooter(){
-    shooter_motor_1 = new WPI_TalonFX(Constants.SHOOTER_MOTOR_PORT_1);
-    shooter_motor_2 = new WPI_TalonFX(Constants.SHOOTER_MOTOR_PORT_2);
-
-    shooter_piston = new DoubleSolenoid(Constants.SHOOTER_PISTON_PORT_1, Constants.SHOOTER_PISTON_PORT_2);
-    limitMotorCurrent();
+  public Catapult(){
+    catapult_motor_1 = new WPI_TalonSRX(Constants.SHOOTER_MOTOR_PORT_1);
+    catapult_motor_2 = new WPI_TalonSRX(Constants.SHOOTER_MOTOR_PORT_2);
+    shooter_p= new DoubleSolenoid(Constants.SHOOTER_PISTON_PORT_1, Constants.SHOOTER_PISTON_PORT_2);
+    limitMotorCurrents();
   }
   //MOTOR
 
   //Reduces the current that the TalonSRX draws in order to prevent brownouts
-  public void limitMotorCurrent(){
+  public void limitMotorCurrents(){
     shooter_motor_1.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 1));
     shooter_motor_1.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 1));
 
@@ -51,23 +49,18 @@ public class Shooter extends SubsystemBase {
    *  @param speed [-1.0, 1.0]
    */
   public void setSpeed(double speed){
-    shooter_motor_1.set(speed);
-    shooter_motor_2.set(speed);
+    shooter_motor_1.set(ControlMode.PercentOutput, speed);
+    shooter_motor_2.set(ControlMode.PercentOutput, speed);
   }
-  //PISTON
+  //PUMP
 
-  public void extendPistons(){
-    shooter_piston.set(DoubleSolenoid.Value.kForward);
-  }
-
-  public void retractPistons(){
-    shooter_piston.set(DoubleSolenoid.Value.kReverse);
+  public void blockCatapult(){
+    shooter_p.set(DoubleSolenoid.Value.kForward);
   }
 
-  public void pistonsOff(){
-    shooter_piston.set(DoubleSolenoid.Value.kOff);
+  public void releaseCatapult(){
+    shooter_p.set(DoubleSolenoid.Value.kReverse);
   }
-
 
   @Override
   public void periodic() {
