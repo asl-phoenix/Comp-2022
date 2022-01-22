@@ -16,7 +16,7 @@ public class MoveForward extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(swerve);
     this.swerve = swerve;
-    this.d = d;
+    this.d = swerve.cmToPulses(d);
   }
 
   // Called when the command is initially scheduled.
@@ -31,14 +31,13 @@ public class MoveForward extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    swerve.stop();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (swerve.reachedPosition(d, d, d, d)){
-      return true;
-    }
-    return false;
+    return swerve.reachedPosition(d, d, d, d);
   }
 }

@@ -19,7 +19,7 @@ public class SwerveRotaters extends SubsystemBase {
   /** These are the variables that are created for this subsytem.. */
   private WPI_TalonFX fRRotater, fLRotater, bLRotater, bRRotater;
   public final double ENCODER_PULSES_PER_ROTATION = 2048;
-  public final double ROTATION_POW = 45;
+  public final double ROTATION_POW = 25;
   public boolean swerveSwitch;
 
   // This is the constructor where the rotater motors are created (named encoders) and are reset.
@@ -116,13 +116,28 @@ public class SwerveRotaters extends SubsystemBase {
     else swerveSwitch = true;
   }
 
-
   //This function gives the current angle that the provided encoder is pointing.
+  public double angleToPulse(double angle){
+    return angle*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360;
+  }
+
+  public double angleToPulse(double angle, double yaw){
+    return angle(angle, yaw)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360;
+  }
+
   public double angleToPulse(double horizontal, double vertical, double yaw){
     return angle(horizontal, vertical, yaw)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360;
   }
 
   // This function provides the goal angle that is trying to be reached by the wheels.
+  private double angle(double angle, double yaw){
+    // This uses the yaw of the robot in order to calculate the angle we want to turn relative to the front
+    // of the robot, which is the 0 point of the encoders. 
+    if (angle>=yaw) angle -= yaw;
+    else angle = 360 - (yaw-angle); 
+    return (angle%360);
+  }
+
   private double angle(double horizontal, double vertical, double yaw){
     double angle = 0;
     angle = Math.toDegrees(Math.atan(-horizontal/vertical));
@@ -142,7 +157,7 @@ public class SwerveRotaters extends SubsystemBase {
     // of the robot, which is the 0 point of the encoders. 
     if (angle>=yaw) angle -= yaw;
     else angle = 360 - (yaw-angle); 
-    return (angle);
+    return (angle%360);
   }
 
   public double getAngle(double horizontal, double vertical, double yaw){
@@ -181,6 +196,7 @@ public class SwerveRotaters extends SubsystemBase {
       }
       else if (isRotating && isTranslating){
         //zone 1
+        System.out.println(angle);
         if(((angle>=0)&&(45>angle))||((360>angle)&&(angle>=315))){
           fRRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
           fLRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
@@ -236,6 +252,13 @@ public class SwerveRotaters extends SubsystemBase {
 
   private boolean checkError(WPI_TalonFX motor, double d){
     return motor.getSelectedSensorPosition() < d + ROTATOR_ERROR_TOLERANCE && motor.getSelectedSensorPosition() > d - ROTATOR_ERROR_TOLERANCE;
+  }
+
+  public void stop(){
+    fRRotater.set(ControlMode.PercentOutput, 0);
+    fLRotater.set(ControlMode.PercentOutput, 0);
+    bRRotater.set(ControlMode.PercentOutput, 0);
+    bLRotater.set(ControlMode.PercentOutput, 0);
   }
 
   @Override

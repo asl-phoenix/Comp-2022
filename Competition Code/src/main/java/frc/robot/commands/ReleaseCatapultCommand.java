@@ -7,13 +7,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.Constants;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Catapult;
 
 public class ReleaseCatapultCommand extends CommandBase {
   /** Creates a new ShootCommand. */
-  private Shooter SHOOTER;
+  private Catapult SHOOTER;
   
-  public ReleaseCatapultCommand(Shooter shooter) {
+  public ReleaseCatapultCommand(Catapult shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
     this.SHOOTER = shooter;
