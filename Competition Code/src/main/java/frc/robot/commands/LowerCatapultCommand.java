@@ -11,10 +11,10 @@ import frc.robot.subsystems.Shooter;
 
 public class LowerCatapultCommand extends CommandBase {
   /** Creates a new LowerCatapultCommand. */
-  private Shooter SHOOTER;
-  public LowerCatapultCommand(Shooter shooter) {
+  private Catapult CATAPULT;
+  public LowerCatapultCommand(Catapult CATAPULT) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter);
+    addRequirements(catapult);
 
     this.SHOOTER = shooter;
   }
@@ -22,7 +22,7 @@ public class LowerCatapultCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize(){
-    SHOOTER.setSpeed(SHOOTER_PISTON_SPEED);
+    SHOOTER.setSpeed(CATAPULT_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

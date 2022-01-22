@@ -31,8 +31,8 @@ public final class Constants {
 
     // Shooter Ports
     //Needs calibrating
-    public static final int SHOOTER_MOTOR_PORT_1 = 11;
-    public static final int SHOOTER_MOTOR_PORT_2 = 12;
+    public static final int SHOOTER_MOTOR_PORT_1 = 1;
+    public static final int SHOOTER_MOTOR_PORT_2 = 2;
     public static final int SHOOTER_PISTON_PORT_1 = 9;
     public static final int SHOOTER_PISTON_PORT_2 = 10;
 
@@ -49,6 +49,7 @@ public final class Constants {
     public static final int INTAKE_BUTTON = 3;
     public static final int OUTTAKE_BUTTON = 4;
     public static final int SHOOT_BUTTON = 5;
+    public static final int LOWERCATAPULT_BUTTON = 6;
 
     // Swervedrive Constants
     public static final double ANGLE_RANGE = 2;
@@ -58,6 +59,7 @@ public final class Constants {
     public static final double UNITS_PER_ROTATION = 2048;
     public static final double L = 24.174;
     public static final double W = 24.183;
+    public static final double CATAPULT_SPEED = 0.4;
     
     //Speed constants
     public static final double ROLLER_INTAKE_SPEED = 0.5;
