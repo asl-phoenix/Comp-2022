@@ -254,6 +254,13 @@ public class SwerveRotaters extends SubsystemBase {
     return motor.getSelectedSensorPosition() < d + ROTATOR_ERROR_TOLERANCE && motor.getSelectedSensorPosition() > d - ROTATOR_ERROR_TOLERANCE;
   }
 
+  public void stop(){
+    fRRotater.set(ControlMode.PercentOutput, 0);
+    fLRotater.set(ControlMode.PercentOutput, 0);
+    bRRotater.set(ControlMode.PercentOutput, 0);
+    bLRotater.set(ControlMode.PercentOutput, 0);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

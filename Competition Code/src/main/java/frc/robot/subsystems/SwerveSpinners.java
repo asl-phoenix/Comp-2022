@@ -211,6 +211,14 @@ public class SwerveSpinners extends SubsystemBase {
   }
 
 
+  public void stop(){
+    fRMotor.set(ControlMode.PercentOutput, 0);
+    fLMotor.set(ControlMode.PercentOutput, 0);
+    bRMotor.set(ControlMode.PercentOutput, 0);
+    bLMotor.set(ControlMode.PercentOutput, 0);
+  }
+
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
