@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.AutoCommands.AutoMoveCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -79,7 +80,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    m_autonomousCommand = autoChooser.getSelected();
+    m_autonomousCommand = new AutoMoveCommand(rCon.SWERVEROTATERS, rCon.SWERVESPINNERS, rCon.GYRO, 100, 20);
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
