@@ -40,17 +40,17 @@ public class SwerveSpinners extends SubsystemBase {
     fRMotor = new WPI_TalonFX(MOTOR_PORT_1);
     fLMotor = new WPI_TalonFX(MOTOR_PORT_2);
 // test
-    fLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 12,13,0.1));
-    fLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 12,13,0.1));
+    fLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20,21,0.1));
+    fLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20,21,0.1));
 
-    fRMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 12,13,0.1));
-    fRMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 12,13,0.1));
+    fRMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20,21,0.1));
+    fRMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20,21,0.1));
 
-    bRMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 12,13,0.1));
-    bRMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 12,13,0.1));
+    bRMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20,21,0.1));
+    bRMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20,21,0.1));
     
-    bLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 12,13,0.1));
-    bLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 12,13,0.1));
+    bLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20,21,0.1));
+    bLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20,21,0.1));
 
 
     bR = new SpeedControllerGroup(bRMotor);

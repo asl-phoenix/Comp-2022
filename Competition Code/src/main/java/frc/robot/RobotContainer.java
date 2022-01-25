@@ -40,13 +40,14 @@ public class RobotContainer {
   public final SwerveSpinners SWERVESPINNERS = new SwerveSpinners();
   public final SwerveRotaters SWERVEROTATERS = new SwerveRotaters();
   public final Gyro GYRO = new Gyro();
-  
+
   //Mechanism Subs
-  public final RollerIntake ROLLERINTAKE = new RollerIntake();
-  public final Catapult YEETER = new Catapult();
+  // public final RollerIntake ROLLERINTAKE = new RollerIntake();
+  // public final Catapult YEETER = new Catapult();
 
   // BUTTONS
-  /*public final JoystickButton modeSwitchButton = new JoystickButton(shopper, DRIVESWITCHBUTTON);
+  /*
+  public final JoystickButton modeSwitchButton = new JoystickButton(shopper, DRIVESWITCHBUTTON);
   public final JoystickButton intakeButton = new JoystickButton(shopper, INTAKE_BUTTON);
   public final JoystickButton outtakeButton = new JoystickButton(shopper, OUTTAKE_BUTTON);
   public final JoystickButton lowerCatapultButton = new JoystickButton(operator, LOWERCATAPULT_BUTTON);
@@ -99,7 +100,8 @@ public class RobotContainer {
     ));
 
     //Intake
-    /*intakeButton.whileHeld(intakeCommand);
+    /*
+    intakeButton.whileHeld(intakeCommand);
     outtakeButton.whileHeld(outtakeCommand);
 
     //Shooter
@@ -108,7 +110,9 @@ public class RobotContainer {
 
     //Switching Tank and Swerve
     modeSwitchButton.whenPressed(modeSwitchRotaters);
-    modeSwitchButton.whenPressed(modeSwitchTrans);*/
+
+    modeSwitchButton.whenPressed(modeSwitchTrans);
+    */
 
     
 
