@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 // import org.graalvm.compiler.asm.sparc.SPARCAssembler.Br;
 
@@ -63,6 +64,11 @@ public class SwerveSpinners extends SubsystemBase {
 
   
   public void configPID(){
+    fRMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+    fLMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+    bLMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+    bRMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+    resetEncoders();
     
     fLMotor.configFactoryDefault();
     fLMotor.set(ControlMode.Velocity,0);
