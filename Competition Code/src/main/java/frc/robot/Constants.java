@@ -33,8 +33,8 @@ public final class Constants {
     //Needs calibrating
     public static final int SHOOTER_MOTOR_PORT_1 = 1;
     public static final int SHOOTER_MOTOR_PORT_2 = 2;
-    public static final int SHOOTER_PISTON_PORT_1 = 9;
-    public static final int SHOOTER_PISTON_PORT_2 = 10;
+    public static final int SHOOTER_PISTON_PORT_1 = 3;
+    public static final int SHOOTER_PISTON_PORT_2 = 4;
 
     //Gyro
     public static final int GYRO_PORT = 9;
@@ -74,5 +74,5 @@ public final class Constants {
     public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.0, 0, 0.0); //coamnds 
     public static final Gains jGains = new Gains(0.1,0.0,0.0,0.0,0, 0.0); // spinners
     public static final double ERROR_TOLERANCE = 25;
-    public static final double ROTATOR_ERROR_TOLERANCE = 25;
+    public static final double ROTATOR_ERROR_TOLERANCE = 5;
 }

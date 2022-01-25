@@ -57,6 +57,7 @@ public class SwerveSpinners extends SubsystemBase {
     bL = new SpeedControllerGroup(bLMotor);
     fR = new SpeedControllerGroup(fRMotor);
     fL = new SpeedControllerGroup(fLMotor);
+    configPID();
 
   }
 
@@ -183,6 +184,12 @@ public class SwerveSpinners extends SubsystemBase {
       // 2048 pulses to a rotation
       return p*WHEEL_DIAMETER_INCHES*2.54*Math.PI/UNITS_PER_ROTATION;
   }
+  public void printDist() {
+    System.out.println(pulsesToCm(bRMotor.getSelectedSensorPosition()));
+    System.out.println(pulsesToCm(bLMotor.getSelectedSensorPosition()));
+    System.out.println(pulsesToCm(fRMotor.getSelectedSensorPosition()));
+    System.out.println(pulsesToCm(fLMotor.getSelectedSensorPosition()));
+  }
 
 
   //takes distance (cm) divides by cm per rotation and then multiplies by pulses per rotation
@@ -197,6 +204,13 @@ public class SwerveSpinners extends SubsystemBase {
     bLMotor.set(ControlMode.Position, cmToPulses(b));
     fRMotor.set(ControlMode.Position, cmToPulses(c));
     fLMotor.set(ControlMode.Position, cmToPulses(d));
+  }
+  public void turnOn(){
+    bRMotor.set(0.3);
+    bLMotor.set(0.3);
+    fLMotor.set(0.3);
+    fRMotor.set(0.3);
+
   }
 
 

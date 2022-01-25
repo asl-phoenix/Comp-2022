@@ -32,7 +32,7 @@ public class Catapult extends SubsystemBase {
   public Catapult(){
     catapult_motor_1 = new WPI_TalonSRX(SHOOTER_MOTOR_PORT_1);
     catapult_motor_2 = new WPI_TalonSRX(SHOOTER_MOTOR_PORT_2);
-    shooter_p= new DoubleSolenoid(SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
+    // shooter_p= new DoubleSolenoid(SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
     limitMotorCurrents();
   }
   //MOTOR

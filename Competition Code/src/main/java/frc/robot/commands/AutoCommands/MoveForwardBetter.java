@@ -7,12 +7,13 @@ package frc.robot.commands.AutoCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SwerveSpinners;
 
-public class MoveForward extends CommandBase {
+public class MoveForwardBetter extends CommandBase {
   SwerveSpinners swerve;
   double d;
+  long time;
 
   /** Creates a new moveTo. */
-  public MoveForward(SwerveSpinners swerve, double d) {
+  public MoveForwardBetter(SwerveSpinners swerve, double d) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(swerve);
     this.swerve = swerve;
@@ -22,12 +23,16 @@ public class MoveForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    swerve.driveDistance(d, d, d, d);
+    swerve.turnOn();
+    time = System.currentTimeMillis();
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    time += System.currentTimeMillis(); 
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -38,6 +43,6 @@ public class MoveForward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return swerve.reachedPosition(d, d, d, d);
+    return (time > 5000);
   }
 }

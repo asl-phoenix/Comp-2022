@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 //import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
+import frc.robot.commands.AutoCommands.AutoMoveCommand;
+import frc.robot.commands.AutoCommands.MoveForward;
 import frc.robot.subsystems.*;
 //import frc.robot.commands.*;
 //import frc.robot.triggers.*;
@@ -29,8 +31,8 @@ import static frc.robot.Constants.*;
 public class RobotContainer {
 
   // JOYSTICKS
-  public final Joystick shopper = new Joystick(DRIVER_CONTROLLER);
-  public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
+  public final Joystick shopper = new Joystick(0);
+  // public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
 
   // SUBSYSTEMS
 
@@ -44,7 +46,7 @@ public class RobotContainer {
   public final Catapult YEETER = new Catapult();
 
   // BUTTONS
-  public final JoystickButton modeSwitchButton = new JoystickButton(shopper, DRIVESWITCHBUTTON);
+  /*public final JoystickButton modeSwitchButton = new JoystickButton(shopper, DRIVESWITCHBUTTON);
   public final JoystickButton intakeButton = new JoystickButton(shopper, INTAKE_BUTTON);
   public final JoystickButton outtakeButton = new JoystickButton(shopper, OUTTAKE_BUTTON);
   public final JoystickButton lowerCatapultButton = new JoystickButton(operator, LOWERCATAPULT_BUTTON);
@@ -54,7 +56,8 @@ public class RobotContainer {
   public final Command intakeCommand = new IntakeCommand(ROLLERINTAKE);
   public final Command outtakeCommand = new OuttakeCommand(ROLLERINTAKE);
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(YEETER);
-  public final Command lowerCatapultCommand = new LowerCatapultCommand(YEETER);
+  public final Command lowerCatapultCommand = new LowerCatapultCommand(YEETER);*/
+  public final Command moveForward = new MoveForward(SWERVESPINNERS, 100);
   
   
   public RobotContainer() {
@@ -96,7 +99,7 @@ public class RobotContainer {
     ));
 
     //Intake
-    intakeButton.whileHeld(intakeCommand);
+    /*intakeButton.whileHeld(intakeCommand);
     outtakeButton.whileHeld(outtakeCommand);
 
     //Shooter
@@ -105,7 +108,7 @@ public class RobotContainer {
 
     //Switching Tank and Swerve
     modeSwitchButton.whenPressed(modeSwitchRotaters);
-    modeSwitchButton.whenPressed(modeSwitchTrans);
+    modeSwitchButton.whenPressed(modeSwitchTrans);*/
 
     
 
