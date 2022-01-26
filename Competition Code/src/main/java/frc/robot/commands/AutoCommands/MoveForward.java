@@ -33,6 +33,7 @@ public class MoveForward extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     //swerve.stop();
+    System.out.println("Finished");
   }
 
   // Returns true when the command should end.
