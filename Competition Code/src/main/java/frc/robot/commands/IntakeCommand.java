@@ -7,16 +7,16 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import static frc.robot.Constants.*;
-import frc.robot.subsystems.RollerIntake;
+import frc.robot.subsystems.*;
 
 public class IntakeCommand extends CommandBase {
   /** Creates a new IntakeCommand. */
-  private RollerIntake INTAKE;
+  private Intake INTAKE;
   
-  public IntakeCommand(RollerIntake intake) {
+  public IntakeCommand(Intake INTAKE) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intake);
-    this.INTAKE = intake;
+    addRequirements(INTAKE);
+    this.INTAKE = INTAKE;
 
   }
 
