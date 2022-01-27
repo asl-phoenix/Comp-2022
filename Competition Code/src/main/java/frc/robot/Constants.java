@@ -23,7 +23,7 @@ public final class Constants {
     public static final int ROTATOR_PORT_4 = 8;
 
     // Intake Ports
-    public static final int INTAKE_PORT = 10;
+    public static final int INTAKE_MOTOR_PORT = 10;
     public static final int INTAKE_PISTON_PORT_1 = 10;
 
     //Climber Ports
@@ -50,12 +50,20 @@ public final class Constants {
     public static final int OPERATOR_CONTROLLER = 0;
 
     // Button Constants
+
+    //Swerve
     public static final int TRANSLATIONAL_HORIZONTAL_AXIS = 0;
     public static final int TRANSLATIONAL_VERTICAL_AXIS = 1;
     public static final int ROTATIONAL_HORIZONTAL_AXIS = 4;
     public static final int DRIVESWITCHBUTTON = 9;
+
+    //Intake
     public static final int INTAKE_BUTTON = 3;
     public static final int OUTTAKE_BUTTON = 4;
+    public static final int RAISE_INTAKE_BUTTON = 8;
+    public static final int LOWER_INTAKE_BUTTON = 10;
+
+    //Catapult
     public static final int SHOOT_BUTTON = 5;
     public static final int LOWERCATAPULT_BUTTON = 6;
     public static final int RELEASECATAPULT_BUTTON = 7;

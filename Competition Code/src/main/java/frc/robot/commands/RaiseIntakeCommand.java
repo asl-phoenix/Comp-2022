@@ -9,11 +9,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import static frc.robot.Constants.*;
 import frc.robot.subsystems.RollerIntake;
 
-public class OuttakeCommand extends CommandBase {
+public class RaiseIntakeCommand extends CommandBase {
   /** Creates a new OuttakeCommand. */
   private Intake INTAKE;
 
-  public OuttakeCommand(Intake INTAKE) {
+  public RaiseIntakeCommand(Intake INTAKE) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(INTAKE);
     this.INTAKE = INTAKE;
@@ -22,7 +22,7 @@ public class OuttakeCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize(){
-    INTAKE.outtake();
+    INTAKE.raiseIntake();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,7 +32,6 @@ public class OuttakeCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    INTAKE.off();
   }
 
   // Returns true when the command should end.

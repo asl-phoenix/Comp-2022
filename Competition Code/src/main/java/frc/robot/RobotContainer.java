@@ -48,11 +48,21 @@ public class RobotContainer {
 
   // Buttons
 
+
+  //Swerve
   public final JoystickButton modeSwitchButton = new JoystickButton(shopper, DRIVESWITCHBUTTON);
+
+  //Intake
   public final JoystickButton intakeButton = new JoystickButton(shopper, INTAKE_BUTTON);
   public final JoystickButton outtakeButton = new JoystickButton(shopper, OUTTAKE_BUTTON);
+  public final JoystickButton raiseIntakeButton = new JoystickButton(operator, RAISE_INTAKE_BUTTON);
+  public final JoystickButton lowerIntakeButton = new JoystickButton(operator, LOWER_INTAKE_BUTTON);
+
+  //Catapult
   public final JoystickButton lowerCatapultButton = new JoystickButton(operator, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton = new JoystickButton(operator, RELEASECATAPULT_BUTTON);
+
+  //Climber
   public final JoystickButton extendTelescopingButton = new JoystickButton(operator, EXTEND_TELESCOPING_BUTTON);
   public final JoystickButton retractTelescopingButton = new JoystickButton(operator, RETRACT_TELESCOPING_BUTTON);
   public final JoystickButton extendSecondaryButton = new JoystickButton(operator, EXTEND_SECONDARY_BUTTON);
@@ -68,6 +78,8 @@ public class RobotContainer {
   // Intake Commands
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command outtakeCommand = new OuttakeCommand(INTAKE);
+  public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
+  public final Command lowerIntakeCommand = new LowerIntakeCommand(INTAKE);
 
   // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(YEETER);
@@ -121,13 +133,18 @@ public class RobotContainer {
     //Intake
     intakeButton.whileHeld(intakeCommand);
     outtakeButton.whileHeld(outtakeCommand);
+    raiseIntakeButton.whenPressed(raiseIntakeCommand);
+    lowerIntakeButton.whenPressed(lowerIntakeCommand);
 
     //Shooter
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
 
     //Climber
-
+    extendTelescopingButton.whenHeld(extendTelescopingCommand);
+    retractTelescopingButton.whenHeld(retractTelescopingButton);
+    extendSecondaryButton.whenHeld(extendSecondaryCommand);
+    retractSecondaryButton.whenHeld(retractSecondaryCommand);
 
     //Switching Tank and Swerve
     modeSwitchButton.whenPressed(modeSwitchRotaters);

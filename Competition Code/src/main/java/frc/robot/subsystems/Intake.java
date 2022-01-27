@@ -9,11 +9,11 @@ import static frc.robot.Constants.*;
 public class Intake extends SubsystemBase{
     //Need to edit rollerIntake as we are not using flywheel design anymore
     private DoubleSolenoid intakePiston;
-    private VictorSP rollerMotor;
+    private TalonSRX rollerMotor;
 
     public Intake(){
-        //intakePiston = new DoubleSolenoid(INTAKE_PISTON_PORT_1, INTAKE_PISTON_PORT_2);
-        rollerMotor = new VictorSP(INTAKE_PORT);
+        rollerMotor = new TalonSRX(INTAKE_MOTOR_PORT);
+        intakePiston = new DoubleSolenoid(INTAKE_PISTON_PORT_1);
     }
     //MOTORS
     /**
@@ -24,6 +24,14 @@ public class Intake extends SubsystemBase{
 
     public void intake(){
         rollerMotor.set(INTAKE_SPEED);
+    }
+
+    public void lowerIntake(){
+        intakePiston.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void raiseIntake(){
+        intakePiston.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void outtake(){
