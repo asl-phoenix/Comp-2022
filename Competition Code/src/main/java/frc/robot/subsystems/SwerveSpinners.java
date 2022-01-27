@@ -200,7 +200,7 @@ public class SwerveSpinners extends SubsystemBase {
 
   //takes distance (cm) divides by cm per rotation and then multiplies by pulses per rotation
   public double cmToPulses(double cm){
-    return GEAR_RATIO_ROTATER*UNITS_PER_ROTATION*cm/(WHEEL_DIAMETER_INCHES*2.54*Math.PI);
+    return GEAR_RATIO_SPINNER*UNITS_PER_ROTATION*cm/(WHEEL_DIAMETER_INCHES*2.54*Math.PI);
   }
 
 
