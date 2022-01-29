@@ -32,7 +32,7 @@ public class MoveForward extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //swerve.stop();
+    swerve.stop();
     System.out.println("Finished");
   }
 
