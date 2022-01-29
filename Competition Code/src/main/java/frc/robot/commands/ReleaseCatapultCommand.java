@@ -12,19 +12,19 @@ import frc.robot.subsystems.Catapult;
 public class ReleaseCatapultCommand extends CommandBase {
   /** Creates a new ShootCommand. */
 
-  private Catapult SHOOTER;
+  private Catapult CATAPULT;
   
-  public ReleaseCatapultCommand(Catapult shooter) {
+  public ReleaseCatapultCommand(Catapult CATAPULT) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter);
-    this.SHOOTER = shooter;
+    addRequirements(CATAPULT);
+    this.CATAPULT = CATAPULT;
 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //SHOOTER.shootCatapult();
+    CATAPULT.pistonReverse();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,7 +34,7 @@ public class ReleaseCatapultCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted){
-    //SHOOTER.releaseCatapult();
+    CATAPULT.pistonForward();
   }
 
   // Returns true when the command should end.

@@ -35,7 +35,6 @@ public final class Constants {
 
     // Catapult Ports
     public static final int SHOOTER_MOTOR_PORT_1 = 1;
-    public static final int SHOOTER_MOTOR_PORT_2 = 2;
     public static final int SHOOTER_PISTON_PORT_1 = 3;
     public static final int SHOOTER_PISTON_PORT_2 = 4;
 
@@ -51,8 +50,8 @@ public final class Constants {
     // === CONTROLLER === //
 
     // Controller Constants
-    public static final int DRIVER_CONTROLLER = 1;
-    public static final int OPERATOR_CONTROLLER = 0;
+    public static final int DRIVER_CONTROLLER = 0;
+    public static final int OPERATOR_CONTROLLER = 1;
 
     // == BUTTON CONSTANTS == //
 
@@ -69,14 +68,10 @@ public final class Constants {
     public static final int LOWER_INTAKE_BUTTON = 10;
 
         //Catapult
-    public static final int SHOOT_BUTTON = 5;
     public static final int LOWERCATAPULT_BUTTON = 6;
     public static final int RELEASECATAPULT_BUTTON = 7;
-    public static final int PISSBUTTON = 8;
-    public static final int PISSRETRACTBUTTON = 7;
 
         //Climber
-    //Needs calibration
     public static final int EXTEND_TELESCOPING_BUTTON = 0;
     public static final int RETRACT_TELESCOPING_BUTTON = 0;
     public static final int EXTEND_SECONDARY_BUTTON = 0;
@@ -88,7 +83,7 @@ public final class Constants {
     public static final double GEAR_RATIO = 12.8;
     public static final double GEAR_RATIO_SPINNER = 6.86;
     public static final double UNITS_PER_ROTATION = 2048;
-    
+       
     //Speed constants
     public static final double INTAKE_SPEED = 0.5;
     public static final double SHOOTER_PISTON_SPEED = 0.5;
@@ -102,8 +97,8 @@ public final class Constants {
     public static final int kTimeoutMs = 30;
     public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.0, 0, 0.0); //coamnds 
     public static final Gains jGains = new Gains(0.1,0.0,0.0,0.0,0, 0.0); // spinners
-    public static final double ERROR_TOLERANCE = 25;
-    public static final double ROTATOR_ERROR_TOLERANCE = 25;
+    public static final double ERROR_TOLERANCE = 300;
+    public static final double ROTATOR_ERROR_TOLERANCE = 300;
 
     //Controller Buttons
     public static final int BUTTON_X = 1;

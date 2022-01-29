@@ -29,12 +29,10 @@ public class Catapult extends SubsystemBase {
   //Pistons
   private DoubleSolenoid shooter_p;
 
-  //Constant Variables
-
 
   public Catapult(){
     catapult_motor_1 = new WPI_TalonSRX(SHOOTER_MOTOR_PORT_1);
-    // shooter_p= new DoubleSolenoid(SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
+    shooter_p= new DoubleSolenoid(SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
     limitMotorCurrents();
   }
   //MOTOR
@@ -43,26 +41,23 @@ public class Catapult extends SubsystemBase {
   public void limitMotorCurrents(){
     //catapult_motor_1.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 1));
     //catapult_motor_1.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 1));
-
-    //catapult_motor_2.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 1));
-    //catapult_motor_2.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 1));
   }
 
   /**
    *  @param speed [-1.0, 1.0]
    */
 
-  public void setSpeed(double speed){
-    catapult_motor_1.set(ControlMode.PercentOutput, speed);;
+  public void setSpeed(){
+    catapult_motor_1.set(ControlMode.PercentOutput, -CATAPULT_SPEED);;
   }
   //PUMP
 
   
-  public void shootCatapult(){
+  public void pistonForward(){
     shooter_p.set(DoubleSolenoid.Value.kForward);
   }
 
-  public void releaseCatapult(){
+  public void pistonReverse(){
     shooter_p.set(DoubleSolenoid.Value.kReverse);
   }
   

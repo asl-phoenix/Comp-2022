@@ -30,7 +30,7 @@ import static frc.robot.Constants.*;
 public class RobotContainer {
 
   // JOYSTICKS
-  public final Joystick shopper = new Joystick(0);
+  public final Joystick shopper = new Joystick(DRIVER_CONTROLLER);
   public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
 
   // SUBSYSTEMS
@@ -51,12 +51,7 @@ public class RobotContainer {
 
 
 
-  // BUTTONS#
-  
-  
-  
-  public final JoystickButton pistonButton = new JoystickButton(operator, PISSBUTTON);
-  public final JoystickButton pistonRetractButton = new JoystickButton(operator, PISSRETRACTBUTTON);
+  // BUTTONS
   public final JoystickButton modeSwitchButton = new JoystickButton(shopper, DRIVESWITCHBUTTON);
 
   //Intake
@@ -71,16 +66,18 @@ public class RobotContainer {
 
   //Climber
   public final JoystickButton extendTelescopingButton = new JoystickButton(operator, EXTEND_TELESCOPING_BUTTON);
-  public final JoystickButton retractTelescopingButton = new JoystickButton(operator, RETRACT_SECONDARY_BUTTON);
+  public final JoystickButton retractTelescopingButton = new JoystickButton(operator, RETRACT_TELESCOPING_BUTTON);
   public final JoystickButton extendSecondaryButton = new JoystickButton(operator, EXTEND_SECONDARY_BUTTON);
   public final JoystickButton retractSecondaryButton = new JoystickButton(operator, RETRACT_SECONDARY_BUTTON);
+
+  //Auto
+  public final JoystickButton autoButton = new JoystickButton(shopper, 5); //Idk
   
   // Commands
 
   // Swerve Commands
   public final InstantCommand modeSwitchRotaters = new InstantCommand(() -> SWERVEROTATERS.toggleSwitch(), SWERVEROTATERS);
   public final InstantCommand modeSwitchTrans = new InstantCommand(()-> SWERVESPINNERS.toggleSwitch(), SWERVESPINNERS);
-  public final Command moveForwardCommand = new MoveForward(SWERVESPINNERS, 100);
 
   // Intake Commands
   public final Command intakeCommand = new IntakeCommand(INTAKE);
@@ -98,6 +95,10 @@ public class RobotContainer {
   public final Command extendSecondaryCommand = new  ExtendSecondaryCommand(CLIMBER);
   public final Command retractSecondaryCommand = new  RetractSecondaryCommand(CLIMBER);
   
+  // Auto Commands
+
+  public final Command moveForward = new MoveForward(SWERVESPINNERS, 100);
+  public final Command autoMoveCommand = new AutoMoveCommand(SWERVEROTATERS, SWERVESPINNERS, GRYO, 100, 315);
   
   public RobotContainer() {
     // Configure the button bindings
@@ -137,24 +138,19 @@ public class RobotContainer {
               GYRO
     ));
 
-    //Shooter
+    // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenHeld(releaseCatapultCommand);
     
-    /*CATAPULT.setDefaultCommand(
-      new RunCommand(
-        () -> YEETER.setSpeed(operator.getRawAxis(0)),
-              YEETER
-    ));
-    */
+    // Auto
+
+    autoButton.whenPressed(autoMoveCommand);
 
     //Intake
     intakeButton.whileHeld(intakeCommand);
     outtakeButton.whileHeld(outtakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
     lowerIntakeButton.whenPressed(lowerIntakeCommand);
-
-    
 
     //Climber
     extendTelescopingButton.whenHeld(extendTelescopingCommand);
