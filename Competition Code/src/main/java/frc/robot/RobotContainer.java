@@ -98,7 +98,7 @@ public class RobotContainer {
   // Auto Commands
 
   public final Command moveForward = new MoveForward(SWERVESPINNERS, 100);
-  public final Command autoMoveCommand = new AutoMoveCommand(SWERVEROTATERS, SWERVESPINNERS, GRYO, 100, 315);
+  public final Command autoMoveCommand = new AutoMoveCommand(SWERVEROTATERS, SWERVESPINNERS, GYRO, 100, 315);
   
   public RobotContainer() {
     // Configure the button bindings

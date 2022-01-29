@@ -11,8 +11,7 @@ public final class Constants {
 
     // === PORTS === //
 
-    // SwerveDrive MOTOR Ports
-  
+        // SwerveDrive MOTOR Ports
     public static final int MOTOR_PORT_1 = 1;
     public static final int MOTOR_PORT_2 = 3;
     public static final int MOTOR_PORT_3 = 5;
@@ -22,34 +21,34 @@ public final class Constants {
     public static final int ROTATOR_PORT_3 = 6;
     public static final int ROTATOR_PORT_4 = 8;
 
-    // Intake Ports
+        // Intake Ports
     public static final int INTAKE_MOTOR_PORT = 10;
     public static final int INTAKE_PISTON_PORT_1 = 10;
     public static final int INTAKE_PISTON_PORT_2 = 11;
 
-    //Climber Ports
+        //Climber Ports
     public static final int TELESCOPE_PORT_1 = 1;
     public static final int TELESCOPE_PORT_2 = 1;
     public static final int SECONDARY_PORT_1 = 1;
     public static final int SECONDARY_PORT_2 = 1;
 
-    // Catapult Ports
+        // Catapult Ports
     public static final int SHOOTER_MOTOR_PORT_1 = 1;
     public static final int SHOOTER_PISTON_PORT_1 = 3;
     public static final int SHOOTER_PISTON_PORT_2 = 4;
 
-    //Piston test ports
+        //Piston test ports
     public static final int TPISTON_PORT_1 = 4;
     public static final int TPISTON_PORT_2 = 5;
-    // Gyro Port
-    
+
+        // Gyro Port
     public static final int GYRO_PORT = 9;
 
-    // Camera & Sensor Ports
+        // Camera & Sensor Ports
 
     // === CONTROLLER === //
 
-    // Controller Constants
+        // Controller Constants
     public static final int DRIVER_CONTROLLER = 0;
     public static final int OPERATOR_CONTROLLER = 1;
 
@@ -78,27 +77,30 @@ public final class Constants {
     public static final int RETRACT_SECONDARY_BUTTON = 0;
     // === EXTRAS === //
 
-    // Swervedrive Constants
+        // Swervedrive Constants
     public static final double CONTROLLER_SENSITIVITY = 0.1;
     public static final double GEAR_RATIO = 12.8;
     public static final double GEAR_RATIO_SPINNER = 6.86;
     public static final double UNITS_PER_ROTATION = 2048;
        
-    //Speed constants
+        //Speed constants
     public static final double INTAKE_SPEED = 0.5;
     public static final double SHOOTER_PISTON_SPEED = 0.5;
     public static final double CATAPULT_SPEED = 0.4;
     public static final double TELESCOPING_SPEED = 0.5;
     public static final double SECONDARY_SPEED = 0.5;
 
-    //Swervedrive PID Stuff
+        //Swervedrive PID Stuff
     public static final int kSlotIdx = 0;
 	public static final int kPIDLoopIdx = 0;
     public static final int kTimeoutMs = 30;
     public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.0, 0, 0.0); //coamnds 
     public static final Gains jGains = new Gains(0.1,0.0,0.0,0.0,0, 0.0); // spinners
+
+        //Auto Constants
     public static final double ERROR_TOLERANCE = 300;
     public static final double ROTATOR_ERROR_TOLERANCE = 300;
+    public static final double SPINNER_ERROR_TOLERANCE = 300;
 
     //Controller Buttons
     public static final int BUTTON_X = 1;

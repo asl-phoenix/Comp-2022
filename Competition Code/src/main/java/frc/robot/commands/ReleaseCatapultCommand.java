@@ -13,18 +13,20 @@ public class ReleaseCatapultCommand extends CommandBase {
   /** Creates a new ShootCommand. */
 
   private Catapult CATAPULT;
-  
+  public double startTime;
+
   public ReleaseCatapultCommand(Catapult CATAPULT) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(CATAPULT);
     this.CATAPULT = CATAPULT;
+    startTime = 0;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     CATAPULT.pistonForward();
-    double startTime = System.currentTimeMillis(); 
+    startTime = System.currentTimeMillis();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
