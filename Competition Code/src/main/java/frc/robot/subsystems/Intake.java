@@ -3,17 +3,18 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.VictorSP;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import static frc.robot.Constants.*;
 
 public class Intake extends SubsystemBase{
     //Need to edit rollerIntake as we are not using flywheel design anymore
     private DoubleSolenoid intakePiston;
-    private TalonSRX rollerMotor;
+    private WPI_TalonSRX rollerMotor;
 
     public Intake(){
-        rollerMotor = new TalonSRX(INTAKE_MOTOR_PORT);
-        intakePiston = new DoubleSolenoid(INTAKE_PISTON_PORT_1);
+        rollerMotor = new WPI_TalonSRX(INTAKE_MOTOR_PORT);
+        intakePiston = new DoubleSolenoid(INTAKE_PISTON_PORT_1, INTAKE_PISTON_PORT_2);
     }
     //MOTORS
     /**

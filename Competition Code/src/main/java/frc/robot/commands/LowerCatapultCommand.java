@@ -1,7 +1,7 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-/*
+
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -11,8 +11,8 @@ import frc.robot.subsystems.Catapult;
 
 public class LowerCatapultCommand extends CommandBase {
   /** Creates a new LowerCatapultCommand. */
-  /*
   private Catapult CATAPULT;
+  
   public LowerCatapultCommand(Catapult CATAPULT) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(CATAPULT);
@@ -23,7 +23,7 @@ public class LowerCatapultCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize(){
-    CATAPULT.setSpeed(CATAPULT_SPEED);
+    CATAPULT.setSpeed(-CATAPULT_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,4 +42,3 @@ public class LowerCatapultCommand extends CommandBase {
     return false;
   }
 }
-*/
