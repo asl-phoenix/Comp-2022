@@ -39,7 +39,7 @@ public class SetWheelDirectionsWithGyro extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //rotators.stop();
+    rotators.stop();
     System.out.println("Finished");
   }
 
