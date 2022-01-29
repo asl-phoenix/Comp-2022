@@ -2,27 +2,27 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.AutoCommands;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.SwerveSpinners;
 
-public class MoveForward extends CommandBase {
-  SwerveSpinners swerve;
-  double d;
+import static frc.robot.Constants.*;
+import frc.robot.subsystems.RollerIntake;
 
-  /** Creates a new moveTo. */
-  public MoveForward(SwerveSpinners swerve, double d) {
+public class RaiseIntakeCommand extends CommandBase {
+  /** Creates a new OuttakeCommand. */
+  private Intake INTAKE;
+
+  public RaiseIntakeCommand(Intake INTAKE) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(swerve);
-    this.swerve = swerve;
-    this.d = swerve.cmToPulses(d);
+    addRequirements(INTAKE);
+    this.INTAKE = INTAKE;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    swerve.driveDistance(d, d, d, d);
+  public void initialize(){
+    INTAKE.raiseIntake();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,13 +32,11 @@ public class MoveForward extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //swerve.stop();
-    System.out.println("Finished");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return swerve.reachedPosition(d, d, d, d);
+    return false;
   }
 }

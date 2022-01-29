@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 // import org.graalvm.compiler.asm.sparc.SPARCAssembler.Br;
 
@@ -40,28 +41,34 @@ public class SwerveSpinners extends SubsystemBase {
     fRMotor = new WPI_TalonFX(MOTOR_PORT_1);
     fLMotor = new WPI_TalonFX(MOTOR_PORT_2);
 // test
-    fLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 12,13,0.1));
-    fLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 12,13,0.1));
+    fLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20,21,0.1));
+    fLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20,21,0.1));
 
-    fRMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 12,13,0.1));
-    fRMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 12,13,0.1));
+    fRMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20,21,0.1));
+    fRMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20,21,0.1));
 
-    bRMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 12,13,0.1));
-    bRMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 12,13,0.1));
+    bRMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20,21,0.1));
+    bRMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20,21,0.1));
     
-    bLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 12,13,0.1));
-    bLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 12,13,0.1));
+    bLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20,21,0.1));
+    bLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20,21,0.1));
 
 
     bR = new SpeedControllerGroup(bRMotor);
     bL = new SpeedControllerGroup(bLMotor);
     fR = new SpeedControllerGroup(fRMotor);
     fL = new SpeedControllerGroup(fLMotor);
+    configPID();
 
   }
 
   
   public void configPID(){
+    fRMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+    fLMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+    bLMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+    bRMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+    resetEncoders();
     
     fLMotor.configFactoryDefault();
     fLMotor.set(ControlMode.Velocity,0);
@@ -183,11 +190,17 @@ public class SwerveSpinners extends SubsystemBase {
       // 2048 pulses to a rotation
       return p*WHEEL_DIAMETER_INCHES*2.54*Math.PI/UNITS_PER_ROTATION;
   }
+  public void printDist() {
+    System.out.println(pulsesToCm(bRMotor.getSelectedSensorPosition()));
+    System.out.println(pulsesToCm(bLMotor.getSelectedSensorPosition()));
+    System.out.println(pulsesToCm(fRMotor.getSelectedSensorPosition()));
+    System.out.println(pulsesToCm(fLMotor.getSelectedSensorPosition()));
+  }
 
 
   //takes distance (cm) divides by cm per rotation and then multiplies by pulses per rotation
   public double cmToPulses(double cm){
-    return GEAR_RATIO_ROTATER*UNITS_PER_ROTATION*cm/(WHEEL_DIAMETER_INCHES*2.54*Math.PI);
+    return GEAR_RATIO_SPINNER*UNITS_PER_ROTATION*cm/(WHEEL_DIAMETER_INCHES*2.54*Math.PI);
   }
 
 
@@ -197,6 +210,13 @@ public class SwerveSpinners extends SubsystemBase {
     bLMotor.set(ControlMode.Position, cmToPulses(b));
     fRMotor.set(ControlMode.Position, cmToPulses(c));
     fLMotor.set(ControlMode.Position, cmToPulses(d));
+  }
+  public void turnOn(){
+    bRMotor.set(0.3);
+    bLMotor.set(0.3);
+    fLMotor.set(0.3);
+    fRMotor.set(0.3);
+
   }
 
 

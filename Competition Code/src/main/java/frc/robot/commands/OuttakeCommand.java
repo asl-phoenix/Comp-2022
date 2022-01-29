@@ -11,12 +11,12 @@ import frc.robot.subsystems.RollerIntake;
 
 public class OuttakeCommand extends CommandBase {
   /** Creates a new OuttakeCommand. */
-  private RollerIntake INTAKE;
+  private Intake INTAKE;
 
-  public OuttakeCommand(RollerIntake intake) {
+  public OuttakeCommand(Intake INTAKE) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intake);
-    this.INTAKE = intake;
+    addRequirements(INTAKE);
+    this.INTAKE = INTAKE;
   }
 
   // Called when the command is initially scheduled.

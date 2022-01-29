@@ -238,12 +238,12 @@ public class SwerveRotaters extends SubsystemBase {
   public void setWheelDirection(double fR, double fL, double bR, double bL) {
     fRRotater.set(ControlMode.Position, fR);
     fLRotater.set(ControlMode.Position, fL);
-    bLRotater.set(ControlMode.Position, bL);
     bRRotater.set(ControlMode.Position, bR);
+    bLRotater.set(ControlMode.Position, bL);
   }
 
   public boolean reachedPosition(double a, double b, double c, double d){
-    if (checkError(fRRotater, a) && checkError(fLRotater, b) && checkError(bLRotater, c) && checkError(bRRotater, d)) {
+    if (checkError(fRRotater, a) && checkError(fLRotater, b) && checkError(bRRotater, c) && checkError(bLRotater, d)) {
       return true;
     }
     return false;

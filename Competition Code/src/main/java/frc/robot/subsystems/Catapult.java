@@ -1,6 +1,7 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
+/*
 
 package frc.robot.subsystems;
 
@@ -21,6 +22,7 @@ public class Catapult extends SubsystemBase {
   /** Creates a new Shooter. */
 
   //Motors
+  /*
   private WPI_TalonSRX catapult_motor_1, catapult_motor_2;
 
   //P
@@ -32,7 +34,7 @@ public class Catapult extends SubsystemBase {
   public Catapult(){
     catapult_motor_1 = new WPI_TalonSRX(SHOOTER_MOTOR_PORT_1);
     catapult_motor_2 = new WPI_TalonSRX(SHOOTER_MOTOR_PORT_2);
-    shooter_p= new DoubleSolenoid(SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
+    // shooter_p= new DoubleSolenoid(SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
     limitMotorCurrents();
   }
   //MOTOR
@@ -49,6 +51,7 @@ public class Catapult extends SubsystemBase {
   /**
    *  @param speed [-1.0, 1.0]
    */
+  /*
   public void setSpeed(double speed){
     catapult_motor_1.set(ControlMode.PercentOutput, speed);
     catapult_motor_2.set(ControlMode.PercentOutput, speed);
@@ -68,3 +71,4 @@ public class Catapult extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 }
+*/
