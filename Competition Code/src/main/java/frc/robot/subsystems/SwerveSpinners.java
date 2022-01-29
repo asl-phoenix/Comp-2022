@@ -206,11 +206,13 @@ public class SwerveSpinners extends SubsystemBase {
 
   public void driveDistance(double a, double b, double c, double d){
     resetEncoders();
-    bRMotor.set(ControlMode.Position, cmToPulses(a));
-    bLMotor.set(ControlMode.Position, cmToPulses(b));
-    fRMotor.set(ControlMode.Position, cmToPulses(c));
-    fLMotor.set(ControlMode.Position, cmToPulses(d));
+    bRMotor.set(ControlMode.PercentOutput, 0.6);
+    bLMotor.set(ControlMode.PercentOutput, 0.6);
+    fRMotor.set(ControlMode.PercentOutput, 0.6);
+    fLMotor.set(ControlMode.PercentOutput, 0.6);
   }
+
+  
   public void turnOn(){
     bRMotor.set(0.3);
     bLMotor.set(0.3);
