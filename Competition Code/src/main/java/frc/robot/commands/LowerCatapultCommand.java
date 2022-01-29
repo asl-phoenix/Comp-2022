@@ -33,7 +33,7 @@ public class LowerCatapultCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted){
-    CATAPULT.setSpeed(0);
+    CATAPULT.motorsOff();
   }
 
   // Returns true when the command should end.

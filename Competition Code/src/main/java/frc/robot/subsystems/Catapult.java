@@ -48,11 +48,13 @@ public class Catapult extends SubsystemBase {
    */
 
   public void setSpeed(){
-    catapult_motor_1.set(ControlMode.PercentOutput, -CATAPULT_SPEED);;
+    catapult_motor_1.set(ControlMode.PercentOutput, -CATAPULT_SPEED);
   }
-  //PUMP
-
   
+  public void motorsOff(){
+    catapult_motor_1.set(ControlMode.PercentOutput, 0);
+  }
+
   public void pistonForward(){
     shooter_p.set(DoubleSolenoid.Value.kForward);
   }
@@ -60,7 +62,10 @@ public class Catapult extends SubsystemBase {
   public void pistonReverse(){
     shooter_p.set(DoubleSolenoid.Value.kReverse);
   }
-  
+
+  public void pistonsOff(){
+    shooter_p.set(DoubleSolenoid.Value.kOff);
+  }
 
   @Override
   public void periodic() {
