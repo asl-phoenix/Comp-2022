@@ -229,7 +229,7 @@ public class SwerveSpinners extends SubsystemBase {
 
 
   private boolean checkError(WPI_TalonFX motor, double d){
-    return motor.getSelectedSensorPosition() < d + ERROR_TOLERANCE && motor.getSelectedSensorPosition() > d - ERROR_TOLERANCE;
+    return motor.getSelectedSensorPosition() < d + SPINNER_ERROR_TOLERANCE && motor.getSelectedSensorPosition() > d - SPINNER_ERROR_TOLERANCE;
   }
 
 
