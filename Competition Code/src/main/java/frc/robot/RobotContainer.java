@@ -23,7 +23,6 @@ import frc.robot.commands.*;
 import frc.robot.commands.AutoCommands.AutoMoveCommand;
 import frc.robot.commands.AutoCommands.MoveForward;
 import frc.robot.subsystems.*;
-import frc.robot.commands.*;
 import frc.robot.triggers.*;
 
 import static frc.robot.Constants.*;
@@ -32,7 +31,7 @@ public class RobotContainer {
 
   // JOYSTICKS
   public final Joystick shopper = new Joystick(0);
-  // public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
+  public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
 
   // SUBSYSTEMS
 
@@ -44,12 +43,20 @@ public class RobotContainer {
   //Mechanism Subs
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
-  // public final Catapult YEETER = new Catapult();
+  public final Catapult CATAPULT = new Catapult();
 
   // Buttons
 
-
   //Swerve
+
+
+
+  // BUTTONS#
+  
+  
+  
+  public final JoystickButton pistonButton = new JoystickButton(operator, PISSBUTTON);
+  public final JoystickButton pistonRetractButton = new JoystickButton(operator, PISSRETRACTBUTTON);
   public final JoystickButton modeSwitchButton = new JoystickButton(shopper, DRIVESWITCHBUTTON);
 
   //Intake
@@ -64,7 +71,7 @@ public class RobotContainer {
 
   //Climber
   public final JoystickButton extendTelescopingButton = new JoystickButton(operator, EXTEND_TELESCOPING_BUTTON);
-  public final JoystickButton retractTelescopingButton = new JoystickButton(operator, RETRACT_TELESCOPING_BUTTON);
+  public final JoystickButton retractTelescopingButton = new JoystickButton(operator, RETRACT_SECONDARY_BUTTON);
   public final JoystickButton extendSecondaryButton = new JoystickButton(operator, EXTEND_SECONDARY_BUTTON);
   public final JoystickButton retractSecondaryButton = new JoystickButton(operator, RETRACT_SECONDARY_BUTTON);
   
@@ -82,8 +89,8 @@ public class RobotContainer {
   public final Command lowerIntakeCommand = new LowerIntakeCommand(INTAKE);
 
   // Catapult Commands
-  public final Command releaseCatapultCommand = new ReleaseCatapultCommand(YEETER);
-  public final Command lowerCatapultCommand = new LowerCatapultCommand(YEETER);
+  public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT);
+  public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
 
   // Climber Commands
   public final Command extendTelescopingCommand = new  ExtendTelescopingCommand(CLIMBER);
@@ -130,24 +137,35 @@ public class RobotContainer {
               GYRO
     ));
 
+    //Shooter
+    lowerCatapultButton.whenHeld(lowerCatapultCommand);
+    releaseCatapultButton.whenHeld(releaseCatapultCommand);
+    
+    /*CATAPULT.setDefaultCommand(
+      new RunCommand(
+        () -> YEETER.setSpeed(operator.getRawAxis(0)),
+              YEETER
+    ));
+    */
+
     //Intake
     intakeButton.whileHeld(intakeCommand);
     outtakeButton.whileHeld(outtakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
     lowerIntakeButton.whenPressed(lowerIntakeCommand);
 
-    //Shooter
-    releaseCatapultButton.whenPressed(releaseCatapultCommand);
-    lowerCatapultButton.whenHeld(lowerCatapultCommand);
+    
 
     //Climber
     extendTelescopingButton.whenHeld(extendTelescopingCommand);
-    retractTelescopingButton.whenHeld(retractTelescopingButton);
+    retractTelescopingButton.whenHeld(retractTelescopingCommand);
     extendSecondaryButton.whenHeld(extendSecondaryCommand);
     retractSecondaryButton.whenHeld(retractSecondaryCommand);
 
     //Switching Tank and Swerve
     modeSwitchButton.whenPressed(modeSwitchRotaters);
     modeSwitchButton.whenPressed(modeSwitchTrans);
+
+
   }
 }
