@@ -12,19 +12,20 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
   /** These are the variables that are created for this subsytem.. */
 
-  public TalonSRX telescope1, telescope2, secondary1, secondary2;
+  public WPI_TalonSRX telescope1, telescope2, secondary1, secondary2;
 
   public Climber() {
-      telescope1 = new TalonSRX(TELESCOPE_PORT_1);
-      telescope2 = new TalonSRX(TELESCOPE_PORT_2);
-      secondary1 = new TalonSRX(SECONDARY_PORT_1);
-      secondary2 = new TalonSRX(SECONDARY_PORT_2);
+      telescope1 = new WPI_TalonSRX(TELESCOPE_PORT_1);
+      telescope2 = new WPI_TalonSRX(TELESCOPE_PORT_2);
+      secondary1 = new WPI_TalonSRX(SECONDARY_PORT_1);
+      secondary2 = new WPI_TalonSRX(SECONDARY_PORT_2);
   }
 
   public void extendTelescoping(){
