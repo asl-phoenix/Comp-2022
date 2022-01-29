@@ -86,7 +86,7 @@ public final class Constants {
         //Speed constants
     public static final double INTAKE_SPEED = 0.5;
     public static final double SHOOTER_PISTON_SPEED = 0.5;
-    public static final double CATAPULT_SPEED = 0.4;
+    public static final double CATAPULT_SPEED = 0.25;
     public static final double TELESCOPING_SPEED = 0.5;
     public static final double SECONDARY_SPEED = 0.5;
 

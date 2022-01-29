@@ -19,13 +19,12 @@ public class ReleaseCatapultCommand extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(CATAPULT);
     this.CATAPULT = CATAPULT;
-    startTime = 0;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    CATAPULT.pistonForward();
+    CATAPULT.pistonReverse();
     startTime = System.currentTimeMillis();
   }
 
@@ -36,12 +35,12 @@ public class ReleaseCatapultCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted){
-    CATAPULT.pistonReverse();
+    CATAPULT.pistonForward();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return System.currentTimeMillis() - startTime > 1000;
+    return (System.currentTimeMillis() - startTime) > 1000;
   }
 }
