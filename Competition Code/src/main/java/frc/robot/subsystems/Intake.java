@@ -8,37 +8,42 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import static frc.robot.Constants.*;
 
 public class Intake extends SubsystemBase{
-    //Need to edit rollerIntake as we are not using flywheel design anymore
+    // These are the variables that need to be created for Intake.
     private DoubleSolenoid intakePiston;
     private WPI_TalonSRX rollerMotor;
 
+    // This is the constructor.
     public Intake(){
         rollerMotor = new WPI_TalonSRX(INTAKE_MOTOR_PORT);
         intakePiston = new DoubleSolenoid(INTAKE_PISTON_PORT_1, INTAKE_PISTON_PORT_2);
     }
-    //MOTORS
     /**
      * Sets the speed of the motor
      * 
      * @param speed [-1.0, 1.0]
      */
 
+    // This method sets the intake motor's speed to a value.
     public void intake(){
         rollerMotor.set(INTAKE_SPEED);
     }
 
-    public void lowerIntake(){
+    // This method pushes the Intake piston forward.
+    public void pistonForward(){
         intakePiston.set(DoubleSolenoid.Value.kForward);
     }
 
-    public void raiseIntake(){
+    // This method pulls the Intake piston back.
+    public void pistonReverse(){
         intakePiston.set(DoubleSolenoid.Value.kReverse);
     }
 
+    // This method runs the intake motor at negative a value in order to outtake.
     public void outtake(){
         rollerMotor.set(-INTAKE_SPEED);
     }
 
+    // This method turns off the intake motor.
     public void off(){
         rollerMotor.set(0);
     }

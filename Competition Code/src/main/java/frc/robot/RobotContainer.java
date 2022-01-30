@@ -29,79 +29,68 @@ import static frc.robot.Constants.*;
 
 public class RobotContainer {
 
-  // JOYSTICKS
+  // == JOYSTICKS =//
   public final Joystick shopper = new Joystick(DRIVER_CONTROLLER);
   public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
 
-  // SUBSYSTEMS
+  // == SUBSYSTEMS == //
 
-  //Drivetrain Subs
+    //Drivetrain Subs
   public final SwerveSpinners SWERVESPINNERS = new SwerveSpinners();
   public final SwerveRotaters SWERVEROTATERS = new SwerveRotaters();
   public final Gyro GYRO = new Gyro();
 
-  //Mechanism Subs
+    //Mechanism Subs
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
   public final Catapult CATAPULT = new Catapult();
 
-  // Buttons
+  // == BUTTONS == //
 
-  //Swerve
-
-
-
-  // BUTTONS
-  public final JoystickButton modeSwitchButton = new JoystickButton(shopper, DRIVESWITCHBUTTON);
-
-  //Intake
+    //Intake
   public final JoystickButton intakeButton = new JoystickButton(shopper, INTAKE_BUTTON);
   public final JoystickButton outtakeButton = new JoystickButton(shopper, OUTTAKE_BUTTON);
   public final JoystickButton raiseIntakeButton = new JoystickButton(operator, RAISE_INTAKE_BUTTON);
   public final JoystickButton lowerIntakeButton = new JoystickButton(operator, LOWER_INTAKE_BUTTON);
 
-  //Catapult
+    //Catapult
   public final JoystickButton lowerCatapultButton = new JoystickButton(operator, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton = new JoystickButton(operator, RELEASECATAPULT_BUTTON);
 
-  //Climber
+    //Climber
   public final JoystickButton extendTelescopingButton = new JoystickButton(operator, EXTEND_TELESCOPING_BUTTON);
   public final JoystickButton retractTelescopingButton = new JoystickButton(operator, RETRACT_TELESCOPING_BUTTON);
   public final JoystickButton extendSecondaryButton = new JoystickButton(operator, EXTEND_SECONDARY_BUTTON);
   public final JoystickButton retractSecondaryButton = new JoystickButton(operator, RETRACT_SECONDARY_BUTTON);
 
-  //Auto
+    //Auto
   public final JoystickButton autoButton = new JoystickButton(shopper, 5); //Idk
   
-  // Commands
+  // == COMMANDS == //
 
-  // Swerve Commands
-  public final InstantCommand modeSwitchRotaters = new InstantCommand(() -> SWERVEROTATERS.toggleSwitch(), SWERVEROTATERS);
-  public final InstantCommand modeSwitchTrans = new InstantCommand(()-> SWERVESPINNERS.toggleSwitch(), SWERVESPINNERS);
-
-  // Intake Commands
+    // Intake Commands
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command outtakeCommand = new OuttakeCommand(INTAKE);
   public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
   public final Command lowerIntakeCommand = new LowerIntakeCommand(INTAKE);
 
-  // Catapult Commands
+    // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
 
-  // Climber Commands
+    // Climber Commands
   public final Command extendTelescopingCommand = new  ExtendTelescopingCommand(CLIMBER);
   public final Command retractTelescopingCommand = new  RetractTelescopingCommand(CLIMBER);
   public final Command extendSecondaryCommand = new  ExtendSecondaryCommand(CLIMBER);
   public final Command retractSecondaryCommand = new  RetractSecondaryCommand(CLIMBER);
   
-  // Auto Commands
+    // Auto Commands
 
   public final Command moveForward = new MoveForward(SWERVESPINNERS, 100);
   public final Command autoMoveCommand = new AutoMoveCommand(SWERVEROTATERS, SWERVESPINNERS, GYRO, 100, 315);
   
+  // This constructs the robot container class.
   public RobotContainer() {
-    // Configure the button bindings
     configureButtonBindings();
   }
 
@@ -113,7 +102,9 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    //Swervedrive.exe
+    // == BUTTON BINDINGS == //
+
+      //Swervedrive.exe
     SWERVEROTATERS.setDefaultCommand(
       new RunCommand(
         () -> SWERVEROTATERS.rotateMotors(shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS),
@@ -138,30 +129,24 @@ public class RobotContainer {
               GYRO
     ));
 
-    // Catapult
+      // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenHeld(releaseCatapultCommand);
     
-    // Auto
-
+      // Auto
     autoButton.whenPressed(autoMoveCommand);
 
-    //Intake
+      //Intake
     intakeButton.whileHeld(intakeCommand);
     outtakeButton.whileHeld(outtakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
     lowerIntakeButton.whenPressed(lowerIntakeCommand);
 
-    //Climber
+      //Climber
     extendTelescopingButton.whenHeld(extendTelescopingCommand);
     retractTelescopingButton.whenHeld(retractTelescopingCommand);
     extendSecondaryButton.whenHeld(extendSecondaryCommand);
     retractSecondaryButton.whenHeld(retractSecondaryCommand);
-
-    //Switching Tank and Swerve
-    modeSwitchButton.whenPressed(modeSwitchRotaters);
-    modeSwitchButton.whenPressed(modeSwitchTrans);
-
-
+    
   }
 }

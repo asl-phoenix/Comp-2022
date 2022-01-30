@@ -11,7 +11,7 @@ public final class Constants {
 
     // === PORTS === //
 
-        // SwerveDrive MOTOR Ports
+        // Swervedrive Ports
     public static final int MOTOR_PORT_1 = 1;
     public static final int MOTOR_PORT_2 = 3;
     public static final int MOTOR_PORT_3 = 5;
@@ -37,10 +37,6 @@ public final class Constants {
     public static final int SHOOTER_PISTON_PORT_1 = 3;
     public static final int SHOOTER_PISTON_PORT_2 = 4;
 
-        //Piston test ports
-    public static final int TPISTON_PORT_1 = 4;
-    public static final int TPISTON_PORT_2 = 5;
-
         // Gyro Port
     public static final int GYRO_PORT = 9;
 
@@ -58,23 +54,23 @@ public final class Constants {
     public static final int TRANSLATIONAL_HORIZONTAL_AXIS = 0;
     public static final int TRANSLATIONAL_VERTICAL_AXIS = 1;
     public static final int ROTATIONAL_HORIZONTAL_AXIS = 4;
-    public static final int DRIVESWITCHBUTTON = 9;
 
         //Intake
-    public static final int INTAKE_BUTTON = 3;
-    public static final int OUTTAKE_BUTTON = 4;
-    public static final int RAISE_INTAKE_BUTTON = 8;
-    public static final int LOWER_INTAKE_BUTTON = 10;
+    public static final int INTAKE_BUTTON = RIGHT_BUMPER;
+    public static final int OUTTAKE_BUTTON = LEFT_BUMPER;
+    public static final int RAISE_INTAKE_BUTTON = BACK_BUTTON;
+    public static final int LOWER_INTAKE_BUTTON = START_BUTTON;
 
         //Catapult
-    public static final int LOWERCATAPULT_BUTTON = 6;
-    public static final int RELEASECATAPULT_BUTTON = 7;
+    public static final int LOWERCATAPULT_BUTTON = LEFT_TRIGGER;
+    public static final int RELEASECATAPULT_BUTTON = RIGHT_TRIGGER;
 
         //Climber
-    public static final int EXTEND_TELESCOPING_BUTTON = 0;
-    public static final int RETRACT_TELESCOPING_BUTTON = 0;
-    public static final int EXTEND_SECONDARY_BUTTON = 0;
-    public static final int RETRACT_SECONDARY_BUTTON = 0;
+    public static final int EXTEND_TELESCOPING_BUTTON = BUTTON_B;
+    public static final int RETRACT_TELESCOPING_BUTTON = BUTTON_X;
+    public static final int EXTEND_SECONDARY_BUTTON = BUTTON_Y;
+    public static final int RETRACT_SECONDARY_BUTTON = BUTTON_A;
+
     // === EXTRAS === //
 
         // Swervedrive Constants
@@ -102,7 +98,7 @@ public final class Constants {
     public static final double ROTATOR_ERROR_TOLERANCE = 300;
     public static final double SPINNER_ERROR_TOLERANCE = 300;
 
-    //Controller Buttons
+        //Controller Buttons
     public static final int BUTTON_X = 1;
     public static final int BUTTON_A = 2;
     public static final int BUTTON_B = 3;

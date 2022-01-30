@@ -10,7 +10,7 @@ import static frc.robot.Constants.*;
 import frc.robot.subsystems.*;
 
 public class IntakeCommand extends CommandBase {
-  /** Creates a new IntakeCommand. */
+  // Creates intake command
   private Intake INTAKE;
   
   public IntakeCommand(Intake INTAKE) {

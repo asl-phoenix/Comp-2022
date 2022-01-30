@@ -10,7 +10,7 @@ import static frc.robot.Constants.*;
 import frc.robot.subsystems.Climber;
 
 public class RetractTelescopingCommand extends CommandBase {
-  /** Creates a new OuttakeCommand. */
+  //Creates a new Command for retracting Telescoping/Primary Climbing Arms
   private Climber CLIMBER;
 
   public RetractTelescopingCommand(Climber CLIMBER) {

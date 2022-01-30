@@ -3,6 +3,8 @@
  */
 package frc.robot;
 
+// This class only exists to create a more organized way of initializing PID values.
+
 public class Gains {
 	/*
 	It's about drive

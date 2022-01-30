@@ -18,6 +18,8 @@ import com.ctre.phoenix.sensors.PigeonIMU.CalibrationMode;
  * This is the subsytem for our gyroscope
  * 
  */
+// Pigeon IMU gyro info
+//https://www.ctr-electronics.com/downloads/pdf/Pigeon%20IMU%20User's%20Guide.pdf
 
 public class Gyro extends SubsystemBase {
 
@@ -29,7 +31,7 @@ public class Gyro extends SubsystemBase {
         NoComm, Initializing, Ready, UserCalibration,
     };
 
-    // Constructer
+    // Constructor
     public Gyro() {
         gyro = new PigeonIMU(GYRO_PORT);
         resetValues();
@@ -37,26 +39,31 @@ public class Gyro extends SubsystemBase {
         getState();
     }
 
+    // This function returns the status of the gyro.
     public ErrorCode getStatus(PigeonIMU.GeneralStatus genStatus){
         return gyro.getGeneralStatus(genStatus);
     }
 
-    //It caps at about 60-65 full rotations. Check this: https://www.ctr-electronics.com/downloads/pdf/Pigeon%20IMU%20User's%20Guide.pdf
+    // This function return the yaw of the gyro.
     public double getYaw(){
         gyro.getYawPitchRoll(ypr);
         return (ypr[0]%360);
     }
 
+    // This function calibrates the gyro.
     public void calibrateGyro()
     {
         gyro.enterCalibrationMode(CalibrationMode.BootTareGyroAccel);
     }
 
+    // This function resets the values of the gyro.
     public void resetValues()
     {
         gyro.configFactoryDefault();
     }
 
+    // This function is for printing the current state of the gyro.
+    // This is important for knowing when the gyro is ready, so swerve can work properly. 
     public void getState()
     {
         if (gyro.getState() == PigeonIMU.PigeonState.Ready)

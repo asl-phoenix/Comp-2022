@@ -10,7 +10,7 @@ import static frc.robot.Constants.*;
 import frc.robot.subsystems.Catapult;
 
 public class LowerCatapultCommand extends CommandBase {
-  /** Creates a new LowerCatapultCommand. */
+  // Creates wind catapult arm command
   private Catapult CATAPULT;
   
   public LowerCatapultCommand(Catapult CATAPULT) {

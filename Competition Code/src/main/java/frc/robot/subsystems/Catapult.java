@@ -21,21 +21,18 @@ import static frc.robot.Constants.*;
 
 public class Catapult extends SubsystemBase {
 
-  /** Creates a new Shooter. */
-
   //Motors
   private WPI_TalonSRX catapult_motor_1;
 
   //Pistons
   private DoubleSolenoid shooter_p;
 
-
+  // Constructor
   public Catapult(){
     catapult_motor_1 = new WPI_TalonSRX(SHOOTER_MOTOR_PORT_1);
     shooter_p= new DoubleSolenoid(SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
     limitMotorCurrents();
   }
-  //MOTOR
 
   //Reduces the current that the TalonSRX draws in order to prevent brownouts
   public void limitMotorCurrents(){
@@ -47,23 +44,28 @@ public class Catapult extends SubsystemBase {
    *  @param speed [-1.0, 1.0]
    */
 
+  // This function sets the speed for the winding catapult motor.
   public void setSpeed(){
     catapult_motor_1.set(ControlMode.PercentOutput, -CATAPULT_SPEED);
   }
   
+  // This function stops the winding catapult motor.
   public void motorsOff(){
     catapult_motor_1.set(ControlMode.PercentOutput, 0);
   }
 
+  // This function pushes the catapult piston forward.
   public void pistonForward(){
     shooter_p.set(DoubleSolenoid.Value.kForward);
   }
 
+  // This function pulls the catapult pistion back.
   public void pistonReverse(){
     shooter_p.set(DoubleSolenoid.Value.kReverse);
   }
 
-  public void pistonsOff(){
+  // This function turns the catapult piston off.
+  public void pistonOff(){
     shooter_p.set(DoubleSolenoid.Value.kOff);
   }
 

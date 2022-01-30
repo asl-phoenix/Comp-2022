@@ -10,7 +10,7 @@ import static frc.robot.Constants.*;
 import frc.robot.subsystems.Intake;
 
 public class RaiseIntakeCommand extends CommandBase {
-  /** Creates a new OuttakeCommand. */
+  // Creates command for raising intake
   private Intake INTAKE;
 
   public RaiseIntakeCommand(Intake INTAKE) {
@@ -22,7 +22,7 @@ public class RaiseIntakeCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize(){
-    INTAKE.raiseIntake();
+    INTAKE.pistonReverse();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
