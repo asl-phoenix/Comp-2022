@@ -25,14 +25,12 @@ public class SwerveRotaters extends SubsystemBase {
   private WPI_TalonFX fRRotater, fLRotater, bLRotater, bRRotater;
   public final double ENCODER_PULSES_PER_ROTATION = 2048;
   public final double ROTATION_POW = 25;
-  public boolean swerveSwitch;
 
   // This is the constructor where the rotater motors are created and are reset.
   // In addition this is where the PID initilization occurs for each rotater motor
   // The sensor configuration is also set in this constructor.
 
   public SwerveRotaters() {
-    swerveSwitch = false;
 
     fRRotater = new WPI_TalonFX(ROTATOR_PORT_1);
     fLRotater = new WPI_TalonFX(ROTATOR_PORT_2);
@@ -114,15 +112,6 @@ public class SwerveRotaters extends SubsystemBase {
     return encoder.getSelectedSensorPosition();
   }
 
-  // This function returns the value of swerveSwitch
-  public boolean getSwitch() {return swerveSwitch;}
-
-  // This function toggles the value of swerveSwitch
-  public void toggleSwitch(){
-    if(swerveSwitch==true) swerveSwitch = false;
-    else swerveSwitch = true;
-  }
-
   // This function converts a provided angle to the encoder pulse value for the motors.
   public double angleToPulse(double angle){
     return angle*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360;
@@ -196,109 +185,96 @@ public class SwerveRotaters extends SubsystemBase {
   public void rotateMotors(double horizontal, double vertical, double rotationHorizontal, double yaw){
     // This -1 is because the vertical axis provided by the controller is reversed.
     vertical *= -1;
-    // swerveSwitch is the variable that switches the system between swervedrive and tankdrive.
-    // If the value of the boolean is false, the swervedrive code will initiate.
-    if(swerveSwitch == false){
-      // First we determine the goal pulse of the angle relative to the front of the robot.
-      double goal = angleToPulse(horizontal, vertical, yaw);
-      // This is the same thing above, but in angle rather than pulses.
-      double angle = angle(horizontal, vertical, yaw);
-      // The 2 booleans below are present for the purpose of sensitivity.
-      // Also they are useful for distinguishing between our 3 different swerve movements.
-      boolean isRotating = Math.abs(rotationHorizontal)>=CONTROLLER_SENSITIVITY;
-      boolean isTranslating = (Math.sqrt((Math.pow(vertical, 2) + Math.pow(horizontal, 2))) >= CONTROLLER_SENSITIVITY);
+    // First we determine the goal pulse of the angle relative to the front of the robot.
+    double goal = angleToPulse(horizontal, vertical, yaw);
+    // This is the same thing above, but in angle rather than pulses.
+    double angle = angle(horizontal, vertical, yaw);
+    // The 2 booleans below are present for the purpose of sensitivity.
+    // Also they are useful for distinguishing between our 3 different swerve movements.
+    boolean isRotating = Math.abs(rotationHorizontal)>=CONTROLLER_SENSITIVITY;
+    boolean isTranslating = (Math.sqrt((Math.pow(vertical, 2) + Math.pow(horizontal, 2))) >= CONTROLLER_SENSITIVITY);
       
-      // This if statement is for only translation swerve.
-      if (isTranslating && !isRotating){
-        // Using the PID initialized motors, we can use the position control mode.
-        // The motors' positions are set to the goal pulses, alining all motors with the wanted direction.
-        fRRotater.set(ControlMode.Position, goal);
-        fLRotater.set(ControlMode.Position, goal);
-        bLRotater.set(ControlMode.Position, goal);
-        bRRotater.set(ControlMode.Position, goal);
-      }
-
-      // This if statement is for only rotation swerve.
-      else if(isRotating && !isTranslating){
-        // The motors are all set to predetermined angles that are best suited for only rotation.
-        // In this case, since our swerve is a square, that happens at the following angles.
-        fRRotater.set(ControlMode.Position, 45*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-        fLRotater.set(ControlMode.Position, 135*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-        bLRotater.set(ControlMode.Position, 225*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-        bRRotater.set(ControlMode.Position, 315*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-      }
-
-      // This if statement is for translation and rotation swerve.
-      else if (isRotating && isTranslating){
-        // This is split into 4 sections, named zones 1 through 4.
-        // The zones are all relative to the front of the robot. 
-        // If we want to add rotation to an already translating swerve, we use deflection.
-        // We deflect the angle of two wheels clockwise(C) and the others counter-clockwise(CC).
-        // This deflection angle is mirrored and it is the same for all motors.
-        // Which ones are deflected clockwise(C) and counter-clockwise(CC) is different in the zones.
-        
-        // In every orientation, 2 are deflected C, while 2 are deflected CC.
-        // Therefore, the directional vectors of the motors have a net direction.
-        // This net direction is the same as the original only translational direction.
-        // This is due to the 2 to 2 ratio of C and CC deflection.
-
-        // The different orientations in the zones ensure that there will always be net rotation.
-        // The deflections create this net rotation.
-        // The net rotation magnitude differs slightly depending on your original only translation dir.
-        // However, it does not differ greatly, therefore rotation + translation is very smooth.
-
-        // It is also worth noting that our of the multiple different swerve algorithms we tested
-        // this method is definitely the smoothest (by far).
-        
-        // zone 1
-        // This is quadrant starts from 45 degrees to the right of the front of the robot.
-        // It ends at 45 degrees to the left of the front of the robot.
-        if(((angle>=0)&&(45>angle))||((360>angle)&&(angle>=315))){
-          fRRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-          fLRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-          bLRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-          bRRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-        }
-
-        //zone 2
-        // This is quadrant starts from 45 degrees to the left of the front of the robot.
-        // It ends at 135 degrees to the left of the front of the robot.
-        else if((angle>=45)&&(135>angle)){
-          bLRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-          fLRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-          fRRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-          bRRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-        }
-
-        //zone 3
-        // This is quadrant starts from 135 degrees to the left of the front of the robot.
-        // It ends at 225 degrees to the left of the front of the robot.
-        else if((angle>=135)&&(225>angle)){
-          bLRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-          bRRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-          fLRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-          fRRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-        }
-
-        //zone 4
-        // This is quadrant starts from 225 degrees to the left of the front of the robot.
-        // It ends at 315 degrees to the left of the front of the robot(aka. 45 degrees to the right).
-        else if((angle>=225)&&(315>angle)){
-          fRRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-          bRRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-          bLRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-          fLRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360); 
-        }
-      }
+    // This if statement is for only translation swerve.
+    if (isTranslating && !isRotating){
+      // Using the PID initialized motors, we can use the position control mode.
+      // The motors' positions are set to the goal pulses, alining all motors with the wanted direction.
+      fRRotater.set(ControlMode.Position, goal);
+      fLRotater.set(ControlMode.Position, goal);
+      bLRotater.set(ControlMode.Position, goal);
+      bRRotater.set(ControlMode.Position, goal);
     }
 
-    // This occurs is swerveSwitch is false.
-    // The values below lock the wheels in position for tank drive.
-    else{
-      fRRotater.set(ControlMode.Position, 0);
-      fLRotater.set(ControlMode.Position, 0);
-      bLRotater.set(ControlMode.Position, 0);
-      bRRotater.set(ControlMode.Position, 0);
+    // This if statement is for only rotation swerve.
+    else if(isRotating && !isTranslating){
+      // The motors are all set to predetermined angles that are best suited for only rotation.
+      // In this case, since our swerve is a square, that happens at the following angles.
+      fRRotater.set(ControlMode.Position, 45*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+      fLRotater.set(ControlMode.Position, 135*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+      bLRotater.set(ControlMode.Position, 225*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+      bRRotater.set(ControlMode.Position, 315*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+    }
+
+    // This if statement is for translation and rotation swerve.
+    else if (isRotating && isTranslating){
+      // This is split into 4 sections, named zones 1 through 4.
+      // The zones are all relative to the front of the robot. 
+      // If we want to add rotation to an already translating swerve, we use deflection.
+      // We deflect the angle of two wheels clockwise(C) and the others counter-clockwise(CC).
+      // This deflection angle is mirrored and it is the same for all motors.
+      // Which ones are deflected clockwise(C) and counter-clockwise(CC) is different in the zones.
+        
+      // In every orientation, 2 are deflected C, while 2 are deflected CC.
+      // Therefore, the directional vectors of the motors have a net direction.
+      // This net direction is the same as the original only translational direction.
+      // This is due to the 2 to 2 ratio of C and CC deflection.
+
+      // The different orientations in the zones ensure that there will always be net rotation.
+      // The deflections create this net rotation.
+      // The net rotation magnitude differs slightly depending on your original only translation dir.
+      // However, it does not differ greatly, therefore rotation + translation is very smooth.
+
+      // It is also worth noting that our of the multiple different swerve algorithms we tested
+      // this method is definitely the smoothest (by far).
+        
+      // zone 1
+      // This is quadrant starts from 45 degrees to the right of the front of the robot.
+      // It ends at 45 degrees to the left of the front of the robot.
+      if(((angle>=0)&&(45>angle))||((360>angle)&&(angle>=315))){
+        fRRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+        fLRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+        bLRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+        bRRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+      }
+
+      //zone 2
+      // This is quadrant starts from 45 degrees to the left of the front of the robot.
+      // It ends at 135 degrees to the left of the front of the robot.
+      else if((angle>=45)&&(135>angle)){
+        bLRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+        fLRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+        fRRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+        bRRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+      }
+
+      //zone 3
+      // This is quadrant starts from 135 degrees to the left of the front of the robot.
+      // It ends at 225 degrees to the left of the front of the robot.
+      else if((angle>=135)&&(225>angle)){
+        bLRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+        bRRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+        fLRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+        fRRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+      }
+
+      //zone 4
+      // This is quadrant starts from 225 degrees to the left of the front of the robot.
+      // It ends at 315 degrees to the left of the front of the robot(aka. 45 degrees to the right).
+      else if((angle>=225)&&(315>angle)){
+        fRRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+        bRRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+        bLRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
+        fLRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360); 
+      }
     }
   }
 
