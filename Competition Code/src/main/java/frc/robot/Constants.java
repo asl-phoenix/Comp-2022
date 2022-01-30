@@ -11,7 +11,7 @@ public final class Constants {
 
     // === PORTS === //
 
-        // Swervedrive  orts
+        // Swervedrive Ports
     public static final int MOTOR_PORT_1 = 1;
     public static final int MOTOR_PORT_2 = 3;
     public static final int MOTOR_PORT_3 = 5;
