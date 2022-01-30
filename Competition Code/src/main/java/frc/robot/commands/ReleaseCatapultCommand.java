@@ -10,7 +10,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Catapult;
 
 public class ReleaseCatapultCommand extends CommandBase {
-  /** Creates a new ShootCommand. */
+  // Creates release catapult for shooting command
 
   private Catapult CATAPULT;
   public double startTime;
@@ -24,7 +24,9 @@ public class ReleaseCatapultCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    // For shooting we need to reverse the piston.
     CATAPULT.pistonReverse();
+    // A variable is created for determining when we want to end command.
     startTime = System.currentTimeMillis();
   }
 
@@ -35,12 +37,15 @@ public class ReleaseCatapultCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted){
+    // When the command ends, the piston is returned to its original position.
+    // Therefore, the mechanism is now ready for lowering the catapult once more. 
     CATAPULT.pistonForward();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    // This means that 1 second after the command is initialized, the command will end.
     return (System.currentTimeMillis() - startTime) > 1000;
   }
 }

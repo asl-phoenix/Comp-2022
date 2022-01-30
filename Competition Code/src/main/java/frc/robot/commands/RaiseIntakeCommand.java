@@ -10,7 +10,7 @@ import static frc.robot.Constants.*;
 import frc.robot.subsystems.Intake;
 
 public class RaiseIntakeCommand extends CommandBase {
-  /** Creates a new OuttakeCommand. */
+  // Creates command for raising intake
   private Intake INTAKE;
 
   public RaiseIntakeCommand(Intake INTAKE) {

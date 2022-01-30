@@ -15,6 +15,8 @@ public class GyroCommand extends CommandBase{
     private double[] ypr;
     private double yaw;
 
+    //This is for gyroscope commands
+
     public GyroCommand(Gyro Gyro){
         addRequirements(Gyro);
         this.gyro = Gyro;

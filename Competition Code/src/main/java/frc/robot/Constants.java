@@ -58,23 +58,23 @@ public final class Constants {
     public static final int TRANSLATIONAL_HORIZONTAL_AXIS = 0;
     public static final int TRANSLATIONAL_VERTICAL_AXIS = 1;
     public static final int ROTATIONAL_HORIZONTAL_AXIS = 4;
-    public static final int DRIVESWITCHBUTTON = 9;
+    //public static final int DRIVESWITCHBUTTON;
 
         //Intake
-    public static final int INTAKE_BUTTON = 3;
-    public static final int OUTTAKE_BUTTON = 4;
-    public static final int RAISE_INTAKE_BUTTON = 8;
-    public static final int LOWER_INTAKE_BUTTON = 10;
+    public static final int INTAKE_BUTTON = RIGHT_BUMPER;
+    public static final int OUTTAKE_BUTTON = LEFT_BUMPER;
+    public static final int RAISE_INTAKE_BUTTON = BACK_BUTTON;
+    public static final int LOWER_INTAKE_BUTTON = START_BUTTON;
 
         //Catapult
-    public static final int LOWERCATAPULT_BUTTON = 6;
-    public static final int RELEASECATAPULT_BUTTON = 7;
+    public static final int LOWERCATAPULT_BUTTON = LEFT_TRIGGER;
+    public static final int RELEASECATAPULT_BUTTON = RIGHT_TRIGGER;
 
         //Climber
-    public static final int EXTEND_TELESCOPING_BUTTON = 0;
-    public static final int RETRACT_TELESCOPING_BUTTON = 0;
-    public static final int EXTEND_SECONDARY_BUTTON = 0;
-    public static final int RETRACT_SECONDARY_BUTTON = 0;
+    public static final int EXTEND_TELESCOPING_BUTTON = BUTTON_B;
+    public static final int RETRACT_TELESCOPING_BUTTON = BUTTON_X;
+    public static final int EXTEND_SECONDARY_BUTTON = BUTTON_Y;
+    public static final int RETRACT_SECONDARY_BUTTON = BUTTON_A;
     // === EXTRAS === //
 
         // Swervedrive Constants

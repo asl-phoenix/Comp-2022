@@ -16,14 +16,19 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SwerveRotaters extends SubsystemBase {
+  // This is the sub-class for the swervedrive.
+  // This class is concerned with the rotation motors for the wheels.
+
+  // == INITIALIZATION == //
+
   /** These are the variables that are created for this subsytem.. */
   private WPI_TalonFX fRRotater, fLRotater, bLRotater, bRRotater;
   public final double ENCODER_PULSES_PER_ROTATION = 2048;
   public final double ROTATION_POW = 25;
   public boolean swerveSwitch;
 
-  // This is the constructor where the rotater motors are created (named encoders) and are reset.
-  // In addition this is where the PIDf initilization occurs for each rotater motor (again named encoders 1, 2, 3, & 4)
+  // This is the constructor where the rotater motors are created and are reset.
+  // In addition this is where the PID initilization occurs for each rotater motor
   // The sensor configuration is also set in this constructor.
 
   public SwerveRotaters() {
@@ -34,13 +39,11 @@ public class SwerveRotaters extends SubsystemBase {
     bLRotater = new WPI_TalonFX(ROTATOR_PORT_3);
     bRRotater = new WPI_TalonFX(ROTATOR_PORT_4);
 
-    //tester shit below
-    // this works i hope
-    // enabled, limit amp, trigger, amp, trigger thrrehosld time
-    // more test
+    // Current Limiting for all motors in order to avoid Brownouts.
+
     fRRotater.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 1));
     fRRotater.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 1));
-    // hello
+
     fLRotater.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 1));
     fLRotater.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 1));
 
@@ -50,12 +53,7 @@ public class SwerveRotaters extends SubsystemBase {
     bRRotater.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 1));
     bRRotater.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 1));
 
-    /* likely wrong
-    fRRotater.configVoltageCompSaturation(20);
-    fRRotater.enableVoltageCompensation(true);
-    */
-    // end of nonsense
-
+    // Sensor config and encoder reset for all motors
 
     fRRotater.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
     fLRotater.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
@@ -63,6 +61,7 @@ public class SwerveRotaters extends SubsystemBase {
     bRRotater.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
     resetEncoders();
 
+    // Config front right rotater
     fRRotater.configFactoryDefault();
     fRRotater.set(ControlMode.Velocity,0);
     fRRotater.config_kP(0, kGains.kP);
@@ -71,6 +70,7 @@ public class SwerveRotaters extends SubsystemBase {
     fRRotater.config_kF(0, kGains.kF); 
     fRRotater.setSensorPhase(true);
 
+    // Config front left rotater
     fLRotater.configFactoryDefault();
     fLRotater.set(ControlMode.Velocity,0);
     fLRotater.config_kP(0, kGains.kP);
@@ -79,6 +79,7 @@ public class SwerveRotaters extends SubsystemBase {
     fLRotater.config_kF(0, kGains.kF); 
     fLRotater.setSensorPhase(true);
 
+    // Config back right rotater
     bLRotater.configFactoryDefault();
     bLRotater.set(ControlMode.Velocity,0);
     bLRotater.config_kP(0, kGains.kP);
@@ -87,6 +88,7 @@ public class SwerveRotaters extends SubsystemBase {
     bLRotater.config_kF(0, kGains.kF); 
     bLRotater.setSensorPhase(true);
     
+    // Config back left rotater
     bRRotater.configFactoryDefault();
     bRRotater.set(ControlMode.Velocity,0);
     bRRotater.config_kP(0, kGains.kP);
@@ -96,7 +98,10 @@ public class SwerveRotaters extends SubsystemBase {
     bRRotater.setSensorPhase(true);
     
   }
-  //This function resets the encoders when the subsytem is initialized
+
+  // == FUNCTIONS == //
+
+  // This function resets the encoders of all motors and is called in the constructor.
   public void resetEncoders(){
     fRRotater.setSelectedSensorPosition(0);
     fLRotater.setSelectedSensorPosition(0);
@@ -104,32 +109,39 @@ public class SwerveRotaters extends SubsystemBase {
     bRRotater.setSelectedSensorPosition(0);
   }
 
-  //This function returns the position of the encoder that is provided
+  // This function returns the position of the motor that is provided
   public double getPosition(WPI_TalonFX encoder){
     return encoder.getSelectedSensorPosition();
   }
 
+  // This function returns the value of swerveSwitch
   public boolean getSwitch() {return swerveSwitch;}
 
+  // This function toggles the value of swerveSwitch
   public void toggleSwitch(){
     if(swerveSwitch==true) swerveSwitch = false;
     else swerveSwitch = true;
   }
 
-  //This function gives the current angle that the provided encoder is pointing.
+  // This function converts a provided angle to the encoder pulse value for the motors.
   public double angleToPulse(double angle){
     return angle*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360;
   }
 
+  // This function converts a provided angle to the angle relative to the front of the robot.
+  // Then the function converts the relative angle to the encoder pulse value for the motors.
   public double angleToPulse(double angle, double yaw){
     return angle(angle, yaw)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360;
   }
 
+  // This function calculates the angle by using the coordinates defined on the controller.
+  // Then the angle is converted into a relative angle (relative to the front of the robot).
+  // Then the angle is converted into the encoder pulse value for the motors.
   public double angleToPulse(double horizontal, double vertical, double yaw){
     return angle(horizontal, vertical, yaw)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360;
   }
 
-  // This function provides the goal angle that is trying to be reached by the wheels.
+  // This function converts a provided angle to the angle relative to the front of the robot.
   private double angle(double angle, double yaw){
     // This uses the yaw of the robot in order to calculate the angle we want to turn relative to the front
     // of the robot, which is the 0 point of the encoders. 
@@ -138,6 +150,8 @@ public class SwerveRotaters extends SubsystemBase {
     return (angle%360);
   }
 
+  // This function calculates the angle by using the coordinates defined on the controller.
+  // Then the angle is converted into a relative angle (relative to the front of the robot).
   private double angle(double horizontal, double vertical, double yaw){
     double angle = 0;
     angle = Math.toDegrees(Math.atan(-horizontal/vertical));
@@ -160,9 +174,13 @@ public class SwerveRotaters extends SubsystemBase {
     return (angle%360);
   }
 
+  // This method calls the method before this one with negative of the second value provided.
+  // This method is called in Robot Container.
   public double getAngle(double horizontal, double vertical, double yaw){
     return angle(horizontal, -vertical, yaw);
   }
+
+  // This method is for autonomous rotation.
   public void autorotate(double targetAngle, double yaw){
 
         while (targetAngle != yaw){
@@ -173,51 +191,98 @@ public class SwerveRotaters extends SubsystemBase {
         }                                                                           
       
   }
+
+  // This is the default method used in this class for swervedrive.
   public void rotateMotors(double horizontal, double vertical, double rotationHorizontal, double yaw){
-    vertical *= -1;
     // This -1 is because the vertical axis provided by the controller is reversed.
+    vertical *= -1;
+    // swerveSwitch is the variable that switches the system between swervedrive and tankdrive.
+    // If the value of the boolean is false, the swervedrive code will initiate.
     if(swerveSwitch == false){
+      // First we determine the goal pulse of the angle relative to the front of the robot.
       double goal = angleToPulse(horizontal, vertical, yaw);
+      // This is the same thing above, but in angle rather than pulses.
       double angle = angle(horizontal, vertical, yaw);
+      // The 2 booleans below are present for the purpose of sensitivity.
+      // Also they are useful for distinguishing between our 3 different swerve movements.
       boolean isRotating = Math.abs(rotationHorizontal)>=CONTROLLER_SENSITIVITY;
       boolean isTranslating = (Math.sqrt((Math.pow(vertical, 2) + Math.pow(horizontal, 2))) >= CONTROLLER_SENSITIVITY);
+      
+      // This if statement is for only translation swerve.
       if (isTranslating && !isRotating){
-        //These are the Position Control Methods for the encoders, essentially the heart of the rotaters file
+        // Using the PID initialized motors, we can use the position control mode.
+        // The motors' positions are set to the goal pulses, alining all motors with the wanted direction.
         fRRotater.set(ControlMode.Position, goal);
         fLRotater.set(ControlMode.Position, goal);
         bLRotater.set(ControlMode.Position, goal);
         bRRotater.set(ControlMode.Position, goal);
       }
+
+      // This if statement is for only rotation swerve.
       else if(isRotating && !isTranslating){
+        // The motors are all set to predetermined angles that are best suited for only rotation.
+        // In this case, since our swerve is a square, that happens at the following angles.
         fRRotater.set(ControlMode.Position, 45*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
         fLRotater.set(ControlMode.Position, 135*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
         bLRotater.set(ControlMode.Position, 225*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
         bRRotater.set(ControlMode.Position, 315*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
       }
+
+      // This if statement is for translation and rotation swerve.
       else if (isRotating && isTranslating){
-        //zone 1
-        System.out.println(angle);
+        // This is split into 4 sections, named zones 1 through 4.
+        // The zones are all relative to the front of the robot. 
+        // If we want to add rotation to an already translating swerve, we use deflection.
+        // We deflect the angle of two wheels clockwise(C) and the others counter-clockwise(CC).
+        // This deflection angle is mirrored and it is the same for all motors.
+        // Which ones are deflected clockwise(C) and counter-clockwise(CC) is different in the zones.
+        
+        // In every orientation, 2 are deflected C, while 2 are deflected CC.
+        // Therefore, the directional vectors of the motors have a net direction.
+        // This net direction is the same as the original only translational direction.
+        // This is due to the 2 to 2 ratio of C and CC deflection.
+
+        // The different orientations in the zones ensure that there will always be net rotation.
+        // The deflections create this net rotation.
+        // The net rotation magnitude differs slightly depending on your original only translation dir.
+        // However, it does not differ greatly, therefore rotation + translation is very smooth.
+
+        // It is also worth noting that our of the multiple different swerve algorithms we tested
+        // this method is definitely the smoothest (by far).
+        
+        // zone 1
+        // This is quadrant starts from 45 degrees to the right of the front of the robot.
+        // It ends at 45 degrees to the left of the front of the robot.
         if(((angle>=0)&&(45>angle))||((360>angle)&&(angle>=315))){
           fRRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
           fLRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
           bLRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
           bRRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
         }
+
         //zone 2
+        // This is quadrant starts from 45 degrees to the left of the front of the robot.
+        // It ends at 135 degrees to the left of the front of the robot.
         else if((angle>=45)&&(135>angle)){
           bLRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
           fLRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
           fRRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
           bRRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
         }
+
         //zone 3
+        // This is quadrant starts from 135 degrees to the left of the front of the robot.
+        // It ends at 225 degrees to the left of the front of the robot.
         else if((angle>=135)&&(225>angle)){
           bLRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
           bRRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
           fLRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
           fRRotater.set(ControlMode.Position, ((angle+rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
         }
+
         //zone 4
+        // This is quadrant starts from 225 degrees to the left of the front of the robot.
+        // It ends at 315 degrees to the left of the front of the robot(aka. 45 degrees to the right).
         else if((angle>=225)&&(315>angle)){
           fRRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
           bRRotater.set(ControlMode.Position, ((angle-rotationHorizontal*ROTATION_POW)%360)*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
@@ -226,15 +291,18 @@ public class SwerveRotaters extends SubsystemBase {
         }
       }
     }
+
+    // This occurs is swerveSwitch is false.
+    // The values below lock the wheels in position for tank drive.
     else{
       fRRotater.set(ControlMode.Position, 0);
       fLRotater.set(ControlMode.Position, 0);
       bLRotater.set(ControlMode.Position, 0);
       bRRotater.set(ControlMode.Position, 0);
     }
-
   }
 
+  // This method sets the wheel direction of the 4 motors, with provided encoder pulse values.
   public void setWheelDirection(double fR, double fL, double bR, double bL) {
     fRRotater.set(ControlMode.Position, fR);
     fLRotater.set(ControlMode.Position, fL);
@@ -242,6 +310,8 @@ public class SwerveRotaters extends SubsystemBase {
     bLRotater.set(ControlMode.Position, bL);
   }
 
+  // This method is for autonomous.
+  // To check if each motor has reached the error boundary of a provided value.
   public boolean reachedPosition(double a, double b, double c, double d){
     if (checkError(fRRotater, a) && checkError(fLRotater, b) && checkError(bRRotater, c) && checkError(bLRotater, d)) {
       return true;
@@ -249,11 +319,13 @@ public class SwerveRotaters extends SubsystemBase {
     return false;
   }
 
-
+  // This method is for autonomous.
+  // To check if an individual motor has reached the error boundary of the provided value. 
   private boolean checkError(WPI_TalonFX motor, double d){
     return motor.getSelectedSensorPosition() < d + ROTATOR_ERROR_TOLERANCE && motor.getSelectedSensorPosition() > d - ROTATOR_ERROR_TOLERANCE;
   }
 
+  // This method stops all motors.
   public void stop(){
     fRRotater.set(ControlMode.PercentOutput, 0);
     fLRotater.set(ControlMode.PercentOutput, 0);
