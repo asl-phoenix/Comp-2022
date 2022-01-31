@@ -49,6 +49,18 @@ public final class Constants {
     public static final int OPERATOR_CONTROLLER = 1;
 
     // == BUTTON CONSTANTS == //
+    
+        //Controller Buttons
+    public static final int BUTTON_X = 1;
+    public static final int BUTTON_A = 2;
+    public static final int BUTTON_B = 3;
+    public static final int BUTTON_Y = 4;
+    public static final int LEFT_BUMPER = 5;
+    public static final int RIGHT_BUMPER = 6;
+    public static final int LEFT_TRIGGER = 7;
+    public static final int RIGHT_TRIGGER = 8;
+    public static final int BACK_BUTTON = 9;
+    public static final int START_BUTTON = 10;
 
         //Swerve
     public static final int TRANSLATIONAL_HORIZONTAL_AXIS = 0;
@@ -97,16 +109,4 @@ public final class Constants {
     public static final double ERROR_TOLERANCE = 300;
     public static final double ROTATOR_ERROR_TOLERANCE = 300;
     public static final double SPINNER_ERROR_TOLERANCE = 300;
-
-        //Controller Buttons
-    public static final int BUTTON_X = 1;
-    public static final int BUTTON_A = 2;
-    public static final int BUTTON_B = 3;
-    public static final int BUTTON_Y = 4;
-    public static final int LEFT_BUMPER = 5;
-    public static final int RIGHT_BUMPER = 6;
-    public static final int LEFT_TRIGGER = 7;
-    public static final int RIGHT_TRIGGER = 8;
-    public static final int BACK_BUTTON = 9;
-    public static final int START_BUTTON = 10;
 }

@@ -1,18 +1,18 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+//import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Gyro;
 
-import com.ctre.phoenix.ErrorCode;
-import com.ctre.phoenix.sensors.PigeonIMU;
-import com.ctre.phoenix.sensors.PigeonIMU.CalibrationMode;
+//import com.ctre.phoenix.ErrorCode;
+//import com.ctre.phoenix.sensors.PigeonIMU;
+//import com.ctre.phoenix.sensors.PigeonIMU.CalibrationMode;
 
 public class GyroCommand extends CommandBase{
     
     private Gyro gyro;
-    private double[] ypr;
+    //private double[] ypr;
     private double yaw;
 
     //This is for gyroscope commands

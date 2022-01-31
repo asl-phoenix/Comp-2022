@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.VictorSP;
+//import edu.wpi.first.wpilibj.VictorSP;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import static frc.robot.Constants.*;

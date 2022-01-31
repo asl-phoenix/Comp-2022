@@ -5,8 +5,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
-import static frc.robot.Constants.*;
 import frc.robot.subsystems.Climber;
 
 public class RetractTelescopingCommand extends CommandBase {
