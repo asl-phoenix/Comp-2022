@@ -62,11 +62,12 @@ public class SwerveSpinners extends SubsystemBase {
 
   
   public void configPID(){
+    resetEncoders();
+
     fRMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
     fLMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
     bLMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
     bRMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-    resetEncoders();
     
     fLMotor.configFactoryDefault();
     fLMotor.set(ControlMode.Velocity,0);
@@ -177,34 +178,24 @@ public class SwerveSpinners extends SubsystemBase {
   }
 
 
-  public void driveDistance(double a, double b, double c, double d){
-    resetEncoders();
-    bRMotor.set(ControlMode.PercentOutput, 0.6);
-    bLMotor.set(ControlMode.PercentOutput, 0.6);
-    fRMotor.set(ControlMode.PercentOutput, 0.6);
-    fLMotor.set(ControlMode.PercentOutput, 0.6);
+  public void driveDistance(double driveToPulse){
+    bRMotor.set(ControlMode.Position, driveToPulse);
+    bLMotor.set(ControlMode.Position, driveToPulse);
+    fRMotor.set(ControlMode.Position, driveToPulse);
+    fLMotor.set(ControlMode.Position, driveToPulse);
   }
-
   
-  public void turnOn(){
-    bRMotor.set(0.3);
-    bLMotor.set(0.3);
-    fLMotor.set(0.3);
-    fRMotor.set(0.3);
 
-  }
-
-
-  public boolean reachedPosition(double a, double b, double c, double d){
-    if (checkError(bRMotor, a) && checkError(bLMotor, b) && checkError(fRMotor, c) && checkError(fLMotor, d)) {
+  public boolean reachedPosition(double pulsesDistance){
+    if (checkError(bRMotor, pulsesDistance) && checkError(bLMotor, pulsesDistance) && checkError(fRMotor, pulsesDistance) && checkError(fLMotor, pulsesDistance)) {
       return true;
     }
     return false;
   }
 
 
-  private boolean checkError(WPI_TalonFX motor, double d){
-    return motor.getSelectedSensorPosition() < d + SPINNER_ERROR_TOLERANCE && motor.getSelectedSensorPosition() > d - SPINNER_ERROR_TOLERANCE;
+  private boolean checkError(WPI_TalonFX motor, double pulsesDistance){
+    return ((motor.getSelectedSensorPosition() < (pulsesDistance + SPINNER_ERROR_TOLERANCE)) && (motor.getSelectedSensorPosition() > (pulsesDistance - SPINNER_ERROR_TOLERANCE)));
   }
 
 

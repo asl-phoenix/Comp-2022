@@ -8,21 +8,22 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SwerveSpinners;
 
 public class MoveForward extends CommandBase {
-  SwerveSpinners swerve;
-  double d;
+  SwerveSpinners spinners;
+  double pulsesDistance;
 
   /** Creates a new moveTo. */
-  public MoveForward(SwerveSpinners swerve, double d) {
+  public MoveForward(SwerveSpinners spinners, double moveDistance) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(swerve);
-    this.swerve = swerve;
-    this.d = swerve.cmToPulses(d);
+    addRequirements(spinners);
+    this.spinners = spinners;
+    this.pulsesDistance = spinners.cmToPulses(moveDistance);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    swerve.driveDistance(d, d, d, d);
+    spinners.resetEncoders();
+    spinners.driveDistance(pulsesDistance);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,13 +33,13 @@ public class MoveForward extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    swerve.stop();
+    spinners.stop();
     System.out.println("Finished");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return swerve.reachedPosition(d, d, d, d);
+    return spinners.reachedPosition(pulsesDistance);
   }
 }
