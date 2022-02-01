@@ -106,7 +106,9 @@ public final class Constants {
     public static final Gains jGains = new Gains(0.1,0.0,0.0,0.0,0, 0.0); // spinners
 
         //Auto Constants
-    public static final double ERROR_TOLERANCE = 300;
+    //public static final double ERROR_TOLERANCE = 300;
     public static final double ROTATOR_ERROR_TOLERANCE = 300;
     public static final double SPINNER_ERROR_TOLERANCE = 300;
+    public static final double ANGLE_ERROR_TOLERANCE = 10;
+    public static final double AUTO_ROTATE_SPEED = 0.1;
 }

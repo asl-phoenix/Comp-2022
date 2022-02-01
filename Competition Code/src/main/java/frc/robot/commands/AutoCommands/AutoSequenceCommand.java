@@ -12,14 +12,13 @@ import frc.robot.subsystems.SwerveSpinners;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoMoveCommand extends SequentialCommandGroup {
-  /** Creates a new AutoMoveCommand. */
-  public AutoMoveCommand(SwerveRotaters rotators, SwerveSpinners spinners, Gyro gyro, double distance, double angle) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
+public class AutoSequenceCommand extends SequentialCommandGroup {
+  /** Creates a new autonomous command sequence. */
+  public AutoSequenceCommand(SwerveRotaters rotators, SwerveSpinners spinners, Gyro gyro) {
+    // This is the sequential commands within our autonomous sequence
     addCommands(
-      new SetWheelDirectionsWithGyro(rotators, gyro, angle, angle, angle, angle),
-      new MoveForward(spinners, distance)
+      new MoveWithSetWheelDirectionsWithGyro(rotators, spinners, gyro, 100, 300),
+      new Rotate(rotators, spinners, gyro, 300)
     );
   }
 }

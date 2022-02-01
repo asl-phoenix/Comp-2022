@@ -21,8 +21,6 @@ import frc.robot.triggers.*;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
-import frc.robot.commands.AutoCommands.AutoMoveCommand;
-import frc.robot.commands.AutoCommands.MoveForward;
 import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
 
@@ -44,6 +42,26 @@ public class RobotContainer {
   public final Climber CLIMBER = new Climber();
   public final Catapult CATAPULT = new Catapult();
 
+    //Auto Subs Access
+  public SwerveSpinners getSpinners(){
+    return SWERVESPINNERS;
+  }
+  public SwerveRotaters getRotaters(){
+    return SWERVEROTATERS;
+  }
+  public Gyro getGyro(){
+    return GYRO;
+  }
+  public Intake getIntake(){
+    return INTAKE;
+  }
+  public Climber getClimber(){
+    return CLIMBER;
+  }
+  public Catapult getCatapult(){
+    return CATAPULT;
+  }
+
   // == BUTTONS == //
 
     //Intake
@@ -63,7 +81,7 @@ public class RobotContainer {
   public final JoystickButton retractSecondaryButton = new JoystickButton(operator, RETRACT_SECONDARY_BUTTON);
 
     //Auto
-  public final JoystickButton autoButton = new JoystickButton(shopper, 5); //Idk
+  //public final JoystickButton autoButton = new JoystickButton(shopper, 5); //Idk
   
   // == COMMANDS == //
 
@@ -84,9 +102,7 @@ public class RobotContainer {
   public final Command retractSecondaryCommand = new  RetractSecondaryCommand(CLIMBER);
   
     // Auto Commands
-
-  public final Command moveForward = new MoveForward(SWERVESPINNERS, 100);
-  public final Command autoMoveCommand = new AutoMoveCommand(SWERVEROTATERS, SWERVESPINNERS, GYRO, 100, 315);
+  //public final Command autoSequence = new AutoSequenceCommand(SWERVEROTATERS, SWERVESPINNERS, GYRO);
   
   // This constructs the robot container class.
   public RobotContainer() {
@@ -133,7 +149,7 @@ public class RobotContainer {
     releaseCatapultButton.whenHeld(releaseCatapultCommand);
     
       // Auto
-    autoButton.whenPressed(autoMoveCommand);
+    //autoButton.whenPressed(autoSequence);
 
       //Intake
     intakeButton.whileHeld(intakeCommand);

@@ -107,11 +107,6 @@ public class SwerveRotaters extends SubsystemBase {
     bRRotater.setSelectedSensorPosition(0);
   }
 
-  // This function returns the position of the motor that is provided
-  public double getPosition(WPI_TalonFX encoder){
-    return encoder.getSelectedSensorPosition();
-  }
-
   // This function converts a provided angle to the encoder pulse value for the motors.
   public double angleToPulse(double angle){
     return angle*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360;
@@ -167,18 +162,6 @@ public class SwerveRotaters extends SubsystemBase {
   // This method is called in Robot Container.
   public double getAngle(double horizontal, double vertical, double yaw){
     return angle(horizontal, -vertical, yaw);
-  }
-
-  // This method is for autonomous rotation.
-  public void autorotate(double targetAngle, double yaw){
-
-        while (targetAngle != yaw){
-        fRRotater.set(ControlMode.Position, 45*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-        fLRotater.set(ControlMode.Position, 135*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-        bLRotater.set(ControlMode.Position, 225*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-        bRRotater.set(ControlMode.Position, 315*(ENCODER_PULSES_PER_ROTATION*GEAR_RATIO)/360);
-        }                                                                           
-      
   }
 
   // This is the default method used in this class for swervedrive.

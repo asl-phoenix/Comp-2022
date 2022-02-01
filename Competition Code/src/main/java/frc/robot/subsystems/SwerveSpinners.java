@@ -21,24 +21,21 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class SwerveSpinners extends SubsystemBase {
 
   /** These are the variables for the SwerveSpinners subsytem. */
-  public static final double MM_TO_IN = 0.0393701;
-  public static final double WHEEL_TO_WHEEL_DIAMETER_INCHES = 320 * MM_TO_IN;
   public static final double WHEEL_DIAMETER_INCHES = 4;
-  // It may be more logical to use no SPEED MULTIPLIER and rather just depend on the controller input(investigate)
-  // public static final double ROTTRANSCUT = 0;
   public static final double SPEED_MULTIPLIER = 0.65;
   public static final double ROTATION_COEFFICIENT = 0.35;
   private WPI_TalonFX bRMotor, bLMotor, fRMotor, fLMotor;
   private SpeedControllerGroup bR, bL, fR, fL;
   
   //This is the constructor for this subsytem.
+
   public SwerveSpinners(){
 
     bRMotor = new WPI_TalonFX(MOTOR_PORT_4);
     bLMotor = new WPI_TalonFX(MOTOR_PORT_3);
     fRMotor = new WPI_TalonFX(MOTOR_PORT_1);
     fLMotor = new WPI_TalonFX(MOTOR_PORT_2);
-// test
+    // Limiting current
     fLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20,21,0.1));
     fLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20,21,0.1));
 
@@ -56,11 +53,12 @@ public class SwerveSpinners extends SubsystemBase {
     bL = new SpeedControllerGroup(bLMotor);
     fR = new SpeedControllerGroup(fRMotor);
     fL = new SpeedControllerGroup(fLMotor);
+
     configPID();
 
   }
-
-  
+ 
+  // This is the initialization method for PID config.
   public void configPID(){
     resetEncoders();
 
@@ -103,7 +101,7 @@ public class SwerveSpinners extends SubsystemBase {
     
   }
 
-
+  // This method resets the encoder values.
   public void resetEncoders(){
     fRMotor.setSelectedSensorPosition(0);
     fLMotor.setSelectedSensorPosition(0);
@@ -111,17 +109,17 @@ public class SwerveSpinners extends SubsystemBase {
     bRMotor.setSelectedSensorPosition(0);
   }
 
-  //This function is the default command for the swervedrive motor spinners.
+  //This function is the default command for the swervedrive spinners.
   public void spinMotors(double horizontal, double vertical, double rotationHorizontal, double angle){
     //This -1 is due to how the vertical axis works on the controller. 
     vertical *= -1;
-    double r = (Math.pow(Math.sqrt(horizontal*horizontal + vertical*vertical),1)*SPEED_MULTIPLIER);
 
-    //Here the initial speeds are set to the value r - calculated above -
+    double r = (Math.pow(Math.sqrt(horizontal*horizontal + vertical*vertical),1)*SPEED_MULTIPLIER);
     double backRightSpeed = 0;
     double backLeftSpeed = 0;
     double frontRightSpeed = 0;
     double frontLeftSpeed = 0;
+
     boolean isRotating = Math.abs(rotationHorizontal)>=CONTROLLER_SENSITIVITY;
     boolean isTranslating = (Math.sqrt((Math.pow(vertical, 2) + Math.pow(horizontal, 2))) >= CONTROLLER_SENSITIVITY);
 
@@ -150,42 +148,22 @@ public class SwerveSpinners extends SubsystemBase {
     bL.set(backLeftSpeed);
     fR.set(frontRightSpeed);
     fL.set(frontLeftSpeed);
+
   }
 
-  public void autoTranslational(double x, double y, double totalDistance){
-    double initialPosition = bRMotor.getSelectedSensorPosition();
-    while((Math.PI*WHEEL_DIAMETER_INCHES*360*(bRMotor.getSelectedSensorPosition()-initialPosition)/2048)<totalDistance){
-      spinMotors(x, -y, 0, 0);
-    }
-  }
+  // Auto Commands
 
-
-  public double pulsesToCm(double p){
-      // 2048 pulses to a rotation
-      return p*WHEEL_DIAMETER_INCHES*2.54*Math.PI/UNITS_PER_ROTATION;
-  }
-  public void printDist() {
-    System.out.println(pulsesToCm(bRMotor.getSelectedSensorPosition()));
-    System.out.println(pulsesToCm(bLMotor.getSelectedSensorPosition()));
-    System.out.println(pulsesToCm(fRMotor.getSelectedSensorPosition()));
-    System.out.println(pulsesToCm(fLMotor.getSelectedSensorPosition()));
-  }
-
-
-  //takes distance (cm) divides by cm per rotation and then multiplies by pulses per rotation
   public double cmToPulses(double cm){
     return GEAR_RATIO_SPINNER*UNITS_PER_ROTATION*cm/(WHEEL_DIAMETER_INCHES*2.54*Math.PI);
   }
 
-
-  public void driveDistance(double driveToPulse){
-    bRMotor.set(ControlMode.Position, driveToPulse);
-    bLMotor.set(ControlMode.Position, driveToPulse);
-    fRMotor.set(ControlMode.Position, driveToPulse);
-    fLMotor.set(ControlMode.Position, driveToPulse);
+  public void driveDistance(double pulseGoal){
+    bRMotor.set(ControlMode.Position, pulseGoal);
+    bLMotor.set(ControlMode.Position, pulseGoal);
+    fRMotor.set(ControlMode.Position, pulseGoal);
+    fLMotor.set(ControlMode.Position, pulseGoal);
   }
   
-
   public boolean reachedPosition(double pulsesDistance){
     if (checkError(bRMotor, pulsesDistance) && checkError(bLMotor, pulsesDistance) && checkError(fRMotor, pulsesDistance) && checkError(fLMotor, pulsesDistance)) {
       return true;
@@ -193,11 +171,9 @@ public class SwerveSpinners extends SubsystemBase {
     return false;
   }
 
-
   private boolean checkError(WPI_TalonFX motor, double pulsesDistance){
     return ((motor.getSelectedSensorPosition() < (pulsesDistance + SPINNER_ERROR_TOLERANCE)) && (motor.getSelectedSensorPosition() > (pulsesDistance - SPINNER_ERROR_TOLERANCE)));
   }
-
 
   public void stop(){
     fRMotor.set(ControlMode.PercentOutput, 0);
@@ -206,6 +182,12 @@ public class SwerveSpinners extends SubsystemBase {
     bLMotor.set(ControlMode.PercentOutput, 0);
   }
 
+  public void autoRunSpinners(double speed){
+    fRMotor.set(ControlMode.PercentOutput, speed);
+    fLMotor.set(ControlMode.PercentOutput, speed);
+    bRMotor.set(ControlMode.PercentOutput, speed);
+    bLMotor.set(ControlMode.PercentOutput, speed);
+  }
 
   @Override
   public void periodic() {
