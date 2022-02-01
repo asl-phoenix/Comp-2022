@@ -29,7 +29,7 @@ public class Rotate extends CommandBase {
     this.bL = rotators.angleToPulse(315);
     addRequirements(rotators, spinners);
     this.targetAngle = targetAngle;
-    currentAngle = gyro.getYaw();
+    double currentAngle = gyro.getYaw();
     // This calculates the turn direction of the swerve in this suto command 
     if (currentAngle>=180){
       boolean condition1 = (currentAngle<= targetAngle && targetAngle <=360);
@@ -72,23 +72,25 @@ public class Rotate extends CommandBase {
     double cA = gyro.getYaw();
     double upperLimit = 360-ANGLE_ERROR_TOLERANCE;
     double lowerLimit = ANGLE_ERROR_TOLERANCE;
-    boolean upperC, lowerC;
+    boolean upperC = false;
+    boolean lowerC = false;
     if (targetAngle>=(upperLimit)){
       boolean c1 = cA >= targetAngle;
       boolean c2 = cA <= targetAngle-upperLimit;
       if (c1 == true || c2 == true) upperC = true;
       if (((targetAngle-ANGLE_ERROR_TOLERANCE)%360)<= cA) lowerC = true;
-      if (upperC & lowerC) return true;
+      if (upperC && lowerC) return true;
     }
     else if (targetAngle <= (lowerLimit)){
       boolean c1 = cA <= targetAngle;
       boolean c2 = cA >= ((targetAngle-lowerLimit)%360);
       if (c1 == true || c2 == true) upperC = true;
       if (((targetAngle+ANGLE_ERROR_TOLERANCE)%360)>= cA) lowerC = true;
-      if (upperC & lowerC) return true;
+      if (upperC && lowerC) return true;
     }
     else{ 
       return (((((targetAngle-ANGLE_ERROR_TOLERANCE)%360)<=cA) &&(cA<=((targetAngle+ANGLE_ERROR_TOLERANCE)%360))));
     }
+    return false;
   }
 }
