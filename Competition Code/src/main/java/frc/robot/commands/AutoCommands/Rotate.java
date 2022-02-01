@@ -30,6 +30,7 @@ public class Rotate extends CommandBase {
     addRequirements(rotators, spinners);
     this.targetAngle = targetAngle;
     currentAngle = gyro.getYaw();
+    // This calculates the turn direction of the swerve in this suto command 
     if (currentAngle>=180){
       boolean condition1 = currentAngle<= targetAngle && targetAngle <=360);
       boolean condition2 = (targetAngle<= ((currentAngle+180)%360));
