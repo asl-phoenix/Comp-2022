@@ -15,6 +15,7 @@ public class Rotate extends CommandBase {
   SwerveSpinners spinners;
   Gyro gyro;
   double targetAngle, fR, fL, bR, bL;
+  double turnDirection;
 
   // This command sets the position of the motors to a preset configuration.
   // Then the command rotates the robot untill it reaches a certain angle. 
@@ -28,6 +29,18 @@ public class Rotate extends CommandBase {
     this.bL = rotators.angleToPulse(315);
     addRequirements(rotators, spinners);
     this.targetAngle = targetAngle;
+    currentAngle = gyro.getYaw();
+    // This calculates the turn direction of the swerve in this suto command 
+    if (currentAngle>=180){
+      boolean condition1 = currentAngle<= targetAngle && targetAngle <=360);
+      boolean condition2 = (targetAngle<= ((currentAngle+180)%360));
+      if (condition1 || condition2) turnDirection = 1; //clockwise
+      else turnDirection = -1; //counter-clockwise
+    }
+    else{
+      if (currentAngle<=targetAngle && targetAngle<=currentAngle+180) turnDirection = 1; //clockwise
+      else turnDirection = -1 //counter-clockwise
+    }
   }
 
   // Called when the command is initially scheduled.
