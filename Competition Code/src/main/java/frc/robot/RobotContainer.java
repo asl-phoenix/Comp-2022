@@ -81,7 +81,7 @@ public class RobotContainer {
   public final JoystickButton retractSecondaryButton = new JoystickButton(operator, RETRACT_SECONDARY_BUTTON);
 
     //Auto
-  //public final JoystickButton autoButton = new JoystickButton(shopper, 5); //Idk
+  public final JoystickButton autoButton = new JoystickButton(shopper, 5); //Idk
   
   // == COMMANDS == //
 
@@ -104,7 +104,7 @@ public class RobotContainer {
   */
   
     // Auto Commands
-  //public final Command autoSequence = new AutoSequenceCommand(SWERVEROTATERS, SWERVESPINNERS, GYRO);
+  public final Command autoSequence = new AutoSequenceCommand(SWERVEROTATERS, SWERVESPINNERS, GYRO);
   
   // This constructs the robot container class.
   public RobotContainer() {
@@ -146,7 +146,7 @@ public class RobotContainer {
               GYRO
     ));
 
-    //autoButton.whenPressed(autoSequence);
+    autoButton.whenPressed(autoSequence);
 
     /*
       // Catapult
