@@ -17,8 +17,8 @@ public class AutoSequenceCommand extends SequentialCommandGroup {
   public AutoSequenceCommand(SwerveRotaters rotators, SwerveSpinners spinners, Gyro gyro) {
     // This is the sequential commands within our autonomous sequence
     addCommands(
-      new MoveWithSetWheelDirectionsWithGyro(rotators, spinners, gyro, 100, 300),
-      new Rotate(rotators, spinners, gyro, 300)
+      new MoveWithSetWheelDirectionsWithGyro(rotators, spinners, gyro, 200, 90),
+      new Rotate(rotators, spinners, gyro, 270)
     );
   }
 }

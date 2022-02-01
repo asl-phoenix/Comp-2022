@@ -16,17 +16,20 @@ public class Rotate extends CommandBase {
   Gyro gyro;
   double targetAngle, fR, fL, bR, bL;
   double turnDirection;
+  double upperLimit = 360-ANGLE_ERROR_TOLERANCE;
+  double lowerLimit = ANGLE_ERROR_TOLERANCE;
 
   // This command sets the position of the motors to a preset configuration.
   // Then the command rotates the robot untill it reaches a certain angle. 
   public Rotate(SwerveRotaters rotators, SwerveSpinners spinners, Gyro gyro, double targetAngle) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.rotators = rotators;
+    this.spinners = spinners;
     this.gyro = gyro;
     this.fR = rotators.angleToPulse(45);
     this.fL = rotators.angleToPulse(135);
-    this.bR = rotators.angleToPulse(225);
-    this.bL = rotators.angleToPulse(315);
+    this.bL = rotators.angleToPulse(225);
+    this.bR = rotators.angleToPulse(315);
     addRequirements(rotators, spinners);
     this.targetAngle = targetAngle;
     double currentAngle = gyro.getYaw();
@@ -56,6 +59,9 @@ public class Rotate extends CommandBase {
     if(rotators.reachedPosition(fR, fL, bR, bL)){
       spinners.autoRunSpinners(AUTO_ROTATE_SPEED*turnDirection);
     }
+    else{
+      spinners.stop();
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -70,27 +76,23 @@ public class Rotate extends CommandBase {
   @Override
   public boolean isFinished() {
     double cA = gyro.getYaw();
-    double upperLimit = 360-ANGLE_ERROR_TOLERANCE;
-    double lowerLimit = ANGLE_ERROR_TOLERANCE;
+    System.out.println(cA);
     boolean upperC = false;
     boolean lowerC = false;
     if (targetAngle>=(upperLimit)){
       boolean c1 = cA >= targetAngle;
       boolean c2 = cA <= targetAngle-upperLimit;
-      if (c1 == true || c2 == true) upperC = true;
-      if (((targetAngle-ANGLE_ERROR_TOLERANCE)%360)<= cA) lowerC = true;
-      if (upperC && lowerC) return true;
+      upperC  = c1||c2 ? true : upperC;
+      lowerC = ((targetAngle-ANGLE_ERROR_TOLERANCE)%360) <= cA ? true : lowerC;
+      return upperC && lowerC;
     }
-    else if (targetAngle <= (lowerLimit)){
+    if (targetAngle <= (lowerLimit)){
       boolean c1 = cA <= targetAngle;
       boolean c2 = cA >= ((targetAngle-lowerLimit)%360);
-      if (c1 == true || c2 == true) upperC = true;
-      if (((targetAngle+ANGLE_ERROR_TOLERANCE)%360)>= cA) lowerC = true;
-      if (upperC && lowerC) return true;
+      upperC = c1 || c2 ? true : upperC;
+      lowerC = ((targetAngle+ANGLE_ERROR_TOLERANCE)%360) >= cA ? true : lowerC;
+      return upperC&& lowerC;
     }
-    else{ 
-      return (((((targetAngle-ANGLE_ERROR_TOLERANCE)%360)<=cA) &&(cA<=((targetAngle+ANGLE_ERROR_TOLERANCE)%360))));
-    }
-    return false;
+    return ((targetAngle-ANGLE_ERROR_TOLERANCE)<=cA) && (cA<=(targetAngle+ANGLE_ERROR_TOLERANCE));
   }
 }

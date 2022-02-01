@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
+import frc.robot.commands.AutoCommands.*;
 
 public class RobotContainer {
 
@@ -32,10 +33,11 @@ public class RobotContainer {
   public final Gyro GYRO = new Gyro();
 
     //Mechanism Subs
+    /*
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
   public final Catapult CATAPULT = new Catapult();
-
+  */
     //Auto Subs Access
   public SwerveSpinners getSpinners(){
     return SWERVESPINNERS;
@@ -46,6 +48,8 @@ public class RobotContainer {
   public Gyro getGyro(){
     return GYRO;
   }
+
+  /*
   public Intake getIntake(){
     return INTAKE;
   }
@@ -55,8 +59,10 @@ public class RobotContainer {
   public Catapult getCatapult(){
     return CATAPULT;
   }
+  */
 
   // == BUTTONS == //
+
 
     //Intake
   public final JoystickButton intakeButton = new JoystickButton(shopper, INTAKE_BUTTON);
@@ -79,6 +85,7 @@ public class RobotContainer {
   
   // == COMMANDS == //
 
+  /*
     // Intake Commands
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command outtakeCommand = new OuttakeCommand(INTAKE);
@@ -94,6 +101,7 @@ public class RobotContainer {
   public final Command retractTelescopingCommand = new  RetractTelescopingCommand(CLIMBER);
   public final Command extendSecondaryCommand = new  ExtendSecondaryCommand(CLIMBER);
   public final Command retractSecondaryCommand = new  RetractSecondaryCommand(CLIMBER);
+  */
   
     // Auto Commands
   //public final Command autoSequence = new AutoSequenceCommand(SWERVEROTATERS, SWERVESPINNERS, GYRO);
@@ -138,12 +146,15 @@ public class RobotContainer {
               GYRO
     ));
 
+    //autoButton.whenPressed(autoSequence);
+
+    /*
       // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenHeld(releaseCatapultCommand);
     
       // Auto
-    //autoButton.whenPressed(autoSequence);
+    
 
       //Intake
     intakeButton.whileHeld(intakeCommand);
@@ -156,6 +167,8 @@ public class RobotContainer {
     retractTelescopingButton.whenHeld(retractTelescopingCommand);
     extendSecondaryButton.whenHeld(extendSecondaryCommand);
     retractSecondaryButton.whenHeld(retractSecondaryCommand);
+
+    */
     
   }
 }
