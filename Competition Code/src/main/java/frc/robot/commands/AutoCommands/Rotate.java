@@ -32,14 +32,14 @@ public class Rotate extends CommandBase {
     currentAngle = gyro.getYaw();
     // This calculates the turn direction of the swerve in this suto command 
     if (currentAngle>=180){
-      boolean condition1 = currentAngle<= targetAngle && targetAngle <=360);
+      boolean condition1 = (currentAngle<= targetAngle && targetAngle <=360);
       boolean condition2 = (targetAngle<= ((currentAngle+180)%360));
       if (condition1 || condition2) turnDirection = 1; //clockwise
       else turnDirection = -1; //counter-clockwise
     }
     else{
       if (currentAngle<=targetAngle && targetAngle<=currentAngle+180) turnDirection = 1; //clockwise
-      else turnDirection = -1 //counter-clockwise
+      else turnDirection = -1; //counter-clockwise
     }
   }
 
@@ -54,7 +54,7 @@ public class Rotate extends CommandBase {
   public void execute() {
     rotators.setWheelDirection(fR, fL, bR, bL);
     if(rotators.reachedPosition(fR, fL, bR, bL)){
-      spinners.autoRunSpinners(AUTO_ROTATE_SPEED);
+      spinners.autoRunSpinners(AUTO_ROTATE_SPEED*turnDirection);
     }
   }
 
@@ -69,6 +69,26 @@ public class Rotate extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return ((((targetAngle-ANGLE_ERROR_TOLERANCE)%360)<=gyro.getYaw())&&(gyro.getYaw()<=((targetAngle+ANGLE_ERROR_TOLERANCE)%360)));
+    double cA = gyro.getYaw();
+    double upperLimit = 360-ANGLE_ERROR_TOLERANCE;
+    double lowerLimit = ANGLE_ERROR_TOLERANCE;
+    boolean upperC, lowerC;
+    if (targetAngle>=(upperLimit)){
+      boolean c1 = cA >= targetAngle;
+      boolean c2 = cA <= targetAngle-upperLimit;
+      if (c1 == true || c2 == true) upperC = true;
+      if (((targetAngle-ANGLE_ERROR_TOLERANCE)%360)<= cA) lowerC = true;
+      if (upperC & lowerC) return true;
+    }
+    else if (targetAngle <= (lowerLimit)){
+      boolean c1 = cA <= targetAngle;
+      boolean c2 = cA >= ((targetAngle-lowerLimit)%360);
+      if (c1 == true || c2 == true) upperC = true;
+      if (((targetAngle+ANGLE_ERROR_TOLERANCE)%360)>= cA) lowerC = true;
+      if (upperC & lowerC) return true;
+    }
+    else{ 
+      return (((((targetAngle-ANGLE_ERROR_TOLERANCE)%360)<=cA) &&(cA<=((targetAngle+ANGLE_ERROR_TOLERANCE)%360))));
+    }
   }
 }
