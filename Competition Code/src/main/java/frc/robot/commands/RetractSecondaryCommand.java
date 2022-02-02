@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
 public class RetractSecondaryCommand extends CommandBase {
-  //Creates a new Command for retracting Secondary Climbing Arms
+  // Creates a new Command for retracting Secondary Climbing Arms
   private Climber CLIMBER;
 
   public RetractSecondaryCommand(Climber CLIMBER) {
@@ -19,7 +19,7 @@ public class RetractSecondaryCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize(){
+  public void initialize() {
     CLIMBER.retractSecondary();
   }
 

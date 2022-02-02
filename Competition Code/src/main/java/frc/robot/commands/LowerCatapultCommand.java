@@ -10,7 +10,7 @@ import frc.robot.subsystems.Catapult;
 public class LowerCatapultCommand extends CommandBase {
   // Creates wind catapult arm command
   private Catapult CATAPULT;
-  
+
   public LowerCatapultCommand(Catapult CATAPULT) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(CATAPULT);
@@ -20,7 +20,7 @@ public class LowerCatapultCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize(){
+  public void initialize() {
     CATAPULT.setSpeed();
   }
 
@@ -30,7 +30,7 @@ public class LowerCatapultCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted){
+  public void end(boolean interrupted) {
     CATAPULT.motorsOff();
   }
 
