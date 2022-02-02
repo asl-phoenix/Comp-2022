@@ -18,6 +18,7 @@ public class Rotate extends CommandBase {
   double turnDirection;
   double upperLimit = 360-ANGLE_ERROR_TOLERANCE;
   double lowerLimit = ANGLE_ERROR_TOLERANCE;
+  boolean gyroReady = false;
 
   // This command sets the position of the motors to a preset configuration.
   // Then the command rotates the robot untill it reaches a certain angle. 
@@ -55,8 +56,9 @@ public class Rotate extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (gyro.getGyroState == 1) gyroReady = true;
     rotators.setWheelDirection(fR, fL, bR, bL);
-    if(rotators.reachedPosition(fR, fL, bR, bL)){
+    if(rotators.reachedPosition(fR, fL, bR, bL)&&gyroReady){
       spinners.autoRunSpinners(AUTO_ROTATE_SPEED*turnDirection);
     }
     else{

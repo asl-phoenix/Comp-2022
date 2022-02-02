@@ -64,8 +64,7 @@ public class Gyro extends SubsystemBase {
 
     // This function is for printing the current state of the gyro.
     // This is important for knowing when the gyro is ready, so swerve can work properly. 
-    public void getState()
-    {
+    public void getState(){
         if (gyro.getState() == PigeonIMU.PigeonState.Ready)
         {
             System.out.println ("Ready");
@@ -83,6 +82,26 @@ public class Gyro extends SubsystemBase {
             System.out.println ("No communication with pigeon gyro");
         }
     }
+
+    public double getGyroState(){
+        if (gyro.getState() == PigeonIMU.PigeonState.Ready)
+        {
+            return 1;
+        }
+        else if (gyro.getState() == PigeonIMU.PigeonState.UserCalibration)
+        {
+            return 0;
+        }
+        else if (gyro.getState() == PigeonIMU.PigeonState.Initializing)
+        {
+            return 0;
+        }
+        else if (gyro.getState() == PigeonIMU.PigeonState.NoComm)
+        {
+            return 0;
+        }
+    }
+    
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
