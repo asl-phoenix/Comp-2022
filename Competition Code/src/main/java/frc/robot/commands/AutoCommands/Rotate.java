@@ -38,13 +38,17 @@ public class Rotate extends CommandBase {
     if (currentAngle >= 180) {
       boolean condition1 = (currentAngle <= targetAngle && targetAngle <= 360);
       boolean condition2 = (targetAngle <= ((currentAngle + 180) % 360));
-      if (condition1 || condition2) turnDirection = 1; // clockwise
-      else turnDirection = -1; // counter-clockwise
+      if (condition1 || condition2) turnDirection = -1; // clockwise
+      else turnDirection = 1; // counter-clockwise
     } else {
       if (currentAngle <= targetAngle && targetAngle <= currentAngle + 180)
-        turnDirection = 1; // clockwise
-      else turnDirection = -1; // counter-clockwise
+        turnDirection = -1; // clockwise
+      else turnDirection = 1; // counter-clockwise
     }
+  }
+
+  public Gyro getGyro() {
+    return gyro;
   }
 
   // Called when the command is initially scheduled.
@@ -56,7 +60,8 @@ public class Rotate extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (gyro.getGyroState == 1) gyroReady = true;
+    if (gyro.getGyroState() == 1) gyroReady = true;
+    gyro.getState(); // Debugging
     rotators.setWheelDirection(fR, fL, bR, bL);
     if (rotators.reachedPosition(fR, fL, bR, bL) && gyroReady) {
       spinners.autoRunSpinners(AUTO_ROTATE_SPEED * turnDirection);
@@ -77,6 +82,9 @@ public class Rotate extends CommandBase {
   @Override
   public boolean isFinished() {
     double cA = gyro.getYaw();
+    if (cA < 0) {
+      cA = 360 - (Math.abs(cA));
+    }
     System.out.println(cA);
     boolean upperC = false;
     boolean lowerC = false;

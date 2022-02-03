@@ -75,15 +75,7 @@ public class Gyro extends SubsystemBase {
   }
 
   public double getGyroState() {
-    if (gyro.getState() == PigeonIMU.PigeonState.Ready) {
-      return 1;
-    } else if (gyro.getState() == PigeonIMU.PigeonState.UserCalibration) {
-      return 0;
-    } else if (gyro.getState() == PigeonIMU.PigeonState.Initializing) {
-      return 0;
-    } else if (gyro.getState() == PigeonIMU.PigeonState.NoComm) {
-      return 0;
-    }
+    return gyro.getState() == PigeonIMU.PigeonState.Ready ? 1 : 0;
   }
 
   @Override

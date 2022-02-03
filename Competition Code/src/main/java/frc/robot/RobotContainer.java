@@ -32,11 +32,10 @@ public class RobotContainer {
   public final Gyro GYRO = new Gyro();
 
   // Mechanism Subs
-  /*
+  public final Catapult CATAPULT = new Catapult();
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
-  public final Catapult CATAPULT = new Catapult();
-  */
+
   // Auto Subs Access
   public SwerveSpinners getSpinners() {
     return SWERVESPINNERS;
@@ -50,17 +49,17 @@ public class RobotContainer {
     return GYRO;
   }
 
-  /*
-  public Intake getIntake(){
+  public Intake getIntake() {
     return INTAKE;
   }
-  public Climber getClimber(){
+
+  public Climber getClimber() {
     return CLIMBER;
   }
-  public Catapult getCatapult(){
+
+  public Catapult getCatapult() {
     return CATAPULT;
   }
-  */
 
   // == BUTTONS == //
 
@@ -86,31 +85,23 @@ public class RobotContainer {
   public final JoystickButton retractSecondaryButton =
       new JoystickButton(operator, RETRACT_SECONDARY_BUTTON);
 
-  // Auto
-  public final JoystickButton autoButton = new JoystickButton(shopper, 5); // Idk
-
   // == COMMANDS == //
 
-  /*
-    // Intake Commands
+  // Intake Commands
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command outtakeCommand = new OuttakeCommand(INTAKE);
   public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
   public final Command lowerIntakeCommand = new LowerIntakeCommand(INTAKE);
 
-    // Catapult Commands
+  // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
 
-    // Climber Commands
-  public final Command extendTelescopingCommand = new  ExtendTelescopingCommand(CLIMBER);
-  public final Command retractTelescopingCommand = new  RetractTelescopingCommand(CLIMBER);
-  public final Command extendSecondaryCommand = new  ExtendSecondaryCommand(CLIMBER);
-  public final Command retractSecondaryCommand = new  RetractSecondaryCommand(CLIMBER);
-  */
-
-  // Auto Commands
-  public final Command autoSequence = new AutoSequenceCommand(SWERVEROTATERS, SWERVESPINNERS, GYRO);
+  // Climber Commands
+  public final Command extendTelescopingCommand = new ExtendTelescopingCommand(CLIMBER);
+  public final Command retractTelescopingCommand = new RetractTelescopingCommand(CLIMBER);
+  public final Command extendSecondaryCommand = new ExtendSecondaryCommand(CLIMBER);
+  public final Command retractSecondaryCommand = new RetractSecondaryCommand(CLIMBER);
 
   // This constructs the robot container class.
   public RobotContainer() {
@@ -151,29 +142,20 @@ public class RobotContainer {
             SWERVESPINNERS));
     GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
 
-    autoButton.whenPressed(autoSequence);
-
-    /*
-      // Catapult
+    // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenHeld(releaseCatapultCommand);
 
-      // Auto
-
-
-      //Intake
+    // Intake
     intakeButton.whileHeld(intakeCommand);
     outtakeButton.whileHeld(outtakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
     lowerIntakeButton.whenPressed(lowerIntakeCommand);
 
-      //Climber
+    // Climber
     extendTelescopingButton.whenHeld(extendTelescopingCommand);
     retractTelescopingButton.whenHeld(retractTelescopingCommand);
     extendSecondaryButton.whenHeld(extendSecondaryCommand);
     retractSecondaryButton.whenHeld(retractSecondaryCommand);
-
-    */
-
   }
 }

@@ -11,7 +11,7 @@ public final class Constants {
 
   // === PORTS === //
 
-  // Swervedrive Ports (Quadrant Order)
+  // Swervedrive Ports
   public static final int MOTOR_PORT_1 = 1;
   public static final int MOTOR_PORT_2 = 3;
   public static final int MOTOR_PORT_3 = 5;
@@ -33,9 +33,9 @@ public final class Constants {
   public static final int SECONDARY_PORT_2 = 1;
 
   // Catapult Ports
-  public static final int SHOOTER_MOTOR_PORT_1 = 1;
-  public static final int SHOOTER_PISTON_PORT_1 = 3;
-  public static final int SHOOTER_PISTON_PORT_2 = 4;
+  public static final int SHOOTER_MOTOR_PORT_1 = 7;
+  public static final int SHOOTER_PISTON_PORT_1 = 4;
+  public static final int SHOOTER_PISTON_PORT_2 = 5;
 
   // Gyro Port
   public static final int GYRO_PORT = 9;
@@ -86,7 +86,7 @@ public final class Constants {
   // === EXTRAS === //
 
   // Swervedrive Constants
-  public static final double CONTROLLER_SENSITIVITY = 0.1;
+  public static final double CONTROLLER_SENSITIVITY = 0.02;
   public static final double GEAR_RATIO = 12.8;
   public static final double GEAR_RATIO_SPINNER = 6.86;
   public static final double UNITS_PER_ROTATION = 2048;
@@ -94,7 +94,7 @@ public final class Constants {
   // Speed constants
   public static final double INTAKE_SPEED = 0.5;
   public static final double SHOOTER_PISTON_SPEED = 0.5;
-  public static final double CATAPULT_SPEED = 0.25;
+  public static final double CATAPULT_SPEED = 0.9;
   public static final double TELESCOPING_SPEED = 0.5;
   public static final double SECONDARY_SPEED = 0.5;
 
@@ -107,8 +107,8 @@ public final class Constants {
 
   // Auto Constants
   // public static final double ERROR_TOLERANCE = 300;
-  public static final double ROTATOR_ERROR_TOLERANCE = 300;
-  public static final double SPINNER_ERROR_TOLERANCE = 300;
+  public static final double ROTATOR_ERROR_TOLERANCE = 100;
+  public static final double SPINNER_ERROR_TOLERANCE = 10;
   public static final double ANGLE_ERROR_TOLERANCE = 10;
-  public static final double AUTO_ROTATE_SPEED = 0.1;
+  public static final double AUTO_ROTATE_SPEED = 0.15;
 }
