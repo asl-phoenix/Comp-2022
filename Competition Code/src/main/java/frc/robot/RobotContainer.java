@@ -1,4 +1,3 @@
-
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -27,72 +26,82 @@ public class RobotContainer {
 
   // == SUBSYSTEMS == //
 
-    //Drivetrain Subs
+  // Drivetrain Subs
   public final SwerveSpinners SWERVESPINNERS = new SwerveSpinners();
   public final SwerveRotaters SWERVEROTATERS = new SwerveRotaters();
   public final Gyro GYRO = new Gyro();
 
-    //Mechanism Subs
+  // Mechanism Subs
   public final Catapult CATAPULT = new Catapult();
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
-  
-    //Auto Subs Access
-  public SwerveSpinners getSpinners(){
+
+  // Auto Subs Access
+  public SwerveSpinners getSpinners() {
     return SWERVESPINNERS;
   }
-  public SwerveRotaters getRotaters(){
+
+  public SwerveRotaters getRotaters() {
     return SWERVEROTATERS;
   }
-  public Gyro getGyro(){
+
+  public Gyro getGyro() {
     return GYRO;
   }
-  public Intake getIntake(){
+
+  public Intake getIntake() {
     return INTAKE;
   }
-  public Climber getClimber(){
+
+  public Climber getClimber() {
     return CLIMBER;
   }
-  public Catapult getCatapult(){
+
+  public Catapult getCatapult() {
     return CATAPULT;
   }
 
   // == BUTTONS == //
 
-    //Intake
+  // Intake
   public final JoystickButton intakeButton = new JoystickButton(shopper, INTAKE_BUTTON);
   public final JoystickButton outtakeButton = new JoystickButton(shopper, OUTTAKE_BUTTON);
   public final JoystickButton raiseIntakeButton = new JoystickButton(operator, RAISE_INTAKE_BUTTON);
   public final JoystickButton lowerIntakeButton = new JoystickButton(operator, LOWER_INTAKE_BUTTON);
 
-    //Catapult
-  public final JoystickButton lowerCatapultButton = new JoystickButton(operator, LOWERCATAPULT_BUTTON);
-  public final JoystickButton releaseCatapultButton = new JoystickButton(operator, RELEASECATAPULT_BUTTON);
+  // Catapult
+  public final JoystickButton lowerCatapultButton =
+      new JoystickButton(operator, LOWERCATAPULT_BUTTON);
+  public final JoystickButton releaseCatapultButton =
+      new JoystickButton(operator, RELEASECATAPULT_BUTTON);
 
-    //Climber
-  public final JoystickButton extendTelescopingButton = new JoystickButton(operator, EXTEND_TELESCOPING_BUTTON);
-  public final JoystickButton retractTelescopingButton = new JoystickButton(operator, RETRACT_TELESCOPING_BUTTON);
-  public final JoystickButton extendSecondaryButton = new JoystickButton(operator, EXTEND_SECONDARY_BUTTON);
-  public final JoystickButton retractSecondaryButton = new JoystickButton(operator, RETRACT_SECONDARY_BUTTON);
-  
+  // Climber
+  public final JoystickButton extendTelescopingButton =
+      new JoystickButton(operator, EXTEND_TELESCOPING_BUTTON);
+  public final JoystickButton retractTelescopingButton =
+      new JoystickButton(operator, RETRACT_TELESCOPING_BUTTON);
+  public final JoystickButton extendSecondaryButton =
+      new JoystickButton(operator, EXTEND_SECONDARY_BUTTON);
+  public final JoystickButton retractSecondaryButton =
+      new JoystickButton(operator, RETRACT_SECONDARY_BUTTON);
+
   // == COMMANDS == //
 
-    // Intake Commands
+  // Intake Commands
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command outtakeCommand = new OuttakeCommand(INTAKE);
   public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
   public final Command lowerIntakeCommand = new LowerIntakeCommand(INTAKE);
 
-    // Catapult Commands
+  // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
 
-    // Climber Commands
-  public final Command extendTelescopingCommand = new  ExtendTelescopingCommand(CLIMBER);
-  public final Command retractTelescopingCommand = new  RetractTelescopingCommand(CLIMBER);
-  public final Command extendSecondaryCommand = new  ExtendSecondaryCommand(CLIMBER);
-  public final Command retractSecondaryCommand = new  RetractSecondaryCommand(CLIMBER);
-
+  // Climber Commands
+  public final Command extendTelescopingCommand = new ExtendTelescopingCommand(CLIMBER);
+  public final Command retractTelescopingCommand = new RetractTelescopingCommand(CLIMBER);
+  public final Command extendSecondaryCommand = new ExtendSecondaryCommand(CLIMBER);
+  public final Command retractSecondaryCommand = new RetractSecondaryCommand(CLIMBER);
 
   // This constructs the robot container class.
   public RobotContainer() {
@@ -100,55 +109,53 @@ public class RobotContainer {
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be
-   * created by instantiating a {@link GenericHID} or one of its subclasses
-   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
-   * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * Use this method to define your button->command mappings. Buttons can be created by
+   * instantiating a {@link GenericHID} or one of its subclasses ({@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
 
     // == BUTTON BINDINGS == //
 
-      //Swervedrive.exe
+    // Swervedrive.exe
     SWERVEROTATERS.setDefaultCommand(
-      new RunCommand(
-        () -> SWERVEROTATERS.rotateMotors(shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS),
-                                          shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS), 
-                                          shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS), 
-                                          GYRO.getYaw()),
-              SWERVEROTATERS
-    ));
+        new RunCommand(
+            () ->
+                SWERVEROTATERS.rotateMotors(
+                    shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS),
+                    shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS),
+                    shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS),
+                    GYRO.getYaw()),
+            SWERVEROTATERS));
     SWERVESPINNERS.setDefaultCommand(
-      new RunCommand(
-        () -> SWERVESPINNERS.spinMotors(shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS),
-                                        shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS),
-                                        shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS),
-              SWERVEROTATERS.getAngle(shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS), 
-                                      shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS), 
-                                      GYRO.getYaw())),
-              SWERVESPINNERS
-    ));
-    GYRO.setDefaultCommand(
-      new RunCommand(
-        () -> GYRO.getState(),
-              GYRO
-    ));
+        new RunCommand(
+            () ->
+                SWERVESPINNERS.spinMotors(
+                    shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS),
+                    shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS),
+                    shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS),
+                    SWERVEROTATERS.getAngle(
+                        shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS),
+                        shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS),
+                        GYRO.getYaw())),
+            SWERVESPINNERS));
+    GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
 
-      // Catapult
+    // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenHeld(releaseCatapultCommand);
-    
-      //Intake
+
+    // Intake
     intakeButton.whileHeld(intakeCommand);
     outtakeButton.whileHeld(outtakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
     lowerIntakeButton.whenPressed(lowerIntakeCommand);
 
-      //Climber
+    // Climber
     extendTelescopingButton.whenHeld(extendTelescopingCommand);
     retractTelescopingButton.whenHeld(retractTelescopingCommand);
     extendSecondaryButton.whenHeld(extendSecondaryCommand);
     retractSecondaryButton.whenHeld(retractSecondaryCommand);
   }
 }
-
