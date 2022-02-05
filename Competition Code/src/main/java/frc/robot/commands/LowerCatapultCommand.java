@@ -40,7 +40,7 @@ public class LowerCatapultCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (System.currentTimeMillis()- CATAPULT_TIMER*1000 > timer){
+    if (System.currentTimeMillis() - CATAPULT_TIMER * 1000 > timer) {
       return true;
     }
     return false;

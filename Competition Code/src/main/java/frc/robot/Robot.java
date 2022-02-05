@@ -69,7 +69,12 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand =
-        new AutoCommand1(rCon.getRotaters(), rCon.getSpinners(), rCon.getGyro(), rCon.getCatapult(), rCon.getIntake());
+        new AutoCommand1(
+            rCon.getRotaters(),
+            rCon.getSpinners(),
+            rCon.getGyro(),
+            rCon.getCatapult(),
+            rCon.getIntake());
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
