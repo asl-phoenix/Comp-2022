@@ -97,6 +97,7 @@ public final class Constants {
   public static final double CATAPULT_SPEED = 0.9;
   public static final double TELESCOPING_SPEED = 0.5;
   public static final double SECONDARY_SPEED = 0.5;
+  public static final double CATAPULT_TIMER = 4;
 
   // Swervedrive PID Stuff
   public static final int kSlotIdx = 0;
