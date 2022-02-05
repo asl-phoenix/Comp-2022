@@ -143,8 +143,8 @@ public class RobotContainer {
     GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
 
     // Catapult
-    lowerCatapultButton.whenHeld(lowerCatapultCommand);
-    releaseCatapultButton.whenHeld(releaseCatapultCommand);
+    lowerCatapultButton.whenPressed(lowerCatapultCommand);
+    releaseCatapultButton.whenPressed(releaseCatapultCommand);
 
     // Intake
     intakeButton.whileHeld(intakeCommand);
