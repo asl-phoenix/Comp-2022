@@ -6,10 +6,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Catapult;
+import static frc.robot.Constants.*;
 
 public class LowerCatapultCommand extends CommandBase {
   // Creates wind catapult arm command
   private Catapult CATAPULT;
+  double timer;
 
   public LowerCatapultCommand(Catapult CATAPULT) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -22,6 +24,7 @@ public class LowerCatapultCommand extends CommandBase {
   @Override
   public void initialize() {
     CATAPULT.setSpeed();
+    timer = System.currentTimeMillis();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,6 +40,9 @@ public class LowerCatapultCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (System.currentTimeMillis()- CATAPULT_TIMER*1000 > timer){
+      return true;
+    }
     return false;
   }
 }
