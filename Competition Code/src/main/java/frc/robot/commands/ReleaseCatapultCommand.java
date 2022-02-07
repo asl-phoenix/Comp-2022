@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Catapult;
+import static frc.robot.Constants.*;
 
 public class ReleaseCatapultCommand extends CommandBase {
   // Creates release catapult for shooting command
@@ -44,6 +45,6 @@ public class ReleaseCatapultCommand extends CommandBase {
   @Override
   public boolean isFinished() {
     // This means that 1 second after the command is initialized, the command will end.
-    return (System.currentTimeMillis() - startTime) > 2000;
+    return (System.currentTimeMillis() - startTime) > 1000 * RELEASE_CATAPULT_TIME;
   }
 }

@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.AutoCommands;
+package frc.robot.commands.AutomatedCommands;
 
 import frc.robot.subsystems.Gyro;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -64,7 +64,7 @@ public class Rotate extends CommandBase {
     gyro.getState(); // Debugging
     rotators.setWheelDirection(fR, fL, bR, bL);
     if (rotators.reachedPosition(fR, fL, bR, bL) && gyroReady) {
-      spinners.autoRunSpinners(AUTO_ROTATE_SPEED * turnDirection);
+      spinners.runSpinners(AUTO_ROTATE_SPEED * turnDirection);
     } else {
       spinners.stop();
     }

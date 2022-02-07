@@ -183,7 +183,7 @@ public class SwerveSpinners extends SubsystemBase {
     bLMotor.set(ControlMode.PercentOutput, 0);
   }
 
-  public void autoRunSpinners(double speed) {
+  public void runSpinners(double speed) {
     fRMotor.set(ControlMode.PercentOutput, speed);
     fLMotor.set(ControlMode.PercentOutput, speed);
     bRMotor.set(ControlMode.PercentOutput, speed);

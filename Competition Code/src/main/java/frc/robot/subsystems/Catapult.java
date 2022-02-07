@@ -43,7 +43,7 @@ public class Catapult extends SubsystemBase {
 
   // This function sets the speed for the winding catapult motor.
   public void setSpeed() {
-    catapult_motor_1.set(ControlMode.PercentOutput, -CATAPULT_SPEED);
+    catapult_motor_1.set(ControlMode.PercentOutput, CATAPULT_SPEED);
   }
 
   // This function stops the winding catapult motor.

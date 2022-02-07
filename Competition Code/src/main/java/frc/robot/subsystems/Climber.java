@@ -26,28 +26,20 @@ public class Climber extends SubsystemBase {
     telescope2 = new WPI_TalonSRX(TELESCOPE_PORT_2);
     secondary1 = new WPI_TalonSRX(SECONDARY_PORT_1);
     secondary2 = new WPI_TalonSRX(SECONDARY_PORT_2);
+    offTelescoping();
+    offSecondary();
   }
 
-  // This method runs motors for extending the telescoping arms.
-  public void extendTelescoping() {
-    telescope1.set(ControlMode.PercentOutput, TELESCOPING_SPEED);
-    telescope2.set(ControlMode.PercentOutput, TELESCOPING_SPEED);
+  // This method supplies a certain output to the telescoping motors.
+  public void supplyTelescoping(double power) {
+    telescope1.set(ControlMode.PercentOutput, power);
+    telescope2.set(ControlMode.PercentOutput, power);
   }
 
-  // This method runs motors for retracting the telescoping arms.
-  public void retractTelescoping() {
-    telescope1.set(ControlMode.PercentOutput, -TELESCOPING_SPEED);
-    telescope2.set(ControlMode.PercentOutput, -TELESCOPING_SPEED);
-  }
-  // This method runs motors for extending the secondary arms.
-  public void extendSecondary() {
-    secondary1.set(ControlMode.PercentOutput, SECONDARY_SPEED);
-    secondary2.set(ControlMode.PercentOutput, SECONDARY_SPEED);
-  }
-  // This method runs motors for retracting the secondary arms.
-  public void retractSecondary() {
-    secondary1.set(ControlMode.PercentOutput, -SECONDARY_SPEED);
-    secondary2.set(ControlMode.PercentOutput, -SECONDARY_SPEED);
+  // This method supplies a certain percent output to the secondary motors.
+  public void supplySecondary(double power) {
+    secondary1.set(ControlMode.PercentOutput, power);
+    secondary2.set(ControlMode.PercentOutput, power);
   }
 
   // This method turns off the telescoping arms' motors.

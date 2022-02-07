@@ -2,55 +2,48 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.AutoCommands;
+package frc.robot.commands.AutomatedCommands;
 
-import frc.robot.subsystems.Gyro;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
+import static frc.robot.Constants.*;
 
-public class MoveWithSetWheelDirectionsWithGyro extends CommandBase {
+public class MoveForward extends CommandBase {
 
   SwerveRotaters rotators;
   SwerveSpinners spinners;
-  double pulsesDistance;
-  Gyro gyro;
-  double fR, fL, bR, bL;
+  private double moveTime;
+  private double startTime = 0;
 
   // This command basically sets the wheels to a specific angle and drives the robot a certain
   // distance
   // in that direction.
-  public MoveWithSetWheelDirectionsWithGyro(
+  public MoveForward(
       SwerveRotaters rotators,
       SwerveSpinners spinners,
-      Gyro gyro,
-      double angle,
-      double moveDistance) {
+      double moveTime) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.rotators = rotators;
     this.spinners = spinners;
-    this.gyro = gyro;
-    this.fR = rotators.angleToPulse(angle, gyro.getYaw());
-    this.fL = rotators.angleToPulse(angle, gyro.getYaw());
-    this.bR = rotators.angleToPulse(angle, gyro.getYaw());
-    this.bL = rotators.angleToPulse(angle, gyro.getYaw());
+    this.moveTime = moveTime;
     addRequirements(rotators, spinners);
-    this.pulsesDistance = spinners.cmToPulses(moveDistance);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    startTime = System.currentTimeMillis();
     System.out.println("amogus");
     spinners.resetEncoders();
-    rotators.setWheelDirection(fR, fL, bR, bL);
+    rotators.setWheelDirection(0, 0, 0, 0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    rotators.setWheelDirection(fR, fL, bR, bL);
-    if (rotators.reachedPosition(fR, fL, bR, bL)) {
-      spinners.driveDistance(pulsesDistance);
+    rotators.setWheelDirection(0, 0, 0, 0);
+    if (rotators.reachedPosition(0, 0, 0, 0)) {
+      spinners.runSpinners(MOVE_SPEED);
     }
   }
 
@@ -65,6 +58,6 @@ public class MoveWithSetWheelDirectionsWithGyro extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return spinners.reachedPosition(pulsesDistance);
+    return (System.currentTimeMillis() - startTime) > 1000 * moveTime;
   }
 }
