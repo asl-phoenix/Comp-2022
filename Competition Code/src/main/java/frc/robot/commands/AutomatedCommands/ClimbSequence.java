@@ -17,20 +17,35 @@ import static frc.robot.Constants.*;
 public class ClimbSequence extends SequentialCommandGroup {
   /** Creates a new autonomous command sequence. */
   public Climber climber;
-  private double T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19;
+
+  private double T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      T6,
+      T7,
+      T8,
+      T9,
+      T10,
+      T11,
+      T12,
+      T13,
+      T14,
+      T15,
+      T16,
+      T17,
+      T18,
+      T19;
 
   /**
-   * 
    * This is good enough for now
-   * 
+   *
    * @param climber
    * @param rotators
    * @param spinners
    */
-
-
-  public ClimbSequence(
-      Climber climber, SwerveRotaters rotators, SwerveSpinners spinners) {
+  public ClimbSequence(Climber climber, SwerveRotaters rotators, SwerveSpinners spinners) {
     // This is the sequential commands for our climbing sequence
     this.climber = climber;
     T1 = 1;
@@ -105,8 +120,8 @@ public class ClimbSequence extends SequentialCommandGroup {
         // secondaries should be fully back, we stop
         new PowerTelescopingCommand(climber, MIDPOWER),
         // TRAVERSE 1 COMPLETE
-        
-        //TRAVERSE 2
+
+        // TRAVERSE 2
         // More power to telescopings to lift
 
         new PowerTelescopingCommand(climber, HIGHPOWER),
@@ -146,7 +161,6 @@ public class ClimbSequence extends SequentialCommandGroup {
         // secondaries should be fully back, we now let the robot drop more
         new WaitCommand(T19),
         // finally telescoping power to 0
-        new PowerTelescopingCommand(climber, 0)
-    );
+        new PowerTelescopingCommand(climber, 0));
   }
 }

@@ -75,7 +75,7 @@ public class RobotContainer {
       new JoystickButton(operator, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton =
       new JoystickButton(operator, RELEASECATAPULT_BUTTON);
-  public final JoystickButton alignCatapultButton = 
+  public final JoystickButton alignCatapultButton =
       new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
 
   // Climber
@@ -145,7 +145,5 @@ public class RobotContainer {
 
     // Climber
     climbButton.whenHeld(climbSequence);
-
-    
   }
 }

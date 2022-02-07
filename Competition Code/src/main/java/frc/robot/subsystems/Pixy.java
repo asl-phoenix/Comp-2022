@@ -6,44 +6,46 @@ import io.github.pseudoresonance.pixy2api.*;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 import static frc.robot.Constants.*;
 
-public class Pixy extends SubsystemBase{
+public class Pixy extends SubsystemBase {
 
-    Pixy2 pixy;
-    double width;
+  Pixy2 pixy;
+  double width;
 
-    public Pixy(){
-        pixy = Pixy2.createInstance(Pixy2.LinkType.SPI);
-        pixy.init();
-        width = pixy.getFrameWidth();
-    }
+  public Pixy() {
+    pixy = Pixy2.createInstance(Pixy2.LinkType.SPI);
+    pixy.init();
+    width = pixy.getFrameWidth();
+  }
 
-    public double getTurnDirection(){
-        double xCoordinate = getLargestBlock().getX(); // This method should give the x coordinate of the center of the block
-        double turnDirection;
-        if (xCoordinate >= (width/2)) turnDirection = 1; // counter-clockwise
-        else turnDirection = -1; // clockwise
-        return turnDirection;
-    }
-    
-    public Block getLargestBlock(){
-        ArrayList<Block> blocks = pixy.getCCC().getBlockCache();
-        if (blocks.size()>0){
-            Block largestBlock = blocks.get(0);
-            Block currentBlock;
-            for (int i = 0; i<blocks.size(); i++){
-                currentBlock = blocks.get(i);
-                if ((currentBlock.getWidth()*currentBlock.getHeight())>(largestBlock.getWidth()*largestBlock.getHeight())){
-                    largestBlock = blocks.get(i);
-                }
-            }
-            return largestBlock;
+  public double getTurnDirection() {
+    double xCoordinate =
+        getLargestBlock()
+            .getX(); // This method should give the x coordinate of the center of the block
+    double turnDirection;
+    if (xCoordinate >= (width / 2)) turnDirection = 1; // counter-clockwise
+    else turnDirection = -1; // clockwise
+    return turnDirection;
+  }
+
+  public Block getLargestBlock() {
+    ArrayList<Block> blocks = pixy.getCCC().getBlockCache();
+    if (blocks.size() > 0) {
+      Block largestBlock = blocks.get(0);
+      Block currentBlock;
+      for (int i = 0; i < blocks.size(); i++) {
+        currentBlock = blocks.get(i);
+        if ((currentBlock.getWidth() * currentBlock.getHeight())
+            > (largestBlock.getWidth() * largestBlock.getHeight())) {
+          largestBlock = blocks.get(i);
         }
-        return null;
+      }
+      return largestBlock;
     }
+    return null;
+  }
 
-    public boolean reachedTarget(){
-        if (Math.abs(getLargestBlock().getX()-(width/2)) <= AUTO_ALIGN_ERROR) return true;
-        return false;
-    }
-    
+  public boolean reachedTarget() {
+    if (Math.abs(getLargestBlock().getX() - (width / 2)) <= AUTO_ALIGN_ERROR) return true;
+    return false;
+  }
 }

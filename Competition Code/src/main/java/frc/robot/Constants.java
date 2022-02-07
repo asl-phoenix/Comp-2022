@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+
 public final class Constants {
 
   // === PORTS === //
@@ -41,15 +42,11 @@ public final class Constants {
   // Gyro Port
   public static final int GYRO_PORT = 9;
 
-
-
   // === CONTROLLER === //
 
   // Controller Constants
   public static final int DRIVER_CONTROLLER = 0;
   public static final int OPERATOR_CONTROLLER = 1;
-
-
 
   // == BUTTON CONSTANTS == //
 
@@ -82,8 +79,6 @@ public final class Constants {
   // Climber
   public static final int CLIMB_BUTTON = BUTTON_B;
 
-
-
   // === EXTRAS === //
 
   // Swervedrive Constants
@@ -102,21 +97,21 @@ public final class Constants {
   public static final double RELEASE_CATAPULT_TIME = 2;
 
   // Climber Sequence Constants
-  public static final double MOVE_SPEED = 0.2; 
+  public static final double MOVE_SPEED = 0.2;
   public static final double TELESCOPING_INITIALIZE = 0.05;
-  public static final double LOWESTPOWER = 0.1; 
-  public static final double LOWPOWER = 0.25; 
+  public static final double LOWESTPOWER = 0.1;
+  public static final double LOWPOWER = 0.25;
   public static final double MIDPOWER = 0.4;
   public static final double HIGHPOWER = 0.6;
-  public static final double SECONDARY_BACKWARD_POSITION = 0.7; 
-  public static final double SECONDARY_MID_POSITION = 0.3; 
-  public static final double SECONDARY_FORWARD_POSITION = 0.1; 
+  public static final double SECONDARY_BACKWARD_POSITION = 0.7;
+  public static final double SECONDARY_MID_POSITION = 0.3;
+  public static final double SECONDARY_FORWARD_POSITION = 0.1;
 
   // Swervedrive PID Stuff
   public static final int kSlotIdx = 0;
   public static final int kPIDLoopIdx = 0;
   public static final int kTimeoutMs = 30;
-  public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.0, 0, 0.0); 
+  public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.0, 0, 0.0);
   public static final Gains jGains = new Gains(0.1, 0.0, 0.0, 0.0, 0, 0.0); // Calibrate
 
   // Auto Constants
