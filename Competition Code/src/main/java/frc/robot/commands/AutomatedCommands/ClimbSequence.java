@@ -56,5 +56,7 @@ public class ClimbSequence extends SequentialCommandGroup {
         // power set to keep the robot where it is
         new PowerTelescopingCommand(climber, MIDPOWER),
         new WaitCommand(T7));
+
+        // Is this necessary? TODO: Review this.
   }
 }
