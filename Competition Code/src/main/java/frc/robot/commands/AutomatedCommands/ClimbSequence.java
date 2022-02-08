@@ -57,6 +57,6 @@ public class ClimbSequence extends SequentialCommandGroup {
         new PowerTelescopingCommand(climber, MIDPOWER),
         new WaitCommand(T7));
 
-        // Is this necessary? TODO: Review this.
+    // Is this necessary? TODO: Review this.
   }
 }
