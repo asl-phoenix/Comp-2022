@@ -61,11 +61,6 @@ public class Catapult extends SubsystemBase {
     shooter_p.set(DoubleSolenoid.Value.kReverse);
   }
 
-  // This function turns the catapult piston off.
-  public void pistonOff() {
-    shooter_p.set(DoubleSolenoid.Value.kOff);
-  }
-
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

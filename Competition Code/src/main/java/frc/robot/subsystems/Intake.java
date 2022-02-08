@@ -41,11 +41,6 @@ public class Intake extends SubsystemBase {
     intakePiston2.set(DoubleSolenoid.Value.kReverse);
   }
 
-  // This method runs the intake motor at negative a value in order to outtake.
-  public void outtake() {
-    rollerMotor.set(-INTAKE_SPEED);
-  }
-
   // This method turns off the intake motor.
   public void off() {
     rollerMotor.set(0);

@@ -103,9 +103,6 @@ public final class Constants {
   public static final double LOWPOWER = 0.25;
   public static final double MIDPOWER = 0.4;
   public static final double HIGHPOWER = 0.6;
-  public static final double SECONDARY_BACKWARD_POSITION = 0.7;
-  public static final double SECONDARY_MID_POSITION = 0.3;
-  public static final double SECONDARY_FORWARD_POSITION = 0.1;
 
   // Swervedrive PID Stuff
   public static final int kSlotIdx = 0;
