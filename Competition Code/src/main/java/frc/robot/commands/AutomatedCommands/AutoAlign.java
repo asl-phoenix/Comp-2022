@@ -9,7 +9,6 @@ import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
 
 public class AutoAlign extends CommandBase {
-
   SwerveRotaters rotators;
   SwerveSpinners spinners;
   double targetAngle, fR, fL, bR, bL;

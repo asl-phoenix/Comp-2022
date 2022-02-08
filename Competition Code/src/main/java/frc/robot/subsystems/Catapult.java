@@ -61,6 +61,8 @@ public class Catapult extends SubsystemBase {
     shooter_p.set(DoubleSolenoid.Value.kReverse);
   }
 
+  // TODO: Make limit switch (ASK SUFAN)
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

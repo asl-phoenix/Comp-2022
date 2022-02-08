@@ -21,10 +21,7 @@ public class Pixy extends SubsystemBase {
     double xCoordinate =
         getLargestBlock()
             .getX(); // This method should give the x coordinate of the center of the block
-    double turnDirection;
-    if (xCoordinate >= (width / 2)) turnDirection = 1; // counter-clockwise
-    else turnDirection = -1; // clockwise
-    return turnDirection;
+    return xCoordinate >= width/2 ? -1 : 1;
   }
 
   public Block getLargestBlock() {
@@ -43,6 +40,8 @@ public class Pixy extends SubsystemBase {
     }
     return null;
   }
+
+  //TODO: Add code for auto positioning
 
   public boolean reachedTarget() {
     if (Math.abs(getLargestBlock().getX() - (width / 2)) <= AUTO_ALIGN_ERROR) return true;
