@@ -17,13 +17,7 @@ public class ClimbSequence extends SequentialCommandGroup {
   /** Creates a new autonomous command sequence. */
   public Climber climber;
 
-  private double T1,
-      T2,
-      T3,
-      T4,
-      T5,
-      T6,
-      T7;
+  private double T1, T2, T3, T4, T5, T6, T7;
 
   /**
    * This is good enough for now
@@ -61,7 +55,6 @@ public class ClimbSequence extends SequentialCommandGroup {
         new WaitCommand(T6),
         // power set to keep the robot where it is
         new PowerTelescopingCommand(climber, MIDPOWER),
-        new WaitCommand(T7)
-    );
+        new WaitCommand(T7));
   }
 }
