@@ -25,6 +25,8 @@ public final class Constants {
   public static final int INTAKE_MOTOR_PORT = 10;
   public static final int INTAKE_PISTON_PORT_1 = 10;
   public static final int INTAKE_PISTON_PORT_2 = 11;
+  public static final int INTAKE_PISTON_PORT_3 = 10;
+  public static final int INTAKE_PISTON_PORT_4 = 11;
 
   // Climber Ports
   public static final int TELESCOPE_PORT_1 = 1;
@@ -39,8 +41,6 @@ public final class Constants {
 
   // Gyro Port
   public static final int GYRO_PORT = 9;
-
-  // Camera & Sensor Ports
 
   // === CONTROLLER === //
 
@@ -69,19 +69,15 @@ public final class Constants {
 
   // Intake
   public static final int INTAKE_BUTTON = RIGHT_BUMPER;
-  public static final int OUTTAKE_BUTTON = LEFT_BUMPER;
-  public static final int RAISE_INTAKE_BUTTON = BACK_BUTTON;
-  public static final int LOWER_INTAKE_BUTTON = START_BUTTON;
+  public static final int RAISE_INTAKE_BUTTON = LEFT_BUMPER;
 
   // Catapult
   public static final int LOWERCATAPULT_BUTTON = LEFT_TRIGGER;
   public static final int RELEASECATAPULT_BUTTON = RIGHT_TRIGGER;
+  public static final int ALIGNCATAPULT_BUTTON = BUTTON_Y;
 
   // Climber
-  public static final int EXTEND_TELESCOPING_BUTTON = BUTTON_B;
-  public static final int RETRACT_TELESCOPING_BUTTON = BUTTON_X;
-  public static final int EXTEND_SECONDARY_BUTTON = BUTTON_Y;
-  public static final int RETRACT_SECONDARY_BUTTON = BUTTON_A;
+  public static final int CLIMB_BUTTON = BUTTON_B;
 
   // === EXTRAS === //
 
@@ -95,21 +91,31 @@ public final class Constants {
   public static final double INTAKE_SPEED = 0.5;
   public static final double SHOOTER_PISTON_SPEED = 0.5;
   public static final double CATAPULT_SPEED = 0.9;
-  public static final double TELESCOPING_SPEED = 0.5;
-  public static final double SECONDARY_SPEED = 0.5;
-  public static final double CATAPULT_TIMER = 4;
+
+  // Time Constants
+  public static final double WIND_CATAPULT_TIME = 4;
+  public static final double RELEASE_CATAPULT_TIME = 2;
+
+  // Climber Sequence Constants
+  public static final double MOVE_SPEED = 0.2;
+  public static final double TELESCOPING_INITIALIZE = 0.05;
+  public static final double LOWESTPOWER = 0.1;
+  public static final double LOWPOWER = 0.25;
+  public static final double MIDPOWER = 0.4;
+  public static final double HIGHPOWER = 0.6;
 
   // Swervedrive PID Stuff
   public static final int kSlotIdx = 0;
   public static final int kPIDLoopIdx = 0;
   public static final int kTimeoutMs = 30;
-  public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.0, 0, 0.0); // coamnds
-  public static final Gains jGains = new Gains(0.1, 0.0, 0.0, 0.0, 0, 0.0); // spinners
+  public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.0, 0, 0.0);
+  public static final Gains jGains = new Gains(0.1, 0.0, 0.0, 0.0, 0, 0.0); // Calibrate
 
   // Auto Constants
-  // public static final double ERROR_TOLERANCE = 300;
   public static final double ROTATOR_ERROR_TOLERANCE = 100;
   public static final double SPINNER_ERROR_TOLERANCE = 10;
   public static final double ANGLE_ERROR_TOLERANCE = 10;
   public static final double AUTO_ROTATE_SPEED = 0.15;
+  public static final double AUTO_ALIGN_SPEED = 0.1;
+  public static final double AUTO_ALIGN_ERROR = 5;
 }

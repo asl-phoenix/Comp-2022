@@ -5,22 +5,24 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Climber;
 
-public class OuttakeCommand extends CommandBase {
-  // Creates outtake command
-  private Intake INTAKE;
+public class PowerTelescopingCommand extends CommandBase {
+  // Creates a new Command for extending Telescoping/Primary Climbing Arms
+  private Climber CLIMBER;
+  private double power;
 
-  public OuttakeCommand(Intake INTAKE) {
+  public PowerTelescopingCommand(Climber CLIMBER, double power) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(INTAKE);
-    this.INTAKE = INTAKE;
+    addRequirements(CLIMBER);
+    this.CLIMBER = CLIMBER;
+    this.power = power;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    INTAKE.outtake();
+    CLIMBER.supplyTelescoping(power);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -29,9 +31,7 @@ public class OuttakeCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    INTAKE.off();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

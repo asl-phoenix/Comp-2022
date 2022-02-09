@@ -9,13 +9,14 @@ import static frc.robot.Constants.*;
 
 public class Intake extends SubsystemBase {
   // These are the variables that need to be created for Intake.
-  private DoubleSolenoid intakePiston;
+  private DoubleSolenoid intakePiston1, intakePiston2;
   private WPI_TalonSRX rollerMotor;
 
   // This is the constructor.
   public Intake() {
     rollerMotor = new WPI_TalonSRX(INTAKE_MOTOR_PORT);
-    intakePiston = new DoubleSolenoid(INTAKE_PISTON_PORT_1, INTAKE_PISTON_PORT_2);
+    intakePiston1 = new DoubleSolenoid(INTAKE_PISTON_PORT_1, INTAKE_PISTON_PORT_2);
+    intakePiston1 = new DoubleSolenoid(INTAKE_PISTON_PORT_3, INTAKE_PISTON_PORT_4);
   }
   /**
    * Sets the speed of the motor
@@ -30,17 +31,14 @@ public class Intake extends SubsystemBase {
 
   // This method pushes the Intake piston forward.
   public void pistonForward() {
-    intakePiston.set(DoubleSolenoid.Value.kForward);
+    intakePiston1.set(DoubleSolenoid.Value.kForward);
+    intakePiston2.set(DoubleSolenoid.Value.kForward);
   }
 
   // This method pulls the Intake piston back.
   public void pistonReverse() {
-    intakePiston.set(DoubleSolenoid.Value.kReverse);
-  }
-
-  // This method runs the intake motor at negative a value in order to outtake.
-  public void outtake() {
-    rollerMotor.set(-INTAKE_SPEED);
+    intakePiston1.set(DoubleSolenoid.Value.kReverse);
+    intakePiston2.set(DoubleSolenoid.Value.kReverse);
   }
 
   // This method turns off the intake motor.

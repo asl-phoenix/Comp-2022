@@ -2,13 +2,13 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.AutoCommands;
+package frc.robot.commands.AutomatedCommands;
 
 import frc.robot.subsystems.Gyro;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 
-public class MoveWithSetWheelDirectionsWithGyro extends CommandBase {
+public class AutoMove extends CommandBase {
 
   SwerveRotaters rotators;
   SwerveSpinners spinners;
@@ -19,7 +19,7 @@ public class MoveWithSetWheelDirectionsWithGyro extends CommandBase {
   // This command basically sets the wheels to a specific angle and drives the robot a certain
   // distance
   // in that direction.
-  public MoveWithSetWheelDirectionsWithGyro(
+  public AutoMove(
       SwerveRotaters rotators,
       SwerveSpinners spinners,
       Gyro gyro,

@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
+import frc.robot.commands.AutomatedCommands.*;
 import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
-import frc.robot.commands.AutoCommands.*;
 
 public class RobotContainer {
 
@@ -29,7 +29,10 @@ public class RobotContainer {
   // Drivetrain Subs
   public final SwerveSpinners SWERVESPINNERS = new SwerveSpinners();
   public final SwerveRotaters SWERVEROTATERS = new SwerveRotaters();
+
+  // Extra Subs
   public final Gyro GYRO = new Gyro();
+  public final Pixy PIXY = new Pixy();
 
   // Mechanism Subs
   public final Catapult CATAPULT = new Catapult();
@@ -65,43 +68,32 @@ public class RobotContainer {
 
   // Intake
   public final JoystickButton intakeButton = new JoystickButton(shopper, INTAKE_BUTTON);
-  public final JoystickButton outtakeButton = new JoystickButton(shopper, OUTTAKE_BUTTON);
   public final JoystickButton raiseIntakeButton = new JoystickButton(operator, RAISE_INTAKE_BUTTON);
-  public final JoystickButton lowerIntakeButton = new JoystickButton(operator, LOWER_INTAKE_BUTTON);
 
   // Catapult
   public final JoystickButton lowerCatapultButton =
       new JoystickButton(operator, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton =
       new JoystickButton(operator, RELEASECATAPULT_BUTTON);
+  public final JoystickButton alignCatapultButton =
+      new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
 
   // Climber
-  public final JoystickButton extendTelescopingButton =
-      new JoystickButton(operator, EXTEND_TELESCOPING_BUTTON);
-  public final JoystickButton retractTelescopingButton =
-      new JoystickButton(operator, RETRACT_TELESCOPING_BUTTON);
-  public final JoystickButton extendSecondaryButton =
-      new JoystickButton(operator, EXTEND_SECONDARY_BUTTON);
-  public final JoystickButton retractSecondaryButton =
-      new JoystickButton(operator, RETRACT_SECONDARY_BUTTON);
+  public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
 
   // == COMMANDS == //
 
   // Intake Commands
   public final Command intakeCommand = new IntakeCommand(INTAKE);
-  public final Command outtakeCommand = new OuttakeCommand(INTAKE);
   public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
-  public final Command lowerIntakeCommand = new LowerIntakeCommand(INTAKE);
 
   // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
+  public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
 
   // Climber Commands
-  public final Command extendTelescopingCommand = new ExtendTelescopingCommand(CLIMBER);
-  public final Command retractTelescopingCommand = new RetractTelescopingCommand(CLIMBER);
-  public final Command extendSecondaryCommand = new ExtendSecondaryCommand(CLIMBER);
-  public final Command retractSecondaryCommand = new RetractSecondaryCommand(CLIMBER);
+  public final Command climbSequence = new ClimbSequence(CLIMBER, SWERVEROTATERS, SWERVESPINNERS);
 
   // This constructs the robot container class.
   public RobotContainer() {
@@ -145,17 +137,13 @@ public class RobotContainer {
     // Catapult
     lowerCatapultButton.whenPressed(lowerCatapultCommand);
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
+    alignCatapultButton.whenHeld(alignCatapultCommand);
 
     // Intake
     intakeButton.whileHeld(intakeCommand);
-    outtakeButton.whileHeld(outtakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
-    lowerIntakeButton.whenPressed(lowerIntakeCommand);
 
     // Climber
-    extendTelescopingButton.whenHeld(extendTelescopingCommand);
-    retractTelescopingButton.whenHeld(retractTelescopingCommand);
-    extendSecondaryButton.whenHeld(extendSecondaryCommand);
-    retractSecondaryButton.whenHeld(retractSecondaryCommand);
+    climbButton.whenHeld(climbSequence);
   }
 }

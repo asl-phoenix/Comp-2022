@@ -43,7 +43,7 @@ public class Catapult extends SubsystemBase {
 
   // This function sets the speed for the winding catapult motor.
   public void setSpeed() {
-    catapult_motor_1.set(ControlMode.PercentOutput, -CATAPULT_SPEED);
+    catapult_motor_1.set(ControlMode.PercentOutput, CATAPULT_SPEED);
   }
 
   // This function stops the winding catapult motor.
@@ -61,10 +61,7 @@ public class Catapult extends SubsystemBase {
     shooter_p.set(DoubleSolenoid.Value.kReverse);
   }
 
-  // This function turns the catapult piston off.
-  public void pistonOff() {
-    shooter_p.set(DoubleSolenoid.Value.kOff);
-  }
+  // TODO: Make limit switch (ASK SUFAN)
 
   @Override
   public void periodic() {
