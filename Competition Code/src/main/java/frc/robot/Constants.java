@@ -38,9 +38,8 @@ public final class Constants {
   public static final int SHOOTER_MOTOR_PORT_1 = 7;
   public static final int SHOOTER_PISTON_PORT_1 = 6;
   public static final int SHOOTER_PISTON_PORT_2 = 5;
-  public static final int SHOOTER_PISTON_PORT_3 = 3; //CCONFIRM LATER UNTESTED
+  public static final int SHOOTER_PISTON_PORT_3 = 3; // CCONFIRM LATER UNTESTED
   public static final int SHOOTER_PISTON_PORT_4 = 2;
-
 
   // Gyro Port
   public static final int GYRO_PORT = 9;
@@ -48,8 +47,8 @@ public final class Constants {
   // === CONTROLLER === //
 
   // Controller Constants
-  public static final int DRIVER_CONTROLLER = 1; //change back to 0
-  public static final int OPERATOR_CONTROLLER = 0; //change back to 1
+  public static final int DRIVER_CONTROLLER = 1; // change back to 0
+  public static final int OPERATOR_CONTROLLER = 0; // change back to 1
 
   // == BUTTON CONSTANTS == //
 

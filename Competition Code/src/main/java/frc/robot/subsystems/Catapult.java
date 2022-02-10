@@ -28,7 +28,7 @@ public class Catapult extends SubsystemBase {
   public Catapult() {
     catapult_motor_1 = new WPI_TalonSRX(SHOOTER_MOTOR_PORT_1);
     shooter_1 = new DoubleSolenoid(SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
-    //shooter_2 = new DoubleSolenoid(SHOOTER_PISTON_PORT_3, SHOOTER_PISTON_PORT_4);
+    // shooter_2 = new DoubleSolenoid(SHOOTER_PISTON_PORT_3, SHOOTER_PISTON_PORT_4);
 
     limitMotorCurrents();
   }
@@ -41,7 +41,9 @@ public class Catapult extends SubsystemBase {
     // 1));
   }
 
-  /** @param speed [-1.0, 1.0] */
+  /**
+   * @param speed [-1.0, 1.0]
+   */
 
   // This function sets the speed for the winding catapult motor.
   public void setSpeed() {
@@ -56,13 +58,13 @@ public class Catapult extends SubsystemBase {
   // This function pushes the catapult piston forward.
   public void pistonForward() {
     shooter_1.set(DoubleSolenoid.Value.kForward);
-    //shooter_2.set(DoubleSolenoid.Value.kForward);
+    // shooter_2.set(DoubleSolenoid.Value.kForward);
   }
 
   // This function pulls the catapult pistion back.
   public void pistonReverse() {
     shooter_1.set(DoubleSolenoid.Value.kReverse);
-    //shooter_2.set(DoubleSolenoid.Value.kReverse);
+    // shooter_2.set(DoubleSolenoid.Value.kReverse);
   }
 
   // TODO: Make limit switch (ASK SUFAN)
