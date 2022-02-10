@@ -47,7 +47,7 @@ public class SwerveSpinners extends SubsystemBase {
     configPID();
   }
 
-  public void limitMotorCurrent(){
+  public void limitMotorCurrent() {
     fLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 0.1));
     fLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 0.1));
 

@@ -40,7 +40,7 @@ public class SwerveRotaters extends SubsystemBase {
 
     // Current Limiting for all motors in order to avoid Brownouts.
     limitMotorCurrent();
-    
+
     // Sensor config and encoder reset for all motors
 
     fRRotater.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
@@ -63,7 +63,7 @@ public class SwerveRotaters extends SubsystemBase {
   }
 
   // This function limits the current that each motor is drawing
-  public void limitMotorCurrent(){
+  public void limitMotorCurrent() {
     fRRotater.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 1));
     fRRotater.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 1));
 
@@ -78,7 +78,7 @@ public class SwerveRotaters extends SubsystemBase {
   }
 
   // This function configures the motors
-  public void configMotors(){
+  public void configMotors() {
     // Config front right rotater
     fRRotater.configFactoryDefault();
     fRRotater.set(ControlMode.Velocity, 0);
