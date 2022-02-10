@@ -6,8 +6,6 @@
 
 package frc.robot.subsystems;
 
-import static frc.robot.Constants.*;
-
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -18,6 +16,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import static frc.robot.Constants.*;
 
 public class SwerveSpinners extends SubsystemBase {
 
@@ -33,11 +33,21 @@ public class SwerveSpinners extends SubsystemBase {
 
   public SwerveSpinners() {
 
-    bRMotor = new WPI_TalonFX(MOTOR_PORT_4);
-    bLMotor = new WPI_TalonFX(MOTOR_PORT_3);
     fRMotor = new WPI_TalonFX(MOTOR_PORT_1);
     fLMotor = new WPI_TalonFX(MOTOR_PORT_2);
-    // Limiting current
+    bLMotor = new WPI_TalonFX(MOTOR_PORT_3);
+    bRMotor = new WPI_TalonFX(MOTOR_PORT_4);
+
+    fR = new SpeedControllerGroup(fRMotor);
+    fL = new SpeedControllerGroup(fLMotor);
+    bR = new SpeedControllerGroup(bRMotor);
+    bL = new SpeedControllerGroup(bLMotor);
+
+    limitMotorCurrent();
+    configPID();
+  }
+
+  public void limitMotorCurrent(){
     fLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 0.1));
     fLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 0.1));
 
@@ -49,13 +59,6 @@ public class SwerveSpinners extends SubsystemBase {
 
     bLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 0.1));
     bLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 0.1));
-
-    bR = new SpeedControllerGroup(bRMotor);
-    bL = new SpeedControllerGroup(bLMotor);
-    fR = new SpeedControllerGroup(fRMotor);
-    fL = new SpeedControllerGroup(fLMotor);
-
-    configPID();
   }
 
   // This is the initialization method for PID config.
@@ -130,11 +133,13 @@ public class SwerveSpinners extends SubsystemBase {
       backLeftSpeed = r;
       backRightSpeed = r;
       frontLeftSpeed = r;
+
     } else if (isRotating && !isTranslating) {
       backRightSpeed = -rotationHorizontal * ROTATION_COEFFICIENT;
       frontRightSpeed = -rotationHorizontal * ROTATION_COEFFICIENT;
       backLeftSpeed = -rotationHorizontal * ROTATION_COEFFICIENT;
       frontLeftSpeed = -rotationHorizontal * ROTATION_COEFFICIENT;
+
     } else if (isRotating && isTranslating) {
       frontRightSpeed = r;
       backLeftSpeed = r;
@@ -142,13 +147,13 @@ public class SwerveSpinners extends SubsystemBase {
       frontLeftSpeed = r;
     }
 
-    bR.set(backRightSpeed);
-    bL.set(backLeftSpeed);
     fR.set(frontRightSpeed);
     fL.set(frontLeftSpeed);
+    bR.set(backRightSpeed);
+    bL.set(backLeftSpeed);
   }
 
-  // Auto Commands
+  // == Auto Commands == //
 
   public double cmToPulses(double cm) {
     return GEAR_RATIO_SPINNER * UNITS_PER_ROTATION * cm / (WHEEL_DIAMETER_INCHES * 2.54 * Math.PI);

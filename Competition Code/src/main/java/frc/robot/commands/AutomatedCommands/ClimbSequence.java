@@ -20,8 +20,6 @@ public class ClimbSequence extends SequentialCommandGroup {
   private double T1, T2, T3, T4, T5, T6, T7;
 
   /**
-   * This is good enough for now
-   *
    * @param climber
    * @param rotators
    * @param spinners
@@ -29,13 +27,13 @@ public class ClimbSequence extends SequentialCommandGroup {
   public ClimbSequence(Climber climber, SwerveRotaters rotators, SwerveSpinners spinners) {
     // This is the sequential commands for our climbing sequence
     this.climber = climber;
-    T1 = 1;
-    T2 = 1;
-    T3 = 1;
-    T4 = 1;
-    T5 = 1;
-    T6 = 1;
-    T7 = 1;
+    T1 = 1.0;
+    T2 = 1.0;
+    T3 = 1.0;
+    T4 = 1.0;
+    T5 = 1.0;
+    T6 = 1.0;
+    T7 = 1.0;
 
     addCommands(
         // The telescoping is initialized

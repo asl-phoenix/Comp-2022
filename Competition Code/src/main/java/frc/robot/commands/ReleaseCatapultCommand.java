@@ -44,7 +44,7 @@ public class ReleaseCatapultCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // This means that 1 second after the command is initialized, the command will end.
+    // This means that 5 seconds after the command is initialized, the command will end.
     return (System.currentTimeMillis() - startTime) > 5000 * RELEASE_CATAPULT_TIME;
   }
 }

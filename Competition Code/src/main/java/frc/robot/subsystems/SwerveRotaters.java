@@ -39,7 +39,31 @@ public class SwerveRotaters extends SubsystemBase {
     bRRotater = new WPI_TalonFX(ROTATOR_PORT_4);
 
     // Current Limiting for all motors in order to avoid Brownouts.
+    limitMotorCurrent();
+    
+    // Sensor config and encoder reset for all motors
 
+    fRRotater.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+    fLRotater.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+    bLRotater.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+    bRRotater.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
+
+    resetEncoders();
+    configMotors();
+  }
+
+  // == FUNCTIONS == //
+
+  // This function resets the encoders of all motors and is called in the constructor.
+  public void resetEncoders() {
+    fRRotater.setSelectedSensorPosition(0);
+    fLRotater.setSelectedSensorPosition(0);
+    bLRotater.setSelectedSensorPosition(0);
+    bRRotater.setSelectedSensorPosition(0);
+  }
+
+  // This function limits the current that each motor is drawing
+  public void limitMotorCurrent(){
     fRRotater.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 1));
     fRRotater.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 1));
 
@@ -51,15 +75,10 @@ public class SwerveRotaters extends SubsystemBase {
 
     bRRotater.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 1));
     bRRotater.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 1));
+  }
 
-    // Sensor config and encoder reset for all motors
-
-    fRRotater.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-    fLRotater.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-    bLRotater.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-    bRRotater.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-    resetEncoders();
-
+  // This function configures the motors
+  public void configMotors(){
     // Config front right rotater
     fRRotater.configFactoryDefault();
     fRRotater.set(ControlMode.Velocity, 0);
@@ -95,16 +114,6 @@ public class SwerveRotaters extends SubsystemBase {
     bRRotater.config_kD(0, kGains.kD);
     bRRotater.config_kF(0, kGains.kF);
     bRRotater.setSensorPhase(true);
-  }
-
-  // == FUNCTIONS == //
-
-  // This function resets the encoders of all motors and is called in the constructor.
-  public void resetEncoders() {
-    fRRotater.setSelectedSensorPosition(0);
-    fLRotater.setSelectedSensorPosition(0);
-    bLRotater.setSelectedSensorPosition(0);
-    bRRotater.setSelectedSensorPosition(0);
   }
 
   // This function converts a provided angle to the encoder pulse value for the motors.
@@ -223,7 +232,7 @@ public class SwerveRotaters extends SubsystemBase {
       // It is also worth noting that our of the multiple different swerve algorithms we tested
       // this method is definitely the smoothest (by far).
 
-      // zone 1
+      // Zone 1
       // This is quadrant starts from 45 degrees to the right of the front of the robot.
       // It ends at 45 degrees to the left of the front of the robot.
       if (((angle >= 0) && (45 > angle)) || ((360 > angle) && (angle >= 315))) {
@@ -249,7 +258,7 @@ public class SwerveRotaters extends SubsystemBase {
                 / 360);
       }
 
-      // zone 2
+      // Zone 2
       // This is quadrant starts from 45 degrees to the left of the front of the robot.
       // It ends at 135 degrees to the left of the front of the robot.
       else if ((angle >= 45) && (135 > angle)) {
@@ -275,7 +284,7 @@ public class SwerveRotaters extends SubsystemBase {
                 / 360);
       }
 
-      // zone 3
+      // Zone 3
       // This is quadrant starts from 135 degrees to the left of the front of the robot.
       // It ends at 225 degrees to the left of the front of the robot.
       else if ((angle >= 135) && (225 > angle)) {
@@ -301,7 +310,7 @@ public class SwerveRotaters extends SubsystemBase {
                 / 360);
       }
 
-      // zone 4
+      // Zone 4
       // This is quadrant starts from 225 degrees to the left of the front of the robot.
       // It ends at 315 degrees to the left of the front of the robot(aka. 45 degrees to the right).
       else if ((angle >= 225) && (315 > angle)) {

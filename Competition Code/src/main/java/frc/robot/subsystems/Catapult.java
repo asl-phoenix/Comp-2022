@@ -29,17 +29,8 @@ public class Catapult extends SubsystemBase {
     catapult_motor_1 = new WPI_TalonSRX(SHOOTER_MOTOR_PORT_1);
     shooter_1 = new DoubleSolenoid(SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
     //shooter_2 = new DoubleSolenoid(SHOOTER_PISTON_PORT_3, SHOOTER_PISTON_PORT_4);
-
-    limitMotorCurrents();
   }
 
-  // Reduces the current that the TalonSRX draws in order to prevent brownouts
-  public void limitMotorCurrents() {
-    // catapult_motor_1.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21,
-    // 1));
-    // catapult_motor_1.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21,
-    // 1));
-  }
 
   /** @param speed [-1.0, 1.0] */
 

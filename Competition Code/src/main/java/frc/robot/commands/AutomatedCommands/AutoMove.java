@@ -16,9 +16,8 @@ public class AutoMove extends CommandBase {
   Gyro gyro;
   double fR, fL, bR, bL;
 
-  // This command basically sets the wheels to a specific angle and drives the robot a certain
-  // distance
-  // in that direction.
+  // This command sets the wheels to a specific angle and drives the robot a certain
+  // distance in that direction.
   public AutoMove(
       SwerveRotaters rotators,
       SwerveSpinners spinners,
@@ -40,7 +39,7 @@ public class AutoMove extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("amogus");
+    System.out.println("AutoMove Initialized");
     spinners.resetEncoders();
     rotators.setWheelDirection(fR, fL, bR, bL);
   }

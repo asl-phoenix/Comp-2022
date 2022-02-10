@@ -15,9 +15,8 @@ public class MoveForward extends CommandBase {
   private double moveTime;
   private double startTime = 0;
 
-  // This command basically sets the wheels to a specific angle and drives the robot a certain
-  // distance
-  // in that direction.
+  // This command sets the wheels to a specific angle and drives the robot a certain
+  // distance in that direction.
   public MoveForward(SwerveRotaters rotators, SwerveSpinners spinners, double moveTime) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.rotators = rotators;
@@ -30,7 +29,7 @@ public class MoveForward extends CommandBase {
   @Override
   public void initialize() {
     startTime = System.currentTimeMillis();
-    System.out.println("amogus");
+    System.out.println("MoveForward Initialized");
     spinners.resetEncoders();
     rotators.setWheelDirection(0, 0, 0, 0);
   }
