@@ -22,7 +22,7 @@ public final class Constants {
   public static final int ROTATOR_PORT_4 = 8;
 
   // Intake Ports
-  public static final int INTAKE_MOTOR_PORT = 10;
+  public static final int INTAKE_MOTOR_PORT = 7;
   public static final int INTAKE_PISTON_PORT_1 = 10; // CHECK
   public static final int INTAKE_PISTON_PORT_2 = 11;
   public static final int INTAKE_PISTON_PORT_3 = 10;
@@ -35,7 +35,7 @@ public final class Constants {
   public static final int SECONDARY_PORT_2 = 1;
 
   // Catapult Ports
-  public static final int SHOOTER_MOTOR_PORT_1 = 7;
+  public static final int SHOOTER_MOTOR_PORT_1 = /*7*/69;
   public static final int SHOOTER_PISTON_PORT_1 = 6;
   public static final int SHOOTER_PISTON_PORT_2 = 5;
   public static final int SHOOTER_PISTON_PORT_3 = 3; // CCONFIRM LATER UNTESTED
@@ -53,10 +53,10 @@ public final class Constants {
   // == BUTTON CONSTANTS == //
 
   // Controller Buttons
-  public static final int BUTTON_X = 1;
-  public static final int BUTTON_A = 2;
-  public static final int BUTTON_B = 3;
-  public static final int BUTTON_Y = 4;
+  public static final int BUTTON_X = 3; //1 on 001
+  public static final int BUTTON_A = 1; //2 on 001
+  public static final int BUTTON_B = 2; // 3 on 001
+  public static final int BUTTON_Y = 4; // 4 on 001
   public static final int LEFT_BUMPER = 5;
   public static final int RIGHT_BUMPER = 6;
   public static final int LEFT_TRIGGER = 7;
@@ -90,7 +90,7 @@ public final class Constants {
   public static final double UNITS_PER_ROTATION = 2048;
 
   // Speed constants
-  public static final double INTAKE_SPEED = 0.5;
+  public static final double INTAKE_SPEED = -0.5;
   public static final double SHOOTER_PISTON_SPEED = 0.5;
   public static final double CATAPULT_SPEED = 0.9;
 
