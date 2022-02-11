@@ -7,20 +7,22 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
-public class RetractTelescopingCommand extends CommandBase {
-  //Creates a new Command for retracting Telescoping/Primary Climbing Arms
+public class PowerTelescopingCommand extends CommandBase {
+  // Creates a new Command for extending Telescoping/Primary Climbing Arms
   private Climber CLIMBER;
+  private double power;
 
-  public RetractTelescopingCommand(Climber CLIMBER) {
+  public PowerTelescopingCommand(Climber CLIMBER, double power) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(CLIMBER);
     this.CLIMBER = CLIMBER;
+    this.power = power;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize(){
-    CLIMBER.retractTelescoping();
+  public void initialize() {
+    CLIMBER.supplyTelescoping(power);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -29,9 +31,7 @@ public class RetractTelescopingCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    CLIMBER.offTelescoping();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

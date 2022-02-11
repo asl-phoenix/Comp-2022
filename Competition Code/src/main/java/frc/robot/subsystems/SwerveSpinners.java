@@ -5,7 +5,6 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-import static frc.robot.Constants.*;
 
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
@@ -18,194 +17,183 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import static frc.robot.Constants.*;
+
 public class SwerveSpinners extends SubsystemBase {
 
   /** These are the variables for the SwerveSpinners subsytem. */
-  public static final double MM_TO_IN = 0.0393701;
-  public static final double WHEEL_TO_WHEEL_DIAMETER_INCHES = 320 * MM_TO_IN;
   public static final double WHEEL_DIAMETER_INCHES = 4;
-  // It may be more logical to use no SPEED MULTIPLIER and rather just depend on the controller input(investigate)
-  // public static final double ROTTRANSCUT = 0;
-  public static final double SPEED_MULTIPLIER = 0.65;
+
+  public static final double SPEED_MULTIPLIER = 0.35;
   public static final double ROTATION_COEFFICIENT = 0.35;
   private WPI_TalonFX bRMotor, bLMotor, fRMotor, fLMotor;
   private SpeedControllerGroup bR, bL, fR, fL;
-  
-  //This is the constructor for this subsytem.
-  public SwerveSpinners(){
 
-    bRMotor = new WPI_TalonFX(MOTOR_PORT_4);
-    bLMotor = new WPI_TalonFX(MOTOR_PORT_3);
+  // This is the constructor for this subsytem.
+
+  public SwerveSpinners() {
+
     fRMotor = new WPI_TalonFX(MOTOR_PORT_1);
     fLMotor = new WPI_TalonFX(MOTOR_PORT_2);
-// test
-    fLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20,21,0.1));
-    fLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20,21,0.1));
+    bLMotor = new WPI_TalonFX(MOTOR_PORT_3);
+    bRMotor = new WPI_TalonFX(MOTOR_PORT_4);
 
-    fRMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20,21,0.1));
-    fRMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20,21,0.1));
-
-    bRMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20,21,0.1));
-    bRMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20,21,0.1));
-    
-    bLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20,21,0.1));
-    bLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20,21,0.1));
-
-
-    bR = new SpeedControllerGroup(bRMotor);
-    bL = new SpeedControllerGroup(bLMotor);
     fR = new SpeedControllerGroup(fRMotor);
     fL = new SpeedControllerGroup(fLMotor);
-    configPID();
+    bR = new SpeedControllerGroup(bRMotor);
+    bL = new SpeedControllerGroup(bLMotor);
 
+    limitMotorCurrent();
+    configPID();
   }
 
-  
-  public void configPID(){
+  public void limitMotorCurrent() {
+    fLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 0.1));
+    fLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 0.1));
+
+    fRMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 0.1));
+    fRMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 0.1));
+
+    bRMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 0.1));
+    bRMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 0.1));
+
+    bLMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 20, 21, 0.1));
+    bLMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 20, 21, 0.1));
+  }
+
+  // This is the initialization method for PID config.
+  public void configPID() {
     resetEncoders();
 
     fRMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
     fLMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
     bLMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
     bRMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
-    
+
     fLMotor.configFactoryDefault();
-    fLMotor.set(ControlMode.Velocity,0);
+    fLMotor.set(ControlMode.Velocity, 0);
     fLMotor.config_kP(0, jGains.kP);
     fLMotor.config_kI(0, jGains.kI);
     fLMotor.config_kD(0, jGains.kD);
-    fLMotor.config_kF(0, jGains.kF); 
+    fLMotor.config_kF(0, jGains.kF);
     fLMotor.setSensorPhase(true);
 
     fRMotor.configFactoryDefault();
-    fRMotor.set(ControlMode.Velocity,0);
+    fRMotor.set(ControlMode.Velocity, 0);
     fRMotor.config_kP(0, jGains.kP);
     fRMotor.config_kI(0, jGains.kI);
     fRMotor.config_kD(0, jGains.kD);
-    fRMotor.config_kF(0, jGains.kF); 
+    fRMotor.config_kF(0, jGains.kF);
     fRMotor.setSensorPhase(true);
 
     bLMotor.configFactoryDefault();
-    bLMotor.set(ControlMode.Velocity,0);
+    bLMotor.set(ControlMode.Velocity, 0);
     bLMotor.config_kP(0, jGains.kP);
     bLMotor.config_kI(0, jGains.kI);
     bLMotor.config_kD(0, jGains.kD);
-    bLMotor.config_kF(0, jGains.kF); 
+    bLMotor.config_kF(0, jGains.kF);
     bLMotor.setSensorPhase(true);
-    
+
     bRMotor.configFactoryDefault();
-    bRMotor.set(ControlMode.Velocity,0);
+    bRMotor.set(ControlMode.Velocity, 0);
     bRMotor.config_kP(0, jGains.kP);
     bRMotor.config_kI(0, jGains.kI);
     bRMotor.config_kD(0, jGains.kD);
-    bRMotor.config_kF(0, jGains.kF); 
+    bRMotor.config_kF(0, jGains.kF);
     bRMotor.setSensorPhase(true);
-    
   }
 
-
-  public void resetEncoders(){
+  // This method resets the encoder values.
+  public void resetEncoders() {
     fRMotor.setSelectedSensorPosition(0);
     fLMotor.setSelectedSensorPosition(0);
     bLMotor.setSelectedSensorPosition(0);
     bRMotor.setSelectedSensorPosition(0);
   }
 
-  //This function is the default command for the swervedrive motor spinners.
-  public void spinMotors(double horizontal, double vertical, double rotationHorizontal, double angle){
-    //This -1 is due to how the vertical axis works on the controller. 
+  // This function is the default command for the swervedrive spinners.
+  public void spinMotors(
+      double horizontal, double vertical, double rotationHorizontal, double angle) {
+    // This -1 is due to how the vertical axis works on the controller.
     vertical *= -1;
-    double r = (Math.pow(Math.sqrt(horizontal*horizontal + vertical*vertical),1)*SPEED_MULTIPLIER);
 
-    //Here the initial speeds are set to the value r - calculated above -
+    double r =
+        (Math.pow(Math.sqrt(horizontal * horizontal + vertical * vertical), 1) * SPEED_MULTIPLIER);
     double backRightSpeed = 0;
     double backLeftSpeed = 0;
     double frontRightSpeed = 0;
     double frontLeftSpeed = 0;
-    boolean isRotating = Math.abs(rotationHorizontal)>=CONTROLLER_SENSITIVITY;
-    boolean isTranslating = (Math.sqrt((Math.pow(vertical, 2) + Math.pow(horizontal, 2))) >= CONTROLLER_SENSITIVITY);
 
-    if (!isRotating&&isTranslating){
+    boolean isRotating = Math.abs(rotationHorizontal) >= CONTROLLER_SENSITIVITY;
+    boolean isTranslating =
+        (Math.sqrt((Math.pow(vertical, 2) + Math.pow(horizontal, 2))) >= CONTROLLER_SENSITIVITY);
+
+    if (!isRotating && isTranslating) {
+      frontRightSpeed = r;
+      backLeftSpeed = r;
+      backRightSpeed = r;
+      frontLeftSpeed = r;
+
+    } else if (isRotating && !isTranslating) {
+      backRightSpeed = -rotationHorizontal * ROTATION_COEFFICIENT;
+      frontRightSpeed = -rotationHorizontal * ROTATION_COEFFICIENT;
+      backLeftSpeed = -rotationHorizontal * ROTATION_COEFFICIENT;
+      frontLeftSpeed = -rotationHorizontal * ROTATION_COEFFICIENT;
+
+    } else if (isRotating && isTranslating) {
       frontRightSpeed = r;
       backLeftSpeed = r;
       backRightSpeed = r;
       frontLeftSpeed = r;
     }
 
-    else if(isRotating && !isTranslating){
-      backRightSpeed = -rotationHorizontal*ROTATION_COEFFICIENT;
-      frontRightSpeed = -rotationHorizontal*ROTATION_COEFFICIENT;
-      backLeftSpeed = -rotationHorizontal*ROTATION_COEFFICIENT;
-      frontLeftSpeed = -rotationHorizontal*ROTATION_COEFFICIENT;
-    }
-
-    else if (isRotating && isTranslating){
-      frontRightSpeed = r;
-      backLeftSpeed = r;
-      backRightSpeed = r;
-      frontLeftSpeed = r;
-    }
-
-    bR.set(backRightSpeed);
-    bL.set(backLeftSpeed);
     fR.set(frontRightSpeed);
     fL.set(frontLeftSpeed);
+    bR.set(backRightSpeed);
+    bL.set(backLeftSpeed);
   }
 
-  public void autoTranslational(double x, double y, double totalDistance){
-    double initialPosition = bRMotor.getSelectedSensorPosition();
-    while((Math.PI*WHEEL_DIAMETER_INCHES*360*(bRMotor.getSelectedSensorPosition()-initialPosition)/2048)<totalDistance){
-      spinMotors(x, -y, 0, 0);
-    }
+  // == Auto Commands == //
+
+  public double cmToPulses(double cm) {
+    return GEAR_RATIO_SPINNER * UNITS_PER_ROTATION * cm / (WHEEL_DIAMETER_INCHES * 2.54 * Math.PI);
   }
 
-
-  public double pulsesToCm(double p){
-      // 2048 pulses to a rotation
-      return p*WHEEL_DIAMETER_INCHES*2.54*Math.PI/UNITS_PER_ROTATION;
-  }
-  public void printDist() {
-    System.out.println(pulsesToCm(bRMotor.getSelectedSensorPosition()));
-    System.out.println(pulsesToCm(bLMotor.getSelectedSensorPosition()));
-    System.out.println(pulsesToCm(fRMotor.getSelectedSensorPosition()));
-    System.out.println(pulsesToCm(fLMotor.getSelectedSensorPosition()));
+  public void driveDistance(double pulseGoal) {
+    bRMotor.set(ControlMode.Position, pulseGoal);
+    bLMotor.set(ControlMode.Position, pulseGoal);
+    fRMotor.set(ControlMode.Position, pulseGoal);
+    fLMotor.set(ControlMode.Position, pulseGoal);
   }
 
-
-  //takes distance (cm) divides by cm per rotation and then multiplies by pulses per rotation
-  public double cmToPulses(double cm){
-    return GEAR_RATIO_SPINNER*UNITS_PER_ROTATION*cm/(WHEEL_DIAMETER_INCHES*2.54*Math.PI);
-  }
-
-
-  public void driveDistance(double driveToPulse){
-    bRMotor.set(ControlMode.Position, driveToPulse);
-    bLMotor.set(ControlMode.Position, driveToPulse);
-    fRMotor.set(ControlMode.Position, driveToPulse);
-    fLMotor.set(ControlMode.Position, driveToPulse);
-  }
-  
-
-  public boolean reachedPosition(double pulsesDistance){
-    if (checkError(bRMotor, pulsesDistance) && checkError(bLMotor, pulsesDistance) && checkError(fRMotor, pulsesDistance) && checkError(fLMotor, pulsesDistance)) {
+  public boolean reachedPosition(double pulsesDistance) {
+    if (checkError(bRMotor, pulsesDistance)
+        && checkError(bLMotor, pulsesDistance)
+        && checkError(fRMotor, pulsesDistance)
+        && checkError(fLMotor, pulsesDistance)) {
       return true;
     }
     return false;
   }
 
-
-  private boolean checkError(WPI_TalonFX motor, double pulsesDistance){
-    return ((motor.getSelectedSensorPosition() < (pulsesDistance + SPINNER_ERROR_TOLERANCE)) && (motor.getSelectedSensorPosition() > (pulsesDistance - SPINNER_ERROR_TOLERANCE)));
+  private boolean checkError(WPI_TalonFX motor, double pulsesDistance) {
+    return ((motor.getSelectedSensorPosition() < (pulsesDistance + SPINNER_ERROR_TOLERANCE))
+        && (motor.getSelectedSensorPosition() > (pulsesDistance - SPINNER_ERROR_TOLERANCE)));
   }
 
-
-  public void stop(){
+  public void stop() {
     fRMotor.set(ControlMode.PercentOutput, 0);
     fLMotor.set(ControlMode.PercentOutput, 0);
     bRMotor.set(ControlMode.PercentOutput, 0);
     bLMotor.set(ControlMode.PercentOutput, 0);
   }
 
+  public void runSpinners(double speed) {
+    fRMotor.set(ControlMode.PercentOutput, speed);
+    fLMotor.set(ControlMode.PercentOutput, speed);
+    bRMotor.set(ControlMode.PercentOutput, speed);
+    bLMotor.set(ControlMode.PercentOutput, speed);
+  }
 
   @Override
   public void periodic() {

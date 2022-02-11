@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Catapult;
+import static frc.robot.Constants.*;
 
 public class ReleaseCatapultCommand extends CommandBase {
   // Creates release catapult for shooting command
@@ -34,16 +35,16 @@ public class ReleaseCatapultCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted){
+  public void end(boolean interrupted) {
     // When the command ends, the piston is returned to its original position.
-    // Therefore, the mechanism is now ready for lowering the catapult once more. 
+    // Therefore, the mechanism is now ready for lowering the catapult once more.
     CATAPULT.pistonForward();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // This means that 1 second after the command is initialized, the command will end.
-    return (System.currentTimeMillis() - startTime) > 1000;
+    // This means that 5 seconds after the command is initialized, the command will end.
+    return (System.currentTimeMillis() - startTime) > 5000 * RELEASE_CATAPULT_TIME;
   }
 }
