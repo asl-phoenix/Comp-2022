@@ -28,15 +28,14 @@ public class ReleaseCatapultCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //Only shoot if the intake is lowered
-    if (INTAKE.getPistonState()){
+    // Only shoot if the intake is lowered
+    if (INTAKE.getPistonState()) {
       // For shooting we need to extend the piston.
       CATAPULT.extendPiston();
       startTime = System.currentTimeMillis();
     }
     // A variable is created for determining when we want to end command.
-   
-    
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -54,8 +53,8 @@ public class ReleaseCatapultCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    //Only checks if the intake pistons are down, which means that the catapult has fired
-    if(INTAKE.getPistonState()){
+    // Only checks if the intake pistons are down, which means that the catapult has fired
+    if (INTAKE.getPistonState()) {
       // This means that 1 second after the command is initialized, the command will end.
       return (System.currentTimeMillis() - startTime) > 1000;
     }
