@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 // import edu.wpi.first.wpilibj.VictorSP;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import static frc.robot.Constants.*;
 
@@ -18,8 +17,8 @@ public class Intake extends SubsystemBase {
   // This is the constructor.
   public Intake() {
     rollerMotor = new VictorSPX(INTAKE_MOTOR_PORT);
-    //intakePiston1 = new DoubleSolenoid(INTAKE_PISTON_PORT_1, INTAKE_PISTON_PORT_2);
-    //intakePiston2 = new DoubleSolenoid(INTAKE_PISTON_PORT_3, INTAKE_PISTON_PORT_4);
+    // intakePiston1 = new DoubleSolenoid(INTAKE_PISTON_PORT_1, INTAKE_PISTON_PORT_2);
+    // intakePiston2 = new DoubleSolenoid(INTAKE_PISTON_PORT_3, INTAKE_PISTON_PORT_4);
   }
   /**
    * Sets the speed of the motor
@@ -33,7 +32,7 @@ public class Intake extends SubsystemBase {
   }
 
   // This method pushes the Intake piston forward.
- /* public void pistonForward() {
+  /* public void pistonForward() {
     intakePiston1.set(DoubleSolenoid.Value.kForward);
     intakePiston2.set(DoubleSolenoid.Value.kForward);
   }*/
