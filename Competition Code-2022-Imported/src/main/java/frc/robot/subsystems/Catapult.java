@@ -5,8 +5,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-// import edu.wpi.first.wpilibj.VictorSP;
+// import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+
 // import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -26,8 +28,8 @@ public class Catapult extends SubsystemBase {
   // Constructor
   public Catapult() {
     catapult_motor_1 = new WPI_VictorSPX(SHOOTER_MOTOR_PORT_1);
-    shooter_1 = new DoubleSolenoid(SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
-    // shooter_2 = new DoubleSolenoid(SHOOTER_PISTON_PORT_3, SHOOTER_PISTON_PORT_4);
+    shooter_1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
+    // shooter_2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, SHOOTER_PISTON_PORT_3, SHOOTER_PISTON_PORT_4);
   }
 
   /**
