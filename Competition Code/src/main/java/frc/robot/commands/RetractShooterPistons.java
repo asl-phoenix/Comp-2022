@@ -11,7 +11,7 @@ import static frc.robot.Constants.*;
 public class RetractShooterPistons extends CommandBase {
   /** Creates a new RetractShooterPistons. */
   private Catapult catapult;
-  public RetractShooterPistons(Catapult catapult) {
+  public RetractShooterCommand(Catapult catapult) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(catapult);
     this.catapult = catapult;
