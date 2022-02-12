@@ -35,9 +35,9 @@ public final class Constants {
   public static final int SECONDARY_PORT_2 = 1;
 
   // Catapult Ports
-  public static final int SHOOTER_MOTOR_PORT_1 = /*7*/ 69;
-  public static final int SHOOTER_PISTON_PORT_1 = 6;
-  public static final int SHOOTER_PISTON_PORT_2 = 5;
+  public static final int SHOOTER_MOTOR_PORT_1 = 7;
+  public static final int SHOOTER_PISTON_PORT_1 = 5;
+  public static final int SHOOTER_PISTON_PORT_2 = 6;
   public static final int SHOOTER_PISTON_PORT_3 = 3; // CCONFIRM LATER UNTESTED
   public static final int SHOOTER_PISTON_PORT_4 = 2;
 
@@ -47,8 +47,8 @@ public final class Constants {
   // === CONTROLLER === //
 
   // Controller Constants
-  public static final int DRIVER_CONTROLLER = 1; // change back to 0
-  public static final int OPERATOR_CONTROLLER = 0; // change back to 1
+  public static final int DRIVER_CONTROLLER = 0; // change back to 0
+  public static final int OPERATOR_CONTROLLER = 1; // change back to 1
 
   // == BUTTON CONSTANTS == //
 
@@ -74,9 +74,10 @@ public final class Constants {
   public static final int RAISE_INTAKE_BUTTON = LEFT_BUMPER;
 
   // Catapult
-  public static final int LOWERCATAPULT_BUTTON = LEFT_TRIGGER;
-  public static final int RELEASECATAPULT_BUTTON = RIGHT_TRIGGER;
-  public static final int ALIGNCATAPULT_BUTTON = BUTTON_Y;
+  public static final int LOWERCATAPULT_BUTTON = BUTTON_X;
+  public static final int RELEASECATAPULT_BUTTON = BUTTON_Y;
+  public static final int RETRACTCATAPULTBUTTON = BUTTON_B;
+  public static final int ALIGNCATAPULT_BUTTON = BUTTON_A;
 
   // Climber
   public static final int CLIMB_BUTTON = BUTTON_B;

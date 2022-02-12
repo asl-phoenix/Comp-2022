@@ -27,6 +27,6 @@ public class AutoSequence extends SequentialCommandGroup {
         new AutoMove(rotators, spinners, gyroAuto, 0, 150),
         new Rotate(rotators, spinners, gyro, 180),
         new AutoMove(rotators, spinners, gyro, 180, 150));
-    new ReleaseCatapultCommand(catapult);
+    new ReleaseCatapultCommand(catapult, intake);
   }
 }

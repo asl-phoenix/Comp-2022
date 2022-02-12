@@ -43,6 +43,11 @@ public class Intake extends SubsystemBase {
     intakePiston2.set(DoubleSolenoid.Value.kReverse);
   }*/
 
+  // This method checks if the pistons are engaged
+  public boolean getPistonState() {
+    return intakePiston1.get() == DoubleSolenoid.Value.kForward;
+  }
+
   // This method turns off the intake motor.
   public void off() {
     rollerMotor.set(ControlMode.PercentOutput, 0);

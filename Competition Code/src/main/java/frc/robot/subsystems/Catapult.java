@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 // import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 // import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-// import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 // import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 // import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
@@ -19,14 +18,14 @@ import static frc.robot.Constants.*;
 public class Catapult extends SubsystemBase {
 
   // Motors
-  private WPI_TalonSRX catapult_motor_1;
+  private WPI_VictorSPX catapult_motor_1;
 
   // Pistons
   private DoubleSolenoid shooter_1, shooter_2;
 
   // Constructor
   public Catapult() {
-    catapult_motor_1 = new WPI_TalonSRX(SHOOTER_MOTOR_PORT_1);
+    catapult_motor_1 = new WPI_VictorSPX(SHOOTER_MOTOR_PORT_1);
     shooter_1 = new DoubleSolenoid(SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
     // shooter_2 = new DoubleSolenoid(SHOOTER_PISTON_PORT_3, SHOOTER_PISTON_PORT_4);
   }
@@ -46,17 +45,20 @@ public class Catapult extends SubsystemBase {
   }
 
   // This function pushes the catapult piston forward.
-  public void pistonForward() {
+  public void extendPiston() {
     shooter_1.set(DoubleSolenoid.Value.kForward);
     // shooter_2.set(DoubleSolenoid.Value.kForward);
   }
 
   // This function pulls the catapult pistion back.
-  public void pistonReverse() {
+  public void retractPiston() {
     shooter_1.set(DoubleSolenoid.Value.kReverse);
     // shooter_2.set(DoubleSolenoid.Value.kReverse);
   }
-
+  // This function gets the current state of the piston
+  public DoubleSolenoid.Value getPistonState() {
+    return shooter_1.get();
+  }
   // TODO: Make limit switch (ASK SUFAN)
 
   @Override
