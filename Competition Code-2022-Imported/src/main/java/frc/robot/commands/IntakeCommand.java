@@ -20,8 +20,10 @@ public class IntakeCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    INTAKE.pistonForward();
+    // INTAKE.pistonForward();
+    System.out.println("Initialised");
     INTAKE.intake();
+    System.out.println("Initialised end");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -31,6 +33,7 @@ public class IntakeCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    System.out.println("end");
     INTAKE.off();
   }
 
