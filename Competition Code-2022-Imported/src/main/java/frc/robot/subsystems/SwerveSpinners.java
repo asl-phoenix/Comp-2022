@@ -14,7 +14,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 // import org.graalvm.compiler.asm.sparc.SPARCAssembler.Br;
 
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+// import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.motorcontrol.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.*;
@@ -27,7 +28,8 @@ public class SwerveSpinners extends SubsystemBase {
   public static final double SPEED_MULTIPLIER = 0.35;
   public static final double ROTATION_COEFFICIENT = 0.35;
   private WPI_TalonFX bRMotor, bLMotor, fRMotor, fLMotor;
-  private SpeedControllerGroup bR, bL, fR, fL;
+  // private SpeedControllerGroup bR, bL, fR, fL;
+  private MotorControllerGroup bR, bL, fR, fL;
 
   // This is the constructor for this subsytem.
 
@@ -38,10 +40,10 @@ public class SwerveSpinners extends SubsystemBase {
     bLMotor = new WPI_TalonFX(MOTOR_PORT_3);
     bRMotor = new WPI_TalonFX(MOTOR_PORT_4);
 
-    fR = new SpeedControllerGroup(fRMotor);
-    fL = new SpeedControllerGroup(fLMotor);
-    bR = new SpeedControllerGroup(bRMotor);
-    bL = new SpeedControllerGroup(bLMotor);
+    fR = new MotorControllerGroup(fRMotor);
+    fL = new MotorControllerGroup(fLMotor);
+    bR = new MotorControllerGroup(bRMotor);
+    bL = new MotorControllerGroup(bLMotor);
 
     limitMotorCurrent();
     configPID();

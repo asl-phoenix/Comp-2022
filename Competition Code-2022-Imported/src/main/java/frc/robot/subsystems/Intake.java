@@ -2,9 +2,10 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-// import edu.wpi.first.wpilibj.VictorSP;
+// import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import static frc.robot.Constants.*;
@@ -17,8 +18,8 @@ public class Intake extends SubsystemBase {
   // This is the constructor.
   public Intake() {
     rollerMotor = new WPI_TalonSRX(INTAKE_MOTOR_PORT);
-    intakePiston1 = new DoubleSolenoid(INTAKE_PISTON_PORT_1, INTAKE_PISTON_PORT_2);
-    intakePiston2 = new DoubleSolenoid(INTAKE_PISTON_PORT_3, INTAKE_PISTON_PORT_4);
+    intakePiston1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, INTAKE_PISTON_PORT_1, INTAKE_PISTON_PORT_2);
+    intakePiston2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, INTAKE_PISTON_PORT_3, INTAKE_PISTON_PORT_4);
   }
   /**
    * Sets the speed of the motor
