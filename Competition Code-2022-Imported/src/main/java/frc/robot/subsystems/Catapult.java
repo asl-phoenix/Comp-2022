@@ -28,8 +28,11 @@ public class Catapult extends SubsystemBase {
   // Constructor
   public Catapult() {
     catapult_motor_1 = new WPI_VictorSPX(SHOOTER_MOTOR_PORT_1);
-    shooter_1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
-    // shooter_2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, SHOOTER_PISTON_PORT_3, SHOOTER_PISTON_PORT_4);
+    shooter_1 =
+        new DoubleSolenoid(
+            PneumaticsModuleType.CTREPCM, SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
+    // shooter_2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, SHOOTER_PISTON_PORT_3,
+    // SHOOTER_PISTON_PORT_4);
   }
 
   /**
