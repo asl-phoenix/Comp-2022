@@ -21,9 +21,10 @@ import static frc.robot.Constants.*;
 public class RobotContainer {
 
   // == JOYSTICKS =//
+  
   public final Joystick shopper = new Joystick(DRIVER_CONTROLLER);
   public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
-
+  
   // == SUBSYSTEMS == //
 
   // Drivetrain Subs
@@ -38,7 +39,8 @@ public class RobotContainer {
   public final Catapult CATAPULT = new Catapult();
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
-
+  
+  
   // Auto Subs Access
   public SwerveSpinners getSpinners() {
     return SWERVESPINNERS;
@@ -75,6 +77,8 @@ public class RobotContainer {
       new JoystickButton(operator, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton =
       new JoystickButton(operator, RELEASECATAPULT_BUTTON);
+  public final JoystickButton retractCatapultButton =
+      new JoystickButton(operator, RETRACTCATAPULTBUTTON);
   public final JoystickButton alignCatapultButton =
       new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
 
@@ -90,6 +94,7 @@ public class RobotContainer {
   // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
+  public final Command retractCatapultCommand = new RetractShooterPistons(CATAPULT);
   public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
 
   // Climber Commands
@@ -135,8 +140,9 @@ public class RobotContainer {
     GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
 
     // Catapult
-    lowerCatapultButton.whenPressed(lowerCatapultCommand);
+    lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
+    retractCatapultButton.whenPressed(retractCatapultCommand);
     alignCatapultButton.whenHeld(alignCatapultCommand);
 
     // Intake
