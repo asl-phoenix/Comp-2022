@@ -23,8 +23,8 @@ public class ReleaseCatapultCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // For shooting we need to reverse the piston.
-    CATAPULT.pistonReverse();
+    // For shooting we need to extend the piston.
+    CATAPULT.extendPiston();
     // A variable is created for determining when we want to end command.
     startTime = System.currentTimeMillis();
   }
@@ -38,13 +38,13 @@ public class ReleaseCatapultCommand extends CommandBase {
   public void end(boolean interrupted) {
     // When the command ends, the piston is returned to its original position.
     // Therefore, the mechanism is now ready for lowering the catapult once more.
-    CATAPULT.pistonForward();
+    CATAPULT.retractPiston();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // This means that 5 seconds after the command is initialized, the command will end.
-    return (System.currentTimeMillis() - startTime) > 5000 * RELEASE_CATAPULT_TIME;
+    // This means that 1 second after the command is initialized, the command will end.
+    return (System.currentTimeMillis() - startTime) > 1000 * RELEASE_CATAPULT_TIME;
   }
 }
