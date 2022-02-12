@@ -21,10 +21,10 @@ import static frc.robot.Constants.*;
 public class RobotContainer {
 
   // == JOYSTICKS =//
-  
+
   public final Joystick shopper = new Joystick(DRIVER_CONTROLLER);
   public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
-  
+
   // == SUBSYSTEMS == //
 
   // Drivetrain Subs
@@ -39,8 +39,7 @@ public class RobotContainer {
   public final Catapult CATAPULT = new Catapult();
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
-  
-  
+
   // Auto Subs Access
   public SwerveSpinners getSpinners() {
     return SWERVESPINNERS;

@@ -11,6 +11,7 @@ import static frc.robot.Constants.*;
 public class RetractShooterPistons extends CommandBase {
   /** Creates a new RetractShooterPistons. */
   private Catapult catapult;
+
   public RetractShooterPistons(Catapult catapult) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(catapult);
@@ -19,8 +20,8 @@ public class RetractShooterPistons extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize(){
-    catapult.retractPiston(); 
+  public void initialize() {
+    catapult.retractPiston();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

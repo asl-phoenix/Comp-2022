@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 // import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 // import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 // import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
@@ -56,7 +55,7 @@ public class Catapult extends SubsystemBase {
     shooter_1.set(DoubleSolenoid.Value.kReverse);
     // shooter_2.set(DoubleSolenoid.Value.kReverse);
   }
-  //This function gets the current state of the piston
+  // This function gets the current state of the piston
   public DoubleSolenoid.Value getPistonState() {
     return shooter_1.get();
   }
