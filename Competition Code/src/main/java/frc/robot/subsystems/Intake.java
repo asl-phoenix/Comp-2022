@@ -32,16 +32,16 @@ public class Intake extends SubsystemBase {
   }
 
   // This method pushes the Intake piston forward.
-  /* public void pistonForward() {
+   public void pistonForward() {
     intakePiston1.set(DoubleSolenoid.Value.kForward);
     intakePiston2.set(DoubleSolenoid.Value.kForward);
-  }*/
+  }
 
   // This method pulls the Intake piston back.
-  /*public void pistonReverse() {
+  public void pistonReverse() {
     intakePiston1.set(DoubleSolenoid.Value.kReverse);
     intakePiston2.set(DoubleSolenoid.Value.kReverse);
-  }*/
+  }
 
   // This method checks if the pistons are engaged
   public boolean getPistonState() {

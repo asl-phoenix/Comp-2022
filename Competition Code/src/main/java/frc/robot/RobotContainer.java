@@ -93,7 +93,7 @@ public class RobotContainer {
   // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT, INTAKE);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
-  public final Command retractShooterCommand = new RetractShooterCommand(CATAPULT);
+  public final Command retractShooterCommand = new RetractShooterPistons(CATAPULT);
   public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
 
   // Climber Commands
