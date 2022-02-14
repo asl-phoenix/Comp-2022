@@ -37,7 +37,7 @@ public class Intake extends SubsystemBase {
   }
 
   // This method pushes the Intake piston forward.
-   public void pistonForward() {
+  public void pistonForward() {
     intakePiston1.set(DoubleSolenoid.Value.kForward);
     intakePiston2.set(DoubleSolenoid.Value.kForward);
   }
