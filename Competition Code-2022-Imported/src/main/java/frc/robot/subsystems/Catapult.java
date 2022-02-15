@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 // import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 // import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
@@ -22,7 +21,7 @@ public class Catapult extends SubsystemBase {
   private WPI_TalonSRX catapult_motor_1;
 
   // Pistons
-  private DoubleSolenoid shooter_1/*, shooter_2*/;
+  private DoubleSolenoid shooter_1 /*, shooter_2*/;
 
   // Constructor
   public Catapult() {
