@@ -53,7 +53,6 @@ public final class Constants {
   // == BUTTON CONSTANTS == //
 
   // Controller Buttons
-
   public static final int BUTTON_X = 3; // 1 on 001
   public static final int BUTTON_A = 1; // 2 on 001
   public static final int BUTTON_B = 2; // 3 on 001
