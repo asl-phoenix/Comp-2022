@@ -18,15 +18,21 @@ public class AutoSequence extends SequentialCommandGroup {
   public AutoSequence(
       SwerveRotaters rotators,
       SwerveSpinners spinners,
-      Gyro gyro,
+      Gyro gyro
+/*
+      ,
       Catapult catapult,
-      Intake intake) {
+      Intake intake
+*/
+      ) {
     // This is the sequential commands within our autonomous sequence
     gyroAuto = gyro;
     addCommands(
         new AutoMove(rotators, spinners, gyroAuto, 0, 150),
         new Rotate(rotators, spinners, gyro, 180),
         new AutoMove(rotators, spinners, gyro, 180, 150));
-    new ReleaseCatapultCommand(catapult, intake);
+/*
+        new ReleaseCatapultCommand(catapult, intake);
+*/
   }
 }

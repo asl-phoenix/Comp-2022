@@ -72,9 +72,13 @@ public class Robot extends TimedRobot {
         new AutoSequence(
             rCon.getRotaters(),
             rCon.getSpinners(),
-            rCon.getGyro(),
+            rCon.getGyro()
+/*
+            ,
             rCon.getCatapult(),
-            rCon.getIntake());
+            rCon.getIntake()
+*/
+            );
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
