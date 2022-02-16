@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-/* ==============MAIN============= */
+/* ==============SWERVE AND INTAKE TESTING============= */
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -33,12 +33,14 @@ public class RobotContainer {
 
   // Extra Subs
   public final Gyro GYRO = new Gyro();
+/*
   public final Pixy PIXY = new Pixy();
 
   // Mechanism Subs
   public final Catapult CATAPULT = new Catapult();
+*/
   public final Intake INTAKE = new Intake();
-  public final Climber CLIMBER = new Climber();
+  // public final Climber CLIMBER = new Climber();
 
   // Auto Subs Access
   public SwerveSpinners getSpinners() {
@@ -56,7 +58,7 @@ public class RobotContainer {
   public Intake getIntake() {
     return INTAKE;
   }
-
+/*
   public Climber getClimber() {
     return CLIMBER;
   }
@@ -64,7 +66,7 @@ public class RobotContainer {
   public Catapult getCatapult() {
     return CATAPULT;
   }
-
+*/
   // == BUTTONS == //
 
   // Intake
@@ -72,6 +74,7 @@ public class RobotContainer {
   public final JoystickButton raiseIntakeButton = new JoystickButton(operator, RAISE_INTAKE_BUTTON);
 
   // Catapult
+/*
   public final JoystickButton lowerCatapultButton =
       new JoystickButton(operator, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton =
@@ -83,13 +86,13 @@ public class RobotContainer {
 
   // Climber
   public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
-
+*/
   // == COMMANDS == //
 
   // Intake Commands
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
-
+/*
   // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT, INTAKE);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
@@ -98,7 +101,7 @@ public class RobotContainer {
 
   // Climber Commands
   public final Command climbSequence = new ClimbSequence(CLIMBER, SWERVEROTATERS, SWERVESPINNERS);
-
+*/
   // This constructs the robot container class.
   public RobotContainer() {
     configureButtonBindings();
@@ -139,16 +142,17 @@ public class RobotContainer {
     GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
 
     // Catapult
+/*
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
     // retractCatapultButton.whenPressed(retractShooterCommand);
     alignCatapultButton.whenHeld(alignCatapultCommand);
-
+*/
     // Intake
     intakeButton.whileHeld(intakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
 
     // Climber
-    climbButton.whenHeld(climbSequence);
+    // climbButton.whenHeld(climbSequence);
   }
 }
