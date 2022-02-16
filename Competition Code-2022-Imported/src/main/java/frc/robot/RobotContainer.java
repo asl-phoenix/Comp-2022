@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
+/* ==================CATAPULT AND INTAKE TESTING=============== */
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -28,16 +28,18 @@ public class RobotContainer {
   // == SUBSYSTEMS == //
 
   // Drivetrain Subs
+/*
   public final SwerveSpinners SWERVESPINNERS = new SwerveSpinners();
   public final SwerveRotaters SWERVEROTATERS = new SwerveRotaters();
 
   // Extra Subs
   public final Gyro GYRO = new Gyro();
   public final Pixy PIXY = new Pixy();
-
+*/
   // Mechanism Subs
   public final Catapult CATAPULT = new Catapult();
   public final Intake INTAKE = new Intake();
+/*
   public final Climber CLIMBER = new Climber();
 
   // Auto Subs Access
@@ -52,15 +54,15 @@ public class RobotContainer {
   public Gyro getGyro() {
     return GYRO;
   }
-
+*/
   public Intake getIntake() {
     return INTAKE;
   }
-
+/*
   public Climber getClimber() {
     return CLIMBER;
   }
-
+*/
   public Catapult getCatapult() {
     return CATAPULT;
   }
@@ -94,11 +96,12 @@ public class RobotContainer {
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT, INTAKE);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
   public final Command retractShooterCommand = new RetractShooterPistons(CATAPULT);
+/*
   public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
 
   // Climber Commands
   public final Command climbSequence = new ClimbSequence(CLIMBER, SWERVEROTATERS, SWERVESPINNERS);
-
+*/
   // This constructs the robot container class.
   public RobotContainer() {
     configureButtonBindings();
@@ -113,7 +116,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // == BUTTON BINDINGS == //
-
+/*
     // Swervedrive.exe
     SWERVEROTATERS.setDefaultCommand(
         new RunCommand(
@@ -137,18 +140,20 @@ public class RobotContainer {
                         GYRO.getYaw())),
             SWERVESPINNERS));
     GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
-
+*/
     // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
     // retractCatapultButton.whenPressed(retractShooterCommand);
-    alignCatapultButton.whenHeld(alignCatapultCommand);
+    // alignCatapultButton.whenHeld(alignCatapultCommand);
 
     // Intake
     intakeButton.whileHeld(intakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
 
     // Climber
+/*
     climbButton.whenHeld(climbSequence);
+*/
   }
 }
