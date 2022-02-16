@@ -99,7 +99,7 @@ public class RobotContainer {
   public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
 */
   // Climber Commands
-  public final Command climbSequence = new ClimbSequence(CLIMBER, SWERVEROTATERS, SWERVESPINNERS); //CHANGE THIS ISHAAN AND THE COMMAND FILE CORRESPONDING TO IT
+  public final Command climbSequence = new ClimbSequence(CLIMBER/*, SWERVEROTATERS, SWERVESPINNERS*/);
 
   // This constructs the robot container class.
   public RobotContainer() {

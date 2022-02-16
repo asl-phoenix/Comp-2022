@@ -24,7 +24,7 @@ public class ClimbSequence extends SequentialCommandGroup {
    * @param rotators
    * @param spinners
    */
-  public ClimbSequence(Climber climber, SwerveRotaters rotators, SwerveSpinners spinners) {
+  public ClimbSequence(Climber climber/*, SwerveRotaters rotators, SwerveSpinners spinners*/) {
     // This is the sequential commands for our climbing sequence
     this.climber = climber;
     T1 = 1.0;
@@ -43,8 +43,10 @@ public class ClimbSequence extends SequentialCommandGroup {
         new PowerTelescopingCommand(climber, 0),
         new WaitCommand(T2),
         //  The robot moves into position
+/*
         new MoveForward(rotators, spinners, T3),
         new WaitCommand(T4),
+*/
         // telescopings latch onto bar
         new PowerTelescopingCommand(climber, LOWPOWER),
         new WaitCommand(T5),
