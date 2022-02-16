@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
+/* =======================CLIMBER TESTING================= */
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -28,6 +28,7 @@ public class RobotContainer {
   // == SUBSYSTEMS == //
 
   // Drivetrain Subs
+/*
   public final SwerveSpinners SWERVESPINNERS = new SwerveSpinners();
   public final SwerveRotaters SWERVEROTATERS = new SwerveRotaters();
 
@@ -38,8 +39,9 @@ public class RobotContainer {
   // Mechanism Subs
   public final Catapult CATAPULT = new Catapult();
   public final Intake INTAKE = new Intake();
+*/
   public final Climber CLIMBER = new Climber();
-
+/*
   // Auto Subs Access
   public SwerveSpinners getSpinners() {
     return SWERVESPINNERS;
@@ -56,15 +58,15 @@ public class RobotContainer {
   public Intake getIntake() {
     return INTAKE;
   }
-
+*/
   public Climber getClimber() {
     return CLIMBER;
   }
-
+/*
   public Catapult getCatapult() {
     return CATAPULT;
   }
-
+*/
   // == BUTTONS == //
 
   // Intake
@@ -85,7 +87,7 @@ public class RobotContainer {
   public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
 
   // == COMMANDS == //
-
+/*
   // Intake Commands
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
@@ -95,9 +97,9 @@ public class RobotContainer {
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
   public final Command retractShooterCommand = new RetractShooterPistons(CATAPULT);
   public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
-
+*/
   // Climber Commands
-  public final Command climbSequence = new ClimbSequence(CLIMBER, SWERVEROTATERS, SWERVESPINNERS);
+  public final Command climbSequence = new ClimbSequence(CLIMBER, SWERVEROTATERS, SWERVESPINNERS); //CHANGE THIS ISHAAN AND THE COMMAND FILE CORRESPONDING TO IT
 
   // This constructs the robot container class.
   public RobotContainer() {
@@ -115,6 +117,7 @@ public class RobotContainer {
     // == BUTTON BINDINGS == //
 
     // Swervedrive.exe
+/*
     SWERVEROTATERS.setDefaultCommand(
         new RunCommand(
             () ->
@@ -147,7 +150,7 @@ public class RobotContainer {
     // Intake
     intakeButton.whileHeld(intakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
-
+*/
     // Climber
     climbButton.whenHeld(climbSequence);
   }
