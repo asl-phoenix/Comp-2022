@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-/* =======================CLIMBER TESTING================= */
+/* =====================CLIMBER TESTING================= */
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -20,7 +20,7 @@ import static frc.robot.Constants.*;
 
 public class RobotContainer {
 
-  // == JOYSTICKS =//
+  // == JOYSTICKS == //
 
   public final Joystick shopper = new Joystick(DRIVER_CONTROLLER);
   public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
