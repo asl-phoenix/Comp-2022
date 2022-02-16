@@ -56,9 +56,11 @@ public class RobotContainer {
   public Intake getIntake() {
     return INTAKE;
   }
+
   public Climber getClimber() {
     return CLIMBER;
   }
+
   public Catapult getCatapult() {
     return CATAPULT;
   }
