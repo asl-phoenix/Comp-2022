@@ -28,15 +28,17 @@ public class RobotContainer {
   // == SUBSYSTEMS == //
 
   // Drivetrain Subs
+/*
   public final SwerveSpinners SWERVESPINNERS = new SwerveSpinners();
   public final SwerveRotaters SWERVEROTATERS = new SwerveRotaters();
 
   // Extra Subs
   public final Gyro GYRO = new Gyro();
   public final Pixy PIXY = new Pixy();
-
+*/
   // Mechanism Subs
   public final Catapult CATAPULT = new Catapult();
+/*
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
 
@@ -60,7 +62,7 @@ public class RobotContainer {
   public Climber getClimber() {
     return CLIMBER;
   }
-
+*/
   public Catapult getCatapult() {
     return CATAPULT;
   }
@@ -85,20 +87,22 @@ public class RobotContainer {
   public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
 
   // == COMMANDS == //
-
+/*
   // Intake Commands
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
 
   // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT, INTAKE);
+*/
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
   public final Command retractShooterCommand = new RetractShooterPistons(CATAPULT);
+/*
   public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
 
   // Climber Commands
   public final Command climbSequence = new ClimbSequence(CLIMBER, SWERVEROTATERS, SWERVESPINNERS);
-
+*/
   // This constructs the robot container class.
   public RobotContainer() {
     configureButtonBindings();
@@ -115,6 +119,7 @@ public class RobotContainer {
     // == BUTTON BINDINGS == //
 
     // Swervedrive.exe
+/*
     SWERVEROTATERS.setDefaultCommand(
         new RunCommand(
             () ->
@@ -137,11 +142,12 @@ public class RobotContainer {
                         GYRO.getYaw())),
             SWERVESPINNERS));
     GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
-
+*/
     // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
-    releaseCatapultButton.whenPressed(releaseCatapultCommand);
-    // retractCatapultButton.whenPressed(retractShooterCommand);
+    // releaseCatapultButton.whenPressed(releaseCatapultCommand);
+    retractCatapultButton.whenPressed(retractShooterCommand);
+/*
     alignCatapultButton.whenHeld(alignCatapultCommand);
 
     // Intake
@@ -150,5 +156,6 @@ public class RobotContainer {
 
     // Climber
     climbButton.whenHeld(climbSequence);
+*/
   }
 }

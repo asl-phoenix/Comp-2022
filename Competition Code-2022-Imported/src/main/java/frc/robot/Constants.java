@@ -47,8 +47,8 @@ public final class Constants {
   // === CONTROLLER === //
 
   // Controller Constants
-  public static final int DRIVER_CONTROLLER = 0; // change back to 0
-  public static final int OPERATOR_CONTROLLER = 1; // change back to 1
+  public static final int DRIVER_CONTROLLER = 1; // change back to 0
+  public static final int OPERATOR_CONTROLLER = 0; // change back to 1
 
   // == BUTTON CONSTANTS == //
 
