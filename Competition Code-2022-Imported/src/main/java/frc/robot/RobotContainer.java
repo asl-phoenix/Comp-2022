@@ -38,9 +38,9 @@ public class RobotContainer {
 
   // Mechanism Subs
   // public final Catapult CATAPULT = new Catapult();
-  // public final Intake INTAKE = new Intake();
+  public final Intake INTAKE = new Intake();
 
- public final Climber CLIMBER = new Climber();
+  public final Climber CLIMBER = new Climber();
 /*
   // Auto Subs Access
   public SwerveSpinners getSpinners() {
@@ -68,11 +68,11 @@ public class RobotContainer {
   }
 */
   // == BUTTONS == //
-/*
+
   // Intake
   public final JoystickButton intakeButton = new JoystickButton(shopper, INTAKE_BUTTON);
   public final JoystickButton raiseIntakeButton = new JoystickButton(operator, RAISE_INTAKE_BUTTON);
-
+/*
   // Catapult
   public final JoystickButton lowerCatapultButton =
       new JoystickButton(operator, LOWERCATAPULT_BUTTON);
@@ -92,11 +92,11 @@ public class RobotContainer {
   
 
   // == COMMANDS == //
-/*
+
   // Intake Commands
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
-
+/*
   // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT, INTAKE);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
@@ -104,10 +104,10 @@ public class RobotContainer {
   public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
 */
   // Climber Commands
-  public final Command climbSequence = new ClimbSequence(CLIMBER/*, SWERVEROTATERS, SWERVESPINNERS*/);
-  public final Command extendCommand = new PowerTelescopingCommand(CLIMBER, 0);
-  public final Command retractCommand = new PowerTelescopingCommand(CLIMBER, HIGHPOWER);
-  public final Command stayCommand = new PowerTelescopingCommand(CLIMBER, MIDPOWER);
+  //public final Command climbSequence = new ClimbSequence(CLIMBER/*, SWERVEROTATERS, SWERVESPINNERS*/);
+  public final Command extendCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, -MIDPOWER);
+  public final Command retractCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, MIDPOWER);
+  //public final Command stayCommand = new PowerTelescopingCommand(CLIMBER, 0);
 
   // This constructs the robot container class.
   public RobotContainer() {
@@ -157,14 +157,14 @@ public class RobotContainer {
     // retractCatapultButton.whenPressed(retractShooterCommand);
     alignCatapultButton.whenHeld(alignCatapultCommand);
     */
-    /* Intake
+    // Intake
     intakeButton.whileHeld(intakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
-    */
+    
     // Climber
     //climbButton.whenHeld(climbSequence);
     extend.whenHeld(extendCommand);
     retract.whenHeld(retractCommand);
-    stay.whenHeld(stayCommand);
+    //stay.whenHeld(stayCommand);
   }
 }
