@@ -21,7 +21,6 @@ import frc.robot.commands.AutomatedCommands.*;
  */
 public class Robot extends TimedRobot {
 
-
   private Command m_autonomousCommand;
   private Command driveForward;
   private Command climbChild;
@@ -87,12 +86,9 @@ public class Robot extends TimedRobot {
     }
   }
 
-
-  
-  public void getAutoCommand () {
+  public void getAutoCommand() {
     m_autonomousCommand = autoChooser.getSelected();
   }
-  
 
   /** This function is called periodically during autonomous. */
   @Override
@@ -125,7 +121,13 @@ public class Robot extends TimedRobot {
 
   public void initailizeAutoChooser() {
     climbChild = new ClimbSequence(rCon.getClimber(), rCon.getRotaters(), rCon.getSpinners());
-    driveForward = new AutoSequence(rCon.getRotaters(), rCon.getSpinners(), rCon.getGyro(), rCon.getCatapult(), rCon.getIntake());
+    driveForward =
+        new AutoSequence(
+            rCon.getRotaters(),
+            rCon.getSpinners(),
+            rCon.getGyro(),
+            rCon.getCatapult(),
+            rCon.getIntake());
     autoChooser.addOption("Climb Squence", climbChild);
     autoChooser.addOption("Drive Forward", driveForward);
   }
