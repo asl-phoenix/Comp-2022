@@ -88,8 +88,6 @@ public class RobotContainer {
   public final JoystickButton extend = new JoystickButton(operator, BUTTON_A);
   public final JoystickButton retract = new JoystickButton(operator, BUTTON_X);
   public final JoystickButton stay = new JoystickButton(operator, BUTTON_Y);
-  
-  
 
   // == COMMANDS == //
 
@@ -105,10 +103,11 @@ public class RobotContainer {
   public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
   // Climber Commands
   */
-  //public final Command climbSequence = new ClimbSequence(CLIMBER/*, SWERVEROTATERS, SWERVESPINNERS);
+  // public final Command climbSequence = new ClimbSequence(CLIMBER/*, SWERVEROTATERS,
+  // SWERVESPINNERS);
   public final Command extendCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, -1);
   public final Command retractCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, 1);
-  //public final Command stayCommand = new PowerTelescopingCommand(CLIMBER, 0);
+  // public final Command stayCommand = new PowerTelescopingCommand(CLIMBER, 0);
 
   // This constructs the robot container class.
   public RobotContainer() {
@@ -159,15 +158,15 @@ public class RobotContainer {
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
     // retractCatapultButton.whenPressed(retractShooterCommand);
     // alignCatapultButton.whenHeld(alignCatapultCommand);
-    
+
     // Intake
     // intakeButton.whileHeld(intakeCommand);
     // raiseIntakeButton.whenPressed(raiseIntakeCommand);
-    
+
     // Climber
-    //climbButton.whenHeld(climbSequence);
+    // climbButton.whenHeld(climbSequence);
     extend.whenHeld(extendCommand);
     retract.whenHeld(retractCommand);
-    //stay.whenHeld(stayCommand);
+    // stay.whenHeld(stayCommand);
   }
 }
