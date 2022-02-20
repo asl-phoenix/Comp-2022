@@ -26,24 +26,13 @@ public class LowerCatapultCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter_piston_state = CATAPULT.getPistonState();
-    if (shooter_piston_state == DoubleSolenoid.Value.kOff
-        || shooter_piston_state == DoubleSolenoid.Value.kForward) {
-      CATAPULT.retractPiston();
-      piston_retracted = true;
-      retractTimer = System.currentTimeMillis();
-    }
+    CATAPULT.retractPiston();
+    CATAPULT.setSpeed();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    if (piston_retracted && System.currentTimeMillis() - retractTimer > 1000) {
-      CATAPULT.setSpeed();
-    } else if (!piston_retracted) {
-      CATAPULT.setSpeed();
-    }
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override

@@ -49,13 +49,13 @@ public class Catapult extends SubsystemBase {
 
   // This function pushes the catapult piston forward.
   public void extendPiston() {
-    shooter_1.set(kForward);
+    shooter_1.set(DoubleSolenoid.Value.kForward);
     // shooter_2.set(DoubleSolenoid.Value.kForward);
   }
 
   // This function pulls the catapult pistion back.
   public void retractPiston() {
-    shooter_1.set(kReverse);
+    shooter_1.set(DoubleSolenoid.Value.kReverse);
     // shooter_2.set(DoubleSolenoid.Value.kReverse);
   }
   // This function gets the current state of the piston
