@@ -23,10 +23,8 @@ public final class Constants {
 
   // Intake Ports
   public static final int INTAKE_MOTOR_PORT = 10;
-  public static final int INTAKE_PISTON_PORT_1 = 6; // CHECK
-  public static final int INTAKE_PISTON_PORT_2 = 7;
-  public static final int INTAKE_PISTON_PORT_3 = 10;
-  public static final int INTAKE_PISTON_PORT_4 = 11;
+  public static final int INTAKE_PISTON_PORT_1 = 5;
+  public static final int INTAKE_PISTON_PORT_2 = 4;
 
   // Climber Ports
   public static final int TELESCOPE_PORT_1 = 12;
@@ -36,10 +34,8 @@ public final class Constants {
 
   // Catapult Ports
   public static final int SHOOTER_MOTOR_PORT_1 = 11;
-  public static final int SHOOTER_PISTON_PORT_1 = 4;
-  public static final int SHOOTER_PISTON_PORT_2 = 5;
-  public static final int SHOOTER_PISTON_PORT_3 = 3; // CCONFIRM LATER UNTESTED
-  public static final int SHOOTER_PISTON_PORT_4 = 2;
+  public static final int SHOOTER_PISTON_PORT_1 = 6;
+  public static final int SHOOTER_PISTON_PORT_2 = 7;
 
   // Gyro Port
   public static final int GYRO_PORT = 9;
@@ -47,8 +43,8 @@ public final class Constants {
   // === CONTROLLER === //
 
   // Controller Constants
-  public static final int DRIVER_CONTROLLER = 1; // change back to 0
-  public static final int OPERATOR_CONTROLLER = 0; // change back to 1
+  public static final int DRIVER_CONTROLLER = 0; // change back to 0
+  public static final int OPERATOR_CONTROLLER = 1; // change back to 1
 
   // == BUTTON CONSTANTS == //
 
@@ -75,8 +71,8 @@ public final class Constants {
 
   // Catapult
   public static final int LOWERCATAPULT_BUTTON = BUTTON_X;
-  public static final int RELEASECATAPULT_BUTTON = BUTTON_Y;
-  public static final int RETRACTCATAPULTBUTTON = BUTTON_B;
+  public static final int RELEASECATAPULT_BUTTON = BUTTON_B;
+  public static final int RETRACTCATAPULTBUTTON = BUTTON_Y;
   public static final int ALIGNCATAPULT_BUTTON = BUTTON_A;
 
   // Climber
@@ -93,7 +89,7 @@ public final class Constants {
   // Speed constants
   public static final double INTAKE_SPEED = -0.5;
   public static final double SHOOTER_PISTON_SPEED = 0.5;
-  public static final double CATAPULT_SPEED = 0.9;
+  public static final double CATAPULT_SPEED = 0.3;
 
   // Time Constants
   public static final double WIND_CATAPULT_TIME = 4;
