@@ -6,7 +6,6 @@ package frc.robot.commands.AutomatedCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.PowerTelescopingCommand;
 import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
 
@@ -37,22 +36,22 @@ public class ClimbSequence extends SequentialCommandGroup {
 
     addCommands(
         // The telescoping is initialized
-        new PowerTelescopingCommand(climber, TELESCOPING_INITIALIZE),
-        new WaitCommand(T1),
+        // new PowerTelescopingCommand(climber, TELESCOPING_INITIALIZE),
+        // new WaitCommand(T1),
         // The telescopings are let to max height
-        new PowerTelescopingCommand(climber, 0),
+        // new PowerTelescopingCommand(climber, 0),
         new WaitCommand(T2),
         //  The robot moves into position
         new MoveForward(rotators, spinners, T3),
         new WaitCommand(T4),
         // telescopings latch onto bar
-        new PowerTelescopingCommand(climber, LOWPOWER),
+        // new PowerTelescopingCommand(climber, LOWPOWER),
         new WaitCommand(T5),
         // more power to telescoping to lift robot
-        new PowerTelescopingCommand(climber, HIGHPOWER),
+        // new PowerTelescopingCommand(climber, HIGHPOWER),
         new WaitCommand(T6),
         // power set to keep the robot where it is
-        new PowerTelescopingCommand(climber, MIDPOWER),
+        // new PowerTelescopingCommand(climber, MIDPOWER),
         new WaitCommand(T7));
 
     // Is this necessary? TODO: Review this.
