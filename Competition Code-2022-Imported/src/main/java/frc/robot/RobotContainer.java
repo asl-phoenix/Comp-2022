@@ -33,12 +33,12 @@ public class RobotContainer {
 
   // Extra Subs
   public final Gyro GYRO = new Gyro();
-/*
-  public final Pixy PIXY = new Pixy();
-*/
+  /*
+    public final Pixy PIXY = new Pixy();
+  */
   // Mechanism Subs
   public final Catapult CATAPULT = new Catapult();
-  
+
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
   public final CompressorF COMPRESSOR = new CompressorF();
@@ -76,11 +76,10 @@ public class RobotContainer {
 
   // Catapult
 
-
   public final JoystickButton lowerCatapultButton =
-       new JoystickButton(operator, LOWERCATAPULT_BUTTON);
+      new JoystickButton(operator, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton =
-       new JoystickButton(operator, RELEASECATAPULT_BUTTON);
+      new JoystickButton(operator, RELEASECATAPULT_BUTTON);
   // public final JoystickButton alignCatapultButton =
   //     new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
 
@@ -90,7 +89,7 @@ public class RobotContainer {
   // == COMMANDS == //
 
   // Intake Commands
-  
+
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
   // Catapult Commands
@@ -98,13 +97,12 @@ public class RobotContainer {
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
 
   /*
-  public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
-  // Climber Commands
-  public final Command climbSequence = new ClimbSequence(CLIMBER, SWERVEROTATERS, SWERVESPINNERS);
-*/
+    public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
+    // Climber Commands
+    public final Command climbSequence = new ClimbSequence(CLIMBER, SWERVEROTATERS, SWERVESPINNERS);
+  */
   public final Command highClimberCommand = new PowerTelescopingCommand(CLIMBER, HIGHPOWER);
   public final Command lowClimberCommand = new PowerTelescopingCommand(CLIMBER, LOWPOWER);
-
 
   // This constructs the robot container class.
   public RobotContainer() {
@@ -144,23 +142,23 @@ public class RobotContainer {
                         GYRO.getYaw())),
             SWERVESPINNERS));
     GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
-    //COMPRESSOR.setDefaultCommand( new RunCommand(() -> COMPRESSOR.getSetCompressorStatus(), COMPRESSOR));
+    // COMPRESSOR.setDefaultCommand( new RunCommand(() -> COMPRESSOR.getSetCompressorStatus(),
+    // COMPRESSOR));
     CLIMBER.setDefaultCommand(
-      new RunCommand(
-        () ->
-          CLIMBER.supplyTelescoping(operator.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS)),
-        CLIMBER));
+        new RunCommand(
+            () -> CLIMBER.supplyTelescoping(operator.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS)),
+            CLIMBER));
     // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
-    //alignCatapultButton.whenHeld(alignCatapultCommand);
+    // alignCatapultButton.whenHeld(alignCatapultCommand);
 
     // Intake
     intakeButton.whileHeld(intakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
 
     // Climber
-    //climbButton.whenHeld(highClimberCommand);
+    // climbButton.whenHeld(highClimberCommand);
 
   }
 }

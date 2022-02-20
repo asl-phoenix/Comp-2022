@@ -72,7 +72,7 @@ public final class Constants {
   // Catapult
   public static final int LOWERCATAPULT_BUTTON = BUTTON_X;
   public static final int RELEASECATAPULT_BUTTON = BUTTON_B;
-  //public static final int RETRACTCATAPULTBUTTON = BUTTON_Y;
+  // public static final int RETRACTCATAPULTBUTTON = BUTTON_Y;
   public static final int ALIGNCATAPULT_BUTTON = BUTTON_A;
 
   // Climber

@@ -61,7 +61,7 @@ public class SwerveRotaters extends SubsystemBase {
     fLRotater.setSelectedSensorPosition(0);
     bLRotater.setSelectedSensorPosition(0);
     bRRotater.setSelectedSensorPosition(0);
-    System.out.println(fRRotater.getSelectedSensorPosition());  
+    System.out.println(fRRotater.getSelectedSensorPosition());
   }
 
   // This function limits the current that each motor is drawing
@@ -138,7 +138,7 @@ public class SwerveRotaters extends SubsystemBase {
 
   public void PrintEncoderValues() {
     System.out.println("FRR: " + fRRotater.getSelectedSensorPosition());
-    System.out.println("FRL: "  + fLRotater.getSelectedSensorPosition());
+    System.out.println("FRL: " + fLRotater.getSelectedSensorPosition());
     System.out.println("BRR : " + bRRotater.getSelectedSensorPosition());
     System.out.println("BLR: " + bLRotater.getSelectedSensorPosition());
   }

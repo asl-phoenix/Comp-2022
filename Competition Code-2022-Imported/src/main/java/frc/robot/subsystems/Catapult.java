@@ -29,7 +29,7 @@ public class Catapult extends SubsystemBase {
     shooter_1 =
         new DoubleSolenoid(
             PneumaticsModuleType.CTREPCM, SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
-    //shooter_1.set(kForward);
+    // shooter_1.set(kForward);
     // shooter_2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, SHOOTER_PISTON_PORT_3,
     // SHOOTER_PISTON_PORT_4);
   }
