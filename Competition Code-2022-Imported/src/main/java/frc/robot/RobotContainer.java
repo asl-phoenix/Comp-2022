@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-/* ====================SWERVE/SWERVE-AUTO TESTING==================== */
+/* ====================MAIN============================*/
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -20,7 +20,7 @@ import static frc.robot.Constants.*;
 
 public class RobotContainer {
 
-  // == JOYSTICKS =//
+  // == JOYSTICKS == //
 
   public final Joystick shopper = new Joystick(DRIVER_CONTROLLER);
   public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
@@ -80,12 +80,17 @@ public class RobotContainer {
   public final JoystickButton lowerCatapultButton =
        new JoystickButton(operator, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton =
-       new JoystickButton(operator, RELEASECATAPULT_BUTTON);
+      new JoystickButton(operator, RELEASECATAPULT_BUTTON);
   // public final JoystickButton alignCatapultButton =
   //     new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
 
   // Climber
-  public final JoystickButton highClimbB = new JoystickButton(operator, CLIMB_BUTTON);
+  public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
+  public final JoystickButton extend = new JoystickButton(operator, BUTTON_A);
+  public final JoystickButton retract = new JoystickButton(operator, BUTTON_X);
+  public final JoystickButton stay = new JoystickButton(operator, BUTTON_Y);
+  
+  
 
   // == COMMANDS == //
 
@@ -100,11 +105,11 @@ public class RobotContainer {
   /*
   public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
   // Climber Commands
-  public final Command climbSequence = new ClimbSequence(CLIMBER, SWERVEROTATERS, SWERVESPINNERS);
-*/
-  public final Command highClimberCommand = new PowerTelescopingCommand(CLIMBER, HIGHPOWER);
-  public final Command lowClimberCommand = new PowerTelescopingCommand(CLIMBER, LOWPOWER);
-
+  */
+  //public final Command climbSequence = new ClimbSequence(CLIMBER/*, SWERVEROTATERS, SWERVESPINNERS);
+  public final Command extendCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, -1);
+  public final Command retractCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, 1);
+  //public final Command stayCommand = new PowerTelescopingCommand(CLIMBER, 0);
 
   // This constructs the robot container class.
   public RobotContainer() {
@@ -153,14 +158,17 @@ public class RobotContainer {
     // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
-    //alignCatapultButton.whenHeld(alignCatapultCommand);
-
+    // retractCatapultButton.whenPressed(retractShooterCommand);
+    // alignCatapultButton.whenHeld(alignCatapultCommand);
+    
     // Intake
-    intakeButton.whileHeld(intakeCommand);
-    raiseIntakeButton.whenPressed(raiseIntakeCommand);
-
+    // intakeButton.whileHeld(intakeCommand);
+    // raiseIntakeButton.whenPressed(raiseIntakeCommand);
+    
     // Climber
-    //climbButton.whenHeld(highClimberCommand);
-
+    //climbButton.whenHeld(climbSequence);
+    extend.whenHeld(extendCommand);
+    retract.whenHeld(retractCommand);
+    //stay.whenHeld(stayCommand);
   }
 }
