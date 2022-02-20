@@ -11,6 +11,7 @@ import frc.robot.subsystems.Intake;
 import static frc.robot.Constants.*;
 
 import static frc.robot.Constants.*;
+
 public class PowerTelescopingCommand extends CommandBase {
   // Creates a new Command for extending Telescoping/Primary Climbing Arms
   private Climber CLIMBER;

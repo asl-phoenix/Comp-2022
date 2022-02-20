@@ -1,4 +1,3 @@
-
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -10,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.*;
 
-
 public class CompressorF extends SubsystemBase {
   /** Creates a new Compressor. */
   private Compressor pcmCompressor;
@@ -19,9 +17,8 @@ public class CompressorF extends SubsystemBase {
     pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   }
 
-
-  public void getSetCompressorStatus(){
-    //pcmCompressor.disable();
+  public void getSetCompressorStatus() {
+    // pcmCompressor.disable();
     System.out.println(pcmCompressor.enabled());
   }
 
@@ -29,6 +26,4 @@ public class CompressorF extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
-
-
 }

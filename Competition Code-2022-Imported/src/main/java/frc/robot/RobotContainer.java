@@ -33,12 +33,12 @@ public class RobotContainer {
 
   // Extra Subs
   public final Gyro GYRO = new Gyro();
-/*
-  public final Pixy PIXY = new Pixy();
-*/
+  /*
+    public final Pixy PIXY = new Pixy();
+  */
   // Mechanism Subs
   public final Catapult CATAPULT = new Catapult();
-  
+
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
   public final CompressorF COMPRESSOR = new CompressorF();
@@ -76,9 +76,8 @@ public class RobotContainer {
 
   // Catapult
 
-
   public final JoystickButton lowerCatapultButton =
-       new JoystickButton(operator, LOWERCATAPULT_BUTTON);
+      new JoystickButton(operator, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton =
       new JoystickButton(operator, RELEASECATAPULT_BUTTON);
   // public final JoystickButton alignCatapultButton =
@@ -95,7 +94,7 @@ public class RobotContainer {
   // == COMMANDS == //
 
   // Intake Commands
-  
+
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
   // Catapult Commands
@@ -149,12 +148,12 @@ public class RobotContainer {
                         GYRO.getYaw())),
             SWERVESPINNERS));
     GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
-    //COMPRESSOR.setDefaultCommand( new RunCommand(() -> COMPRESSOR.getSetCompressorStatus(), COMPRESSOR));
+    // COMPRESSOR.setDefaultCommand( new RunCommand(() -> COMPRESSOR.getSetCompressorStatus(),
+    // COMPRESSOR));
     CLIMBER.setDefaultCommand(
-      new RunCommand(
-        () ->
-          CLIMBER.supplyTelescoping(operator.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS)),
-        CLIMBER));
+        new RunCommand(
+            () -> CLIMBER.supplyTelescoping(operator.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS)),
+            CLIMBER));
     // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
