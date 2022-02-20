@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 
+import static frc.robot.Constants.*;
 public class PowerTelescopingCommand extends CommandBase {
   // Creates a new Command for extending Telescoping/Primary Climbing Arms
   private Climber CLIMBER;
@@ -31,7 +32,9 @@ public class PowerTelescopingCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted){
+    CLIMBER.supplyTelescoping(MIDPOWER);
+  }
 
   // Returns true when the command should end.
   @Override
