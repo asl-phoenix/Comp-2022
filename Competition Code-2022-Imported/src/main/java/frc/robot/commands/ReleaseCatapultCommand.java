@@ -54,10 +54,10 @@ public class ReleaseCatapultCommand extends CommandBase {
   @Override
   public boolean isFinished() {
     // Only checks if the intake pistons are down, which means that the catapult has fired
-    //if (INTAKE.getPistonState()) {
-      // This means that 1 second after the command is initialized, the command will end.
-      return (System.currentTimeMillis() - startTime) > 3000;
-    //}
-    //return false;
+    // if (INTAKE.getPistonState()) {
+    // This means that 1 second after the command is initialized, the command will end.
+    return (System.currentTimeMillis() - startTime) > 3000;
+    // }
+    // return false;
   }
 }
