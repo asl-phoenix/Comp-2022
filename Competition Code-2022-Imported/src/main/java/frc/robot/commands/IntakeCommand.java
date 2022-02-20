@@ -20,10 +20,10 @@ public class IntakeCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // INTAKE.pistonForward();
     System.out.println("Initialised");
     INTAKE.intake();
     System.out.println("Initialised end");
+    INTAKE.pistonForward();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
