@@ -115,7 +115,7 @@ public final class Constants {
   // Auto Constants
   public static final double ROTATOR_ERROR_TOLERANCE = 100;
   public static final double SPINNER_ERROR_TOLERANCE = 10;
-  public static final double ANGLE_ERROR_TOLERANCE = 10;
+  public static final double ANGLE_ERROR_TOLERANCE = 2.5;
   public static final double AUTO_ROTATE_SPEED = 0.15;
   public static final double AUTO_ALIGN_SPEED = 0.1;
   public static final double AUTO_ALIGN_ERROR = 5;
