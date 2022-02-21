@@ -41,7 +41,7 @@ public class RobotContainer {
 
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
-  public final CompressorF COMPRESSOR = new CompressorF();
+  // public final CompressorF COMPRESSOR = new CompressorF();
 
   // Auto Subs Access
   public SwerveSpinners getSpinners() {
@@ -160,8 +160,8 @@ public class RobotContainer {
     // alignCatapultButton.whenHeld(alignCatapultCommand);
 
     // Intake
-    // intakeButton.whileHeld(intakeCommand);
-    // raiseIntakeButton.whenPressed(raiseIntakeCommand);
+    intakeButton.whileHeld(intakeCommand);
+    raiseIntakeButton.whenPressed(raiseIntakeCommand);
 
     // Climber
     // climbButton.whenHeld(climbSequence);

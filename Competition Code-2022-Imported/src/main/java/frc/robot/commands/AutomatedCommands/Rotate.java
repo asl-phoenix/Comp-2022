@@ -60,10 +60,10 @@ public class Rotate extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (gyro.getGyroState() == 1) gyroReady = true;
-    gyro.getState(); // Debugging
+    // if (gyro.getGyroState() == 1) gyroReady = true;
+    // gyro.getState(); // Debugging
     rotators.setWheelDirection(fR, fL, bR, bL);
-    if (rotators.reachedPosition(fR, fL, bR, bL) && gyroReady) {
+    if (rotators.reachedPosition(fR, fL, bR, bL) && gyro.getGyroState() == 1) { // State for Gyro 1 is ready
       spinners.runSpinners(AUTO_ROTATE_SPEED * turnDirection);
     } else {
       spinners.stop();

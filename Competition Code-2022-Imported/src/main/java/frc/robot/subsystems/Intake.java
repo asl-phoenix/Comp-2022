@@ -12,7 +12,7 @@ import static frc.robot.Constants.*;
 
 public class Intake extends SubsystemBase {
   // These are the variables that need to be created for Intake.
-  private DoubleSolenoid intakePiston1, intakePiston2;
+  private DoubleSolenoid intakePiston1;
   private WPI_TalonSRX rollerMotor;
 
   // This is the constructor.

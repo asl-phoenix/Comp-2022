@@ -73,7 +73,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    /*
+    
     m_autonomousCommand =
         new AutoSequence(
             rCon.getRotaters(),
@@ -81,17 +81,17 @@ public class Robot extends TimedRobot {
             rCon.getGyro(),
             rCon.getCatapult(),
             rCon.getIntake());
-    */
+    
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
   }
-
+/*
   public void getAutoCommand() {
     m_autonomousCommand = autoChooser.getSelected();
   }
-
+*/
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {}
@@ -120,7 +120,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
-
+/*
   public void initailizeAutoChooser() {
     climbChild = new ClimbSequence(rCon.getClimber(), rCon.getRotaters(), rCon.getSpinners());
     driveForward =
@@ -133,4 +133,5 @@ public class Robot extends TimedRobot {
     autoChooser.addOption("Climb Squence", climbChild);
     autoChooser.addOption("Drive Forward", driveForward);
   }
+  */
 }

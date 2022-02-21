@@ -47,7 +47,7 @@ public class AutoMove extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    rotators.setWheelDirection(fR, fL, bR, bL);
+    // rotators.setWheelDirection(fR, fL, bR, bL);
     if (rotators.reachedPosition(fR, fL, bR, bL)) {
       spinners.driveDistance(pulsesDistance);
     }
@@ -58,12 +58,13 @@ public class AutoMove extends CommandBase {
   public void end(boolean interrupted) {
     rotators.stop();
     spinners.stop();
-    System.out.println("Finished");
+    System.out.println("You opened the box, I came");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return spinners.reachedPosition(pulsesDistance);
+    // return spinners.reachedPosition(pulsesDistance);
+    return false;
   }
 }
