@@ -75,7 +75,6 @@ public final class Constants {
   public static final int RELEASECATAPULT_BUTTON = BUTTON_B;
   // public static final int ALIGNCATAPULT_BUTTON = BUTTON_A;
 
-
   // Climber
   public static final int CLIMB_BUTTON = BUTTON_Y;
 

@@ -375,8 +375,7 @@ public class SwerveRotaters extends SubsystemBase {
         && motor.getSelectedSensorPosition() > d - ROTATOR_ERROR_TOLERANCE;
   }
 
-
-  public void printEncodersRotaters(){
+  public void printEncodersRotaters() {
     System.out.println("FRR " + fRRotater.getSelectedSensorPosition());
     System.out.println("FLR: " + fLRotater.getSelectedSensorPosition());
     System.out.println("BLR: " + bLRotater.getSelectedSensorPosition());

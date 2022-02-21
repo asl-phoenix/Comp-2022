@@ -161,8 +161,7 @@ public class SwerveSpinners extends SubsystemBase {
     return GEAR_RATIO_SPINNER * UNITS_PER_ROTATION * cm / (WHEEL_DIAMETER_INCHES * 2.54 * Math.PI);
   }
 
-
-  public void printEncodersSpinners(){
+  public void printEncodersSpinners() {
     System.out.println("FRS " + fRMotor.getSelectedSensorPosition());
     System.out.println("FLS: " + fLMotor.getSelectedSensorPosition());
     System.out.println("BLS: " + bLMotor.getSelectedSensorPosition());
