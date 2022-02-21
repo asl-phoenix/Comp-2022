@@ -45,6 +45,5 @@ public class LowerCatapultAuto extends CommandBase {
   @Override
   public boolean isFinished() {
     return (System.currentTimeMillis() - retractTimer > 1500);
-
   }
 }

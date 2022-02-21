@@ -30,11 +30,11 @@ public class ReleaseCatapultCommand extends CommandBase {
   @Override
   public void initialize() {
     // Only shoot if the intake is lowered
-    //if (INTAKE.getPistonState()) {
-      // For shooting we need to extend the piston.
-      CATAPULT.extendPiston();
-      startTime = System.currentTimeMillis();
-    //}
+    // if (INTAKE.getPistonState()) {
+    // For shooting we need to extend the piston.
+    CATAPULT.extendPiston();
+    startTime = System.currentTimeMillis();
+    // }
     // A variable is created for determining when we want to end command.
 
   }
