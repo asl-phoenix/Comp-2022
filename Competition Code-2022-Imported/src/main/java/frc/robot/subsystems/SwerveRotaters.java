@@ -25,7 +25,7 @@ public class SwerveRotaters extends SubsystemBase {
   private WPI_TalonFX fRRotater, fLRotater, bLRotater, bRRotater;
 
   public final double ENCODER_PULSES_PER_ROTATION = 2048;
-  public final double ROTATION_POW = 30;
+  public final double ROTATION_POW = 20;
 
   // This is the constructor where the rotater motors are created and are reset.
   // In addition this is where the PID initilization occurs for each rotater motor

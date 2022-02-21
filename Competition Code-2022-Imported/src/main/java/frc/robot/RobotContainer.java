@@ -78,7 +78,7 @@ public class RobotContainer {
   // Catapult
 
   public final JoystickButton lowerCatapultButton =
-      new JoystickButton(shopper, LOWERCATAPULT_BUTTON);
+      new JoystickButton(operator, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton =
       new JoystickButton(operator, RELEASECATAPULT_BUTTON);
   // public final JoystickButton alignCatapultButton =
@@ -164,8 +164,8 @@ public class RobotContainer {
 
     // Climber
     // climbButton.whenHeld(climbSequence);
-    extend.whenHeld(extendCommand);
-    retract.whenHeld(retractCommand);
+    //extend.whenHeld(extendCommand);
+    //retract.whenHeld(retractCommand);
     // stay.whenHeld(stayCommand);
   }
 }
