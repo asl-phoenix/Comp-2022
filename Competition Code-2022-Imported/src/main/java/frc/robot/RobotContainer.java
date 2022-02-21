@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,7 +24,7 @@ public class RobotContainer {
   // == JOYSTICKS =//
 
   public final Joystick shopper = new Joystick(DRIVER_CONTROLLER);
-  public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
+  //final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
 
   // == SUBSYSTEMS == //
 
@@ -33,6 +34,7 @@ public class RobotContainer {
 
   // Extra Subs
   public final Gyro GYRO = new Gyro();
+  public final CompressorF COMPRESSOR = new CompressorF();
   public final Pixy PIXY = new Pixy();
 
   // Mechanism Subs
@@ -68,20 +70,18 @@ public class RobotContainer {
 
   // Intake
   public final JoystickButton intakeButton = new JoystickButton(shopper, INTAKE_BUTTON);
-  public final JoystickButton raiseIntakeButton = new JoystickButton(operator, RAISE_INTAKE_BUTTON);
+  public final JoystickButton raiseIntakeButton = new JoystickButton(shopper, RAISE_INTAKE_BUTTON);
 
-  // Catapult
+  //Catapult
   public final JoystickButton lowerCatapultButton =
-      new JoystickButton(operator, LOWERCATAPULT_BUTTON);
+      new JoystickButton(shopper, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton =
-      new JoystickButton(operator, RELEASECATAPULT_BUTTON);
-  public final JoystickButton retractCatapultButton =
-      new JoystickButton(operator, RETRACTCATAPULTBUTTON);
-  public final JoystickButton alignCatapultButton =
-      new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
+      new JoystickButton(shopper, RELEASECATAPULT_BUTTON);
+  //public final JoystickButton alignCatapultButton =
+      //new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
 
   // Climber
-  public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
+  public final JoystickButton climbButton = new JoystickButton(shopper, CLIMB_BUTTON);
 
   // == COMMANDS == //
   // Intake Commands
@@ -91,8 +91,7 @@ public class RobotContainer {
   // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT, INTAKE);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
-  public final Command retractShooterCommand = new RetractShooterPistons(CATAPULT);
-  public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
+  // public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
   // Climber Commands
   public final Command climbSequence = new ClimbSequence(CLIMBER, SWERVEROTATERS, SWERVESPINNERS);
 
@@ -134,17 +133,17 @@ public class RobotContainer {
                         GYRO.getYaw())),
             SWERVESPINNERS));
     GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
-
+    
+    //COMPRESSOR.setDefaultCommand(new RunCommand(() -> COMPRESSOR.getSetCompressorStatus(), COMPRESSOR));
     // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
-    // retractCatapultButton.whenPressed(retractShooterCommand);
-    alignCatapultButton.whenHeld(alignCatapultCommand);
+    //alignCatapultButton.whenHeld(alignCatapultCommand);
 
     // Intake
     intakeButton.whileHeld(intakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
     // Climber
-    climbButton.whenHeld(climbSequence);
+    // climbButton.whenHeld(climbSequence);
   }
 }

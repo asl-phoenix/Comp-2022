@@ -21,7 +21,7 @@ public class Catapult extends SubsystemBase {
   private WPI_TalonSRX catapult_motor_1;
 
   // Pistons
-  private DoubleSolenoid shooter_1 /*, shooter_2*/;
+  private DoubleSolenoid shooter_1;
 
   // Constructor
   public Catapult() {
@@ -29,8 +29,6 @@ public class Catapult extends SubsystemBase {
     shooter_1 =
         new DoubleSolenoid(
             PneumaticsModuleType.CTREPCM, SHOOTER_PISTON_PORT_1, SHOOTER_PISTON_PORT_2);
-    // shooter_2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, SHOOTER_PISTON_PORT_3,
-    // SHOOTER_PISTON_PORT_4);
   }
 
   /**
@@ -49,13 +47,12 @@ public class Catapult extends SubsystemBase {
 
   // This function pushes the catapult piston forward.
   public void extendPiston() {
-    shooter_1.set(DoubleSolenoid.Value.kForward);
-    // shooter_2.set(DoubleSolenoid.Value.kForward);
+    shooter_1.set(DoubleSolenoid.Value.kReverse);
   }
 
   // This function pulls the catapult pistion back.
   public void retractPiston() {
-    shooter_1.set(DoubleSolenoid.Value.kReverse);
+    shooter_1.set(DoubleSolenoid.Value.kForward);
     // shooter_2.set(DoubleSolenoid.Value.kReverse);
   }
   // This function gets the current state of the piston

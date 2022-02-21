@@ -56,6 +56,7 @@ public class SwerveRotaters extends SubsystemBase {
 
   // This function resets the encoders of all motors and is called in the constructor.
   public void resetEncoders() {
+    fRRotater.set(ControlMode.Position, 0);
     fRRotater.setSelectedSensorPosition(0);
     fLRotater.setSelectedSensorPosition(0);
     bLRotater.setSelectedSensorPosition(0);
@@ -336,6 +337,7 @@ public class SwerveRotaters extends SubsystemBase {
                 / 360);
       }
     }
+    printEncodersRotaters();
   }
 
   // This method sets the wheel direction of the 4 motors, with provided encoder pulse values.
@@ -363,6 +365,15 @@ public class SwerveRotaters extends SubsystemBase {
   private boolean checkError(WPI_TalonFX motor, double d) {
     return motor.getSelectedSensorPosition() < d + ROTATOR_ERROR_TOLERANCE
         && motor.getSelectedSensorPosition() > d - ROTATOR_ERROR_TOLERANCE;
+  }
+
+
+  public void printEncodersRotaters(){
+    System.out.println("FRR " + fRRotater.getSelectedSensorPosition());
+    System.out.println("FLR: " + fLRotater.getSelectedSensorPosition());
+    System.out.println("BLR: " + bLRotater.getSelectedSensorPosition());
+    System.out.println("BRR: " + bRRotater.getSelectedSensorPosition());
+    System.out.println("");
   }
 
   // This method stops all motors.
