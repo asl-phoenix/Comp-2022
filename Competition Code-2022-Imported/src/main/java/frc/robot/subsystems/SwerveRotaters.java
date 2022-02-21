@@ -25,7 +25,7 @@ public class SwerveRotaters extends SubsystemBase {
   private WPI_TalonFX fRRotater, fLRotater, bLRotater, bRRotater;
 
   public final double ENCODER_PULSES_PER_ROTATION = 2048;
-  public final double ROTATION_POW = 30;
+  public final double ROTATION_POW = 20;
 
   // This is the constructor where the rotater motors are created and are reset.
   // In addition this is where the PID initilization occurs for each rotater motor
@@ -345,6 +345,7 @@ public class SwerveRotaters extends SubsystemBase {
                 / 360);
       }
     }
+    printEncodersRotaters();
   }
 
   // This method sets the wheel direction of the 4 motors, with provided encoder pulse values.
@@ -372,6 +373,15 @@ public class SwerveRotaters extends SubsystemBase {
   private boolean checkError(WPI_TalonFX motor, double d) {
     return motor.getSelectedSensorPosition() < d + ROTATOR_ERROR_TOLERANCE
         && motor.getSelectedSensorPosition() > d - ROTATOR_ERROR_TOLERANCE;
+  }
+
+
+  public void printEncodersRotaters(){
+    System.out.println("FRR " + fRRotater.getSelectedSensorPosition());
+    System.out.println("FLR: " + fLRotater.getSelectedSensorPosition());
+    System.out.println("BLR: " + bLRotater.getSelectedSensorPosition());
+    System.out.println("BRR: " + bRRotater.getSelectedSensorPosition());
+    System.out.println("");
   }
 
   // This method stops all motors.

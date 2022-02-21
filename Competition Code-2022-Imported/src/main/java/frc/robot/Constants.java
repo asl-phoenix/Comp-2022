@@ -71,9 +71,10 @@ public final class Constants {
 
   // Catapult
   public static final int LOWERCATAPULT_BUTTON = BUTTON_X;
+
   public static final int RELEASECATAPULT_BUTTON = BUTTON_B;
-  // public static final int RETRACTCATAPULTBUTTON = BUTTON_Y;
-  public static final int ALIGNCATAPULT_BUTTON = BUTTON_A;
+  // public static final int ALIGNCATAPULT_BUTTON = BUTTON_A;
+
 
   // Climber
   public static final int CLIMB_BUTTON = BUTTON_Y;
@@ -81,17 +82,16 @@ public final class Constants {
   // === EXTRAS === //
 
   // Swervedrive Constants
-  public static final double CONTROLLER_SENSITIVITY = 0.02;
+  public static final double CONTROLLER_SENSITIVITY = 0.1;
   public static final double GEAR_RATIO = 12.8;
   public static final double GEAR_RATIO_SPINNER = 6.86;
   public static final double UNITS_PER_ROTATION = 2048;
 
   // Speed constants
+
   public static final double INTAKE_SPEED = -1;
   public static final double SHOOTER_PISTON_SPEED = 0.5;
-  public static final double CATAPULT_SPEED = 0.7;
-
-  // Time Constants
+  public static final double CATAPULT_SPEED = 0.9;
   public static final double WIND_CATAPULT_TIME = 4;
   public static final double RELEASE_CATAPULT_TIME = 2;
 

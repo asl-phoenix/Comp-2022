@@ -24,6 +24,7 @@ public class AutoSequence extends SequentialCommandGroup {
       Intake intake) {
     // This is the sequential commands within our autonomous sequence
     gyroAuto = gyro;
+    rotators.resetEncoders();
     addCommands(
         new WaitCommand(5.0),
         new IntakeAuto(intake, true),

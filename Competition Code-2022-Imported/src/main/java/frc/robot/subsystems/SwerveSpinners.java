@@ -25,7 +25,7 @@ public class SwerveSpinners extends SubsystemBase {
   /** These are the variables for the SwerveSpinners subsytem. */
   public static final double WHEEL_DIAMETER_INCHES = 4;
 
-  public static final double SPEED_MULTIPLIER = 0.4;
+  public static final double SPEED_MULTIPLIER = 0.5;
   public static final double ROTATION_COEFFICIENT = 0.35;
   private WPI_TalonFX bRMotor, bLMotor, fRMotor, fLMotor;
   // private SpeedControllerGroup bR, bL, fR, fL;
@@ -161,11 +161,19 @@ public class SwerveSpinners extends SubsystemBase {
     return GEAR_RATIO_SPINNER * UNITS_PER_ROTATION * cm / (WHEEL_DIAMETER_INCHES * 2.54 * Math.PI);
   }
 
+
+  public void printEncodersSpinners(){
+    System.out.println("FRS " + fRMotor.getSelectedSensorPosition());
+    System.out.println("FLS: " + fLMotor.getSelectedSensorPosition());
+    System.out.println("BLS: " + bLMotor.getSelectedSensorPosition());
+    System.out.println("BRS: " + bRMotor.getSelectedSensorPosition());
+  }
+
   public void driveDistance(double pulseGoal) {
-    bRMotor.set(ControlMode.Position, pulseGoal);
-    bLMotor.set(ControlMode.Position, pulseGoal);
-    fRMotor.set(ControlMode.Position, pulseGoal);
-    fLMotor.set(ControlMode.Position, pulseGoal);
+    bRMotor.set(ControlMode.Velocity, 200);
+    bLMotor.set(ControlMode.Velocity, 200);
+    fRMotor.set(ControlMode.Velocity, 200);
+    fLMotor.set(ControlMode.Velocity, 200);
   }
 
   public boolean reachedPosition(double pulsesDistance) {
@@ -179,8 +187,8 @@ public class SwerveSpinners extends SubsystemBase {
   }
 
   private boolean checkError(WPI_TalonFX motor, double pulsesDistance) {
-    return ((motor.getSelectedSensorPosition() < (pulsesDistance + SPINNER_ERROR_TOLERANCE))
-        && (motor.getSelectedSensorPosition() > (pulsesDistance - SPINNER_ERROR_TOLERANCE)));
+    return ((motor.getSelectedSensorPosition() < (pulsesDistance + 200))
+        && (motor.getSelectedSensorPosition() > (pulsesDistance - 200)));
   }
 
   public void stop() {

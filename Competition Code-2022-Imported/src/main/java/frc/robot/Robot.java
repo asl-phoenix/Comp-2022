@@ -73,7 +73,6 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-
     m_autonomousCommand =
         new AutoSequence(
             rCon.getRotaters(),
@@ -81,17 +80,17 @@ public class Robot extends TimedRobot {
             rCon.getGyro(),
             rCon.getCatapult(),
             rCon.getIntake());
-
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
   }
   /*
-    public void getAutoCommand() {
-      m_autonomousCommand = autoChooser.getSelected();
-    }
+  public void getAutoCommand() {
+    m_autonomousCommand = autoChooser.getSelected();
+  }
   */
+
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {}
