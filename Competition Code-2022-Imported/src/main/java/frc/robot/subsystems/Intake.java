@@ -21,11 +21,6 @@ public class Intake extends SubsystemBase {
     intakePiston1 =
         new DoubleSolenoid(
             PneumaticsModuleType.CTREPCM, INTAKE_PISTON_PORT_1, INTAKE_PISTON_PORT_2);
-    /*
-    intakePiston2 =
-        new DoubleSolenoid(
-            PneumaticsModuleType.CTREPCM, INTAKE_PISTON_PORT_3, INTAKE_PISTON_PORT_4);
-    */
   }
   /**
    * Sets the speed of the motor
