@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-/* =====================MAIN==================== */
+/* ====================MAIN============================*/
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -21,10 +21,10 @@ import static frc.robot.Constants.*;
 
 public class RobotContainer {
 
-  // == JOYSTICKS =//
+  // == JOYSTICKS == //
 
   public final Joystick shopper = new Joystick(DRIVER_CONTROLLER);
-  //final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
+  final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
 
   // == SUBSYSTEMS == //
 
@@ -34,13 +34,15 @@ public class RobotContainer {
 
   // Extra Subs
   public final Gyro GYRO = new Gyro();
-  public final CompressorF COMPRESSOR = new CompressorF();
-  public final Pixy PIXY = new Pixy();
-
+  /*
+    public final Pixy PIXY = new Pixy();
+  */
   // Mechanism Subs
   public final Catapult CATAPULT = new Catapult();
+
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
+  // public final CompressorF COMPRESSOR = new CompressorF();
 
   // Auto Subs Access
   public SwerveSpinners getSpinners() {
@@ -66,34 +68,45 @@ public class RobotContainer {
   public Catapult getCatapult() {
     return CATAPULT;
   }
+
   // == BUTTONS == //
 
   // Intake
-  public final JoystickButton intakeButton = new JoystickButton(shopper, INTAKE_BUTTON);
-  public final JoystickButton raiseIntakeButton = new JoystickButton(shopper, RAISE_INTAKE_BUTTON);
+  public final JoystickButton intakeButton = new JoystickButton(operator, INTAKE_BUTTON);
+  public final JoystickButton raiseIntakeButton = new JoystickButton(operator, RAISE_INTAKE_BUTTON);
 
-  //Catapult
+  // Catapult
+
   public final JoystickButton lowerCatapultButton =
       new JoystickButton(shopper, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton =
-      new JoystickButton(shopper, RELEASECATAPULT_BUTTON);
-  //public final JoystickButton alignCatapultButton =
-      //new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
+      new JoystickButton(operator, RELEASECATAPULT_BUTTON);
+  // public final JoystickButton alignCatapultButton =
+  //     new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
 
   // Climber
-  public final JoystickButton climbButton = new JoystickButton(shopper, CLIMB_BUTTON);
+  public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
+  public final JoystickButton extend = new JoystickButton(operator, BUTTON_A);
+  public final JoystickButton retract = new JoystickButton(operator, BUTTON_X);
+  public final JoystickButton stay = new JoystickButton(operator, BUTTON_Y);
 
   // == COMMANDS == //
+
   // Intake Commands
+
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
-
   // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT, INTAKE);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
   // public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
   // Climber Commands
-  public final Command climbSequence = new ClimbSequence(CLIMBER, SWERVEROTATERS, SWERVESPINNERS);
+  
+  // public final Command climbSequence = new ClimbSequence(CLIMBER/*, SWERVEROTATERS,
+  // SWERVESPINNERS);
+  public final Command extendCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, -1);
+  public final Command retractCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, 1);
+  // public final Command stayCommand = new PowerTelescopingCommand(CLIMBER, 0);
 
   // This constructs the robot container class.
   public RobotContainer() {
@@ -117,7 +130,7 @@ public class RobotContainer {
                 SWERVEROTATERS.rotateMotors(
                     shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS),
                     shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS),
-                    shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS),
+                    -shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS),
                     GYRO.getYaw()),
             SWERVEROTATERS));
     SWERVESPINNERS.setDefaultCommand(
@@ -133,17 +146,26 @@ public class RobotContainer {
                         GYRO.getYaw())),
             SWERVESPINNERS));
     GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
-    
-    //COMPRESSOR.setDefaultCommand(new RunCommand(() -> COMPRESSOR.getSetCompressorStatus(), COMPRESSOR));
+    // COMPRESSOR.setDefaultCommand( new RunCommand(() -> COMPRESSOR.getSetCompressorStatus(),
+    // COMPRESSOR));
+    CLIMBER.setDefaultCommand(
+        new RunCommand(
+            () -> CLIMBER.supplyTelescoping(operator.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS)),
+            CLIMBER));
     // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
-    //alignCatapultButton.whenHeld(alignCatapultCommand);
+    // retractCatapultButton.whenPressed(retractShooterCommand);
+    // alignCatapultButton.whenHeld(alignCatapultCommand);
 
     // Intake
-    intakeButton.whileHeld(intakeCommand);
-    raiseIntakeButton.whenPressed(raiseIntakeCommand);
+    // intakeButton.whileHeld(intakeCommand);
+    // raiseIntakeButton.whenPressed(raiseIntakeCommand);
+
     // Climber
     // climbButton.whenHeld(climbSequence);
+    extend.whenHeld(extendCommand);
+    retract.whenHeld(retractCommand);
+    // stay.whenHeld(stayCommand);
   }
 }

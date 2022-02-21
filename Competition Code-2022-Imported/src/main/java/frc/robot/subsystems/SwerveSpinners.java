@@ -25,7 +25,7 @@ public class SwerveSpinners extends SubsystemBase {
   /** These are the variables for the SwerveSpinners subsytem. */
   public static final double WHEEL_DIAMETER_INCHES = 4;
 
-  public static final double SPEED_MULTIPLIER = 0.35;
+  public static final double SPEED_MULTIPLIER = 0.5;
   public static final double ROTATION_COEFFICIENT = 0.35;
   private WPI_TalonFX bRMotor, bLMotor, fRMotor, fLMotor;
   // private SpeedControllerGroup bR, bL, fR, fL;

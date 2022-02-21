@@ -71,11 +71,13 @@ public final class Constants {
 
   // Catapult
   public static final int LOWERCATAPULT_BUTTON = BUTTON_X;
+
   public static final int RELEASECATAPULT_BUTTON = BUTTON_Y;
   // public static final int ALIGNCATAPULT_BUTTON = BUTTON_A;
 
+
   // Climber
-  public static final int CLIMB_BUTTON = BUTTON_B;
+  public static final int CLIMB_BUTTON = BUTTON_Y;
 
   // === EXTRAS === //
 
@@ -86,9 +88,10 @@ public final class Constants {
   public static final double UNITS_PER_ROTATION = 2048;
 
   // Speed constants
-  public static final double INTAKE_SPEED = -0.55;
+
+  public static final double INTAKE_SPEED = -1;
   public static final double SHOOTER_PISTON_SPEED = 0.5;
-  public static final double CATAPULT_SPEED = 0.75;
+  public static final double CATAPULT_SPEED = 0.7;
 
   // Time Constants
   public static final double WIND_CATAPULT_TIME = 4;
