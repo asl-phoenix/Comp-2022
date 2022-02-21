@@ -71,15 +71,15 @@ public class RobotContainer {
   // == BUTTONS == //
 
   // Intake
-  public final JoystickButton intakeButton = new JoystickButton(shopper, INTAKE_BUTTON);
-  public final JoystickButton raiseIntakeButton = new JoystickButton(shopper, RAISE_INTAKE_BUTTON);
+  public final JoystickButton intakeButton = new JoystickButton(operator, INTAKE_BUTTON);
+  public final JoystickButton raiseIntakeButton = new JoystickButton(operator, RAISE_INTAKE_BUTTON);
 
   // Catapult
 
   public final JoystickButton lowerCatapultButton =
-      new JoystickButton(shopper, LOWERCATAPULT_BUTTON);
+      new JoystickButton(operator, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton =
-      new JoystickButton(shopper, RELEASECATAPULT_BUTTON);
+      new JoystickButton(operator, RELEASECATAPULT_BUTTON);
   // public final JoystickButton alignCatapultButton =
   //     new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
 
@@ -132,7 +132,7 @@ public class RobotContainer {
                 SWERVEROTATERS.rotateMotors(
                     shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS),
                     shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS),
-                    -shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS),
+                    shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS),
                     GYRO.getYaw()),
             SWERVEROTATERS));
     SWERVESPINNERS.setDefaultCommand(
