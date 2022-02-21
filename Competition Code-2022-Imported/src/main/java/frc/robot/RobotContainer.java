@@ -130,7 +130,7 @@ public class RobotContainer {
                 SWERVEROTATERS.rotateMotors(
                     shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS),
                     shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS),
-                    -shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS),
+                    shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS),
                     GYRO.getYaw()),
             SWERVEROTATERS));
     SWERVESPINNERS.setDefaultCommand(
@@ -159,8 +159,8 @@ public class RobotContainer {
     // alignCatapultButton.whenHeld(alignCatapultCommand);
 
     // Intake
-    // intakeButton.whileHeld(intakeCommand);
-    // raiseIntakeButton.whenPressed(raiseIntakeCommand);
+    intakeButton.whileHeld(intakeCommand);
+    raiseIntakeButton.whenPressed(raiseIntakeCommand);
 
     // Climber
     // climbButton.whenHeld(climbSequence);

@@ -26,10 +26,16 @@ public class AutoSequence extends SequentialCommandGroup {
     gyroAuto = gyro;
     rotators.resetEncoders();
     addCommands(
-        new MoveForward(rotators, spinners, 1.0), new WaitCommand(1.0), new MoveForward(rotators, spinners, 1.0));
-    // new AutoMove(rotators, spinners, gyroAuto, 90, 10, 0),
-    // new Rotate(rotators, spinners, gyro, 90));)
-    // new AutoMove(rotators, spinners, gyro, 180, 150));
-    // new ReleaseCatapultCommand(catapult, intake);
+        new WaitCommand(5.0),
+        new IntakeAuto(intake, true),
+        new WaitCommand(2.0),
+        new MoveForward(rotators, spinners, 0.5, 1),
+        new WaitCommand(2.0),
+        new ReleaseCatapultCommand(catapult, intake),
+        new WaitCommand(2.0),
+        new LowerCatapultAuto(catapult), // make time set option
+        new MoveForward(rotators, spinners, 1.0, 1),
+        new WaitCommand(2.0),
+        new RunIntakeAuto(intake, true));
   }
 }

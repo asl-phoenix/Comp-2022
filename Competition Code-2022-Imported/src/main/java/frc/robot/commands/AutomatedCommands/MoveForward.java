@@ -13,15 +13,18 @@ public class MoveForward extends CommandBase {
   SwerveRotaters rotators;
   SwerveSpinners spinners;
   private double moveTime;
+  private double direction;
   private double startTime = 0;
 
   // This command sets the wheels to a specific angle and drives the robot a certain
   // distance in that direction.
-  public MoveForward(SwerveRotaters rotators, SwerveSpinners spinners, double moveTime) {
+  public MoveForward(
+      SwerveRotaters rotators, SwerveSpinners spinners, double moveTime, double direction) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.rotators = rotators;
     this.spinners = spinners;
     this.moveTime = moveTime;
+    this.direction = direction;
     addRequirements(rotators, spinners);
   }
 
@@ -39,7 +42,7 @@ public class MoveForward extends CommandBase {
   public void execute() {
     rotators.setWheelDirection(0, 0, 0, 0);
     if (rotators.reachedPosition(0, 0, 0, 0)) {
-      spinners.runSpinners(MOVE_SPEED);
+      spinners.runSpinners(direction * MOVE_SPEED);
     }
   }
 

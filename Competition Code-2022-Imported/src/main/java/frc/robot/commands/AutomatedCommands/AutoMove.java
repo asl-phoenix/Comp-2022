@@ -58,12 +58,13 @@ public class AutoMove extends CommandBase {
   public void end(boolean interrupted) {
     rotators.stop();
     spinners.stop();
-    System.out.println("Finished");
+    System.out.println("You opened the box, I came");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return spinners.reachedPosition(pulsesDistance);
+    // return false;
   }
 }
