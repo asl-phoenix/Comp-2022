@@ -30,8 +30,8 @@ public class PowerTelescopingCommand extends CommandBase {
   @Override
   public void initialize() {
     // if (INTAKE.getPistonState()) {
-      // This means that 1 second after the command is initialized, the command will end.
-      CLIMBER.supplyTelescoping(power);
+    // This means that 1 second after the command is initialized, the command will end.
+    CLIMBER.supplyTelescoping(power);
     // }
   }
 
@@ -43,7 +43,6 @@ public class PowerTelescopingCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     CLIMBER.supplyTelescoping(0);
-
   }
 
   // Returns true when the command should end.
