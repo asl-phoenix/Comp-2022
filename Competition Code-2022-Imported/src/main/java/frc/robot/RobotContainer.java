@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,7 +24,7 @@ public class RobotContainer {
   // == JOYSTICKS == //
 
   public final Joystick shopper = new Joystick(DRIVER_CONTROLLER);
-  public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
+  final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
 
   // == SUBSYSTEMS == //
 
@@ -41,7 +42,7 @@ public class RobotContainer {
 
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
-  public final CompressorF COMPRESSOR = new CompressorF();
+  // public final CompressorF COMPRESSOR = new CompressorF();
 
   // Auto Subs Access
   public SwerveSpinners getSpinners() {
@@ -77,7 +78,7 @@ public class RobotContainer {
   // Catapult
 
   public final JoystickButton lowerCatapultButton =
-      new JoystickButton(operator, LOWERCATAPULT_BUTTON);
+      new JoystickButton(shopper, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton =
       new JoystickButton(operator, RELEASECATAPULT_BUTTON);
   // public final JoystickButton alignCatapultButton =
@@ -88,8 +89,6 @@ public class RobotContainer {
   public final JoystickButton extend = new JoystickButton(operator, BUTTON_A);
   public final JoystickButton retract = new JoystickButton(operator, BUTTON_X);
   public final JoystickButton stay = new JoystickButton(operator, BUTTON_Y);
-  
-  
 
   // == COMMANDS == //
 
@@ -100,15 +99,14 @@ public class RobotContainer {
   // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT, INTAKE);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
-
-  /*
-  public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
+  // public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
   // Climber Commands
-  */
-  //public final Command climbSequence = new ClimbSequence(CLIMBER/*, SWERVEROTATERS, SWERVESPINNERS);
+  
+  // public final Command climbSequence = new ClimbSequence(CLIMBER/*, SWERVEROTATERS,
+  // SWERVESPINNERS);
   public final Command extendCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, -1);
   public final Command retractCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, 1);
-  //public final Command stayCommand = new PowerTelescopingCommand(CLIMBER, 0);
+  // public final Command stayCommand = new PowerTelescopingCommand(CLIMBER, 0);
 
   // This constructs the robot container class.
   public RobotContainer() {
@@ -159,15 +157,15 @@ public class RobotContainer {
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
     // retractCatapultButton.whenPressed(retractShooterCommand);
     // alignCatapultButton.whenHeld(alignCatapultCommand);
-    
+
     // Intake
     // intakeButton.whileHeld(intakeCommand);
     // raiseIntakeButton.whenPressed(raiseIntakeCommand);
-    
+
     // Climber
-    //climbButton.whenHeld(climbSequence);
+    // climbButton.whenHeld(climbSequence);
     extend.whenHeld(extendCommand);
     retract.whenHeld(retractCommand);
-    //stay.whenHeld(stayCommand);
+    // stay.whenHeld(stayCommand);
   }
 }

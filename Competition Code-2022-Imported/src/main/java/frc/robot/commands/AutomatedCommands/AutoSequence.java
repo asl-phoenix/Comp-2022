@@ -5,6 +5,7 @@
 package frc.robot.commands.AutomatedCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.ReleaseCatapultCommand;
 import frc.robot.subsystems.*;
 
@@ -23,10 +24,12 @@ public class AutoSequence extends SequentialCommandGroup {
       Intake intake) {
     // This is the sequential commands within our autonomous sequence
     gyroAuto = gyro;
+    rotators.resetEncoders();
     addCommands(
-        new AutoMove(rotators, spinners, gyroAuto, 0, 150),
-        new Rotate(rotators, spinners, gyro, 180),
-        new AutoMove(rotators, spinners, gyro, 180, 150));
-    new ReleaseCatapultCommand(catapult, intake);
+        new MoveForward(rotators, spinners, 1.0), new WaitCommand(1.0), new MoveForward(rotators, spinners, 1.0));
+    // new AutoMove(rotators, spinners, gyroAuto, 90, 10, 0),
+    // new Rotate(rotators, spinners, gyro, 90));)
+    // new AutoMove(rotators, spinners, gyro, 180, 150));
+    // new ReleaseCatapultCommand(catapult, intake);
   }
 }

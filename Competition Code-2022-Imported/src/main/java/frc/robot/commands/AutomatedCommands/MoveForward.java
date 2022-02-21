@@ -54,6 +54,7 @@ public class MoveForward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    System.out.println("uwu!" + (System.currentTimeMillis() - startTime));
     return (System.currentTimeMillis() - startTime) > 1000 * moveTime;
   }
 }

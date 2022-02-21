@@ -345,6 +345,7 @@ public class SwerveRotaters extends SubsystemBase {
                 / 360);
       }
     }
+    printEncodersRotaters();
   }
 
   // This method sets the wheel direction of the 4 motors, with provided encoder pulse values.
@@ -372,6 +373,15 @@ public class SwerveRotaters extends SubsystemBase {
   private boolean checkError(WPI_TalonFX motor, double d) {
     return motor.getSelectedSensorPosition() < d + ROTATOR_ERROR_TOLERANCE
         && motor.getSelectedSensorPosition() > d - ROTATOR_ERROR_TOLERANCE;
+  }
+
+
+  public void printEncodersRotaters(){
+    System.out.println("FRR " + fRRotater.getSelectedSensorPosition());
+    System.out.println("FLR: " + fLRotater.getSelectedSensorPosition());
+    System.out.println("BLR: " + bLRotater.getSelectedSensorPosition());
+    System.out.println("BRR: " + bRRotater.getSelectedSensorPosition());
+    System.out.println("");
   }
 
   // This method stops all motors.
