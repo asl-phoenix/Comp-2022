@@ -74,6 +74,7 @@ public class Gyro extends SubsystemBase {
       System.out.println("No communication with pigeon gyro");
     }
     
+    
   }
 
   public double getGyroState() {

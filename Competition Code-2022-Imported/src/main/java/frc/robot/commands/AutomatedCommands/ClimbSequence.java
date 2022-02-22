@@ -42,7 +42,7 @@ public class ClimbSequence extends SequentialCommandGroup {
         // new PowerTelescopingCommand(climber, 0),
         new WaitCommand(T2),
         //  The robot moves into position
-        new MoveForward(rotators, spinners, T3,1),
+        // new MoveForward(rotators, spinners, T3,1, 0),
         new WaitCommand(T4),
         // telescopings latch onto bar
         // new PowerTelescopingCommand(climber, LOWPOWER),

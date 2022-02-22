@@ -75,7 +75,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     
     m_autonomousCommand =
-        new AutoSequence(
+        new Pos1(
             rCon.getRotaters(),
             rCon.getSpinners(),
             rCon.getGyro(),
@@ -120,11 +120,11 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
-/*
+
   public void initailizeAutoChooser() {
     climbChild = new ClimbSequence(rCon.getClimber(), rCon.getRotaters(), rCon.getSpinners());
     driveForward =
-        new AutoSequence(
+        new Pos1(
             rCon.getRotaters(),
             rCon.getSpinners(),
             rCon.getGyro(),
@@ -133,5 +133,5 @@ public class Robot extends TimedRobot {
     autoChooser.addOption("Climb Squence", climbChild);
     autoChooser.addOption("Drive Forward", driveForward);
   }
-  */
+  
 }

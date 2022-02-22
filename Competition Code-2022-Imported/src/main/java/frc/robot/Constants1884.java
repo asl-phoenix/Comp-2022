@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-public final class Constants {
+public final class Constants1884 {
 
   // === PORTS === //
 
