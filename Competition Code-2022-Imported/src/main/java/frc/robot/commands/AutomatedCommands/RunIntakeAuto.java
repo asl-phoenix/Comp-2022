@@ -3,11 +3,11 @@ package frc.robot.commands.AutomatedCommands;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IntakeAuto extends CommandBase {
+public class RunIntakeAuto extends CommandBase {
   boolean run;
   Intake intake;
 
-  public IntakeAuto(Intake intake, boolean run) {
+  public RunIntakeAuto(Intake intake, boolean run) {
     this.intake = intake;
     this.run = run;
 
@@ -17,7 +17,7 @@ public class IntakeAuto extends CommandBase {
   public void initialize() {
     if (run) {
       intake.pistonForward();
-      // intake.intake();
+      intake.intake();
     } else if (!run) {
       intake.pistonReverse();
       intake.off();

@@ -23,7 +23,7 @@ public class RobotContainer {
   // == JOYSTICKS == //
 
   public final Joystick shopper = new Joystick(DRIVER_CONTROLLER);
-  public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
+  final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
 
   // == SUBSYSTEMS == //
 
@@ -41,7 +41,7 @@ public class RobotContainer {
 
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
-  public final CompressorF COMPRESSOR = new CompressorF();
+  // public final CompressorF COMPRESSOR = new CompressorF();
 
   // Auto Subs Access
   public SwerveSpinners getSpinners() {
@@ -98,11 +98,10 @@ public class RobotContainer {
   // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT, INTAKE);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
-
-  /*
-  public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
+  // public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS,
+  // PIXY);
   // Climber Commands
-  */
+
   // public final Command climbSequence = new ClimbSequence(CLIMBER/*, SWERVEROTATERS,
   // SWERVESPINNERS);
   public final Command extendCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, -1);
@@ -131,7 +130,7 @@ public class RobotContainer {
                 SWERVEROTATERS.rotateMotors(
                     shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS),
                     shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS),
-                    -shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS),
+                    shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS),
                     GYRO.getYaw()),
             SWERVEROTATERS));
     SWERVESPINNERS.setDefaultCommand(
@@ -160,13 +159,13 @@ public class RobotContainer {
     // alignCatapultButton.whenHeld(alignCatapultCommand);
 
     // Intake
-    // intakeButton.whileHeld(intakeCommand);
-    // raiseIntakeButton.whenPressed(raiseIntakeCommand);
+    intakeButton.whileHeld(intakeCommand);
+    raiseIntakeButton.whenPressed(raiseIntakeCommand);
 
     // Climber
     // climbButton.whenHeld(climbSequence);
-    extend.whenHeld(extendCommand);
-    retract.whenHeld(retractCommand);
+    // extend.whenHeld(extendCommand);
+    // retract.whenHeld(retractCommand);
     // stay.whenHeld(stayCommand);
   }
 }
