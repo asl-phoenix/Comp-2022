@@ -68,6 +68,7 @@ public final class Constants {
   public static final int TRANSLATIONAL_HORIZONTAL_AXIS = 0;
   public static final int TRANSLATIONAL_VERTICAL_AXIS = 1;
   public static final int ROTATIONAL_HORIZONTAL_AXIS = 4;
+  public static final int ROTATIONAL_VERTICAL_AXIS = 5;
 
   // Intake
   public static final int INTAKE_BUTTON = RIGHT_BUMPER;

@@ -22,7 +22,7 @@ public class RobotContainer {
 
   // == JOYSTICKS == //
 
-  public final Joystick shopper = new Joystick(DRIVER_CONTROLLER);
+  //public final Joystick shopper = new Joystick(DRIVER_CONTROLLER);
   public final Joystick operator = new Joystick(OPERATOR_CONTROLLER);
 
   // == SUBSYSTEMS == //
@@ -70,7 +70,7 @@ public class RobotContainer {
   // == BUTTONS == //
 
   // Intake
-  public final JoystickButton intakeButton = new JoystickButton(shopper, INTAKE_BUTTON);
+  public final JoystickButton intakeButton = new JoystickButton(operator, INTAKE_BUTTON);
   public final JoystickButton raiseIntakeButton = new JoystickButton(operator, RAISE_INTAKE_BUTTON);
 /*
   // Catapult
@@ -149,7 +149,13 @@ public class RobotContainer {
             SWERVESPINNERS));
             */
    //  GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
-
+    CLIMBER.setDefaultCommand(
+      new RunCommand(
+        () ->
+            CLIMBER.supplyTelescoping(
+              operator.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS), 
+              operator.getRawAxis(ROTATIONAL_VERTICAL_AXIS)
+            )));
     // Catapult
     /*
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
@@ -161,10 +167,12 @@ public class RobotContainer {
     intakeButton.whileHeld(intakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
     
+    /*
     // Climber
-    //climbButton.whenHeld(climbSequence);
+    climbButton.whenHeld(climbSequence);
     extend.whenHeld(extendCommand);
     retract.whenHeld(retractCommand);
-    //stay.whenHeld(stayCommand);
+    stay.whenHeld(stayCommand);
+    */
   }
 }
