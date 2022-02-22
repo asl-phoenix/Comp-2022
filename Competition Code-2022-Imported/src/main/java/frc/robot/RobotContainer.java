@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
-import frc.robot.commands.AutomatedCommands.*;
 import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
 
@@ -28,29 +27,19 @@ public class RobotContainer {
   // == SUBSYSTEMS == //
 
   // Drivetrain Subs
-  public final SwerveSpinners SWERVESPINNERS = new SwerveSpinners();
-  public final SwerveRotaters SWERVEROTATERS = new SwerveRotaters();
+  private final Drive m_drivetrainSubsystem = new Drive();
 
   // Extra Subs
   public final Gyro GYRO = new Gyro();
   /*
-    public final Pixy PIXY = new Pixy();
-  */
+   * public final Pixy PIXY = new Pixy();
+   */
   // Mechanism Subs
   public final Catapult CATAPULT = new Catapult();
 
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
   // public final CompressorF COMPRESSOR = new CompressorF();
-
-  // Auto Subs Access
-  public SwerveSpinners getSpinners() {
-    return SWERVESPINNERS;
-  }
-
-  public SwerveRotaters getRotaters() {
-    return SWERVEROTATERS;
-  }
 
   public Gyro getGyro() {
     return GYRO;
@@ -76,12 +65,10 @@ public class RobotContainer {
 
   // Catapult
 
-  public final JoystickButton lowerCatapultButton =
-      new JoystickButton(operator, LOWERCATAPULT_BUTTON);
-  public final JoystickButton releaseCatapultButton =
-      new JoystickButton(operator, RELEASECATAPULT_BUTTON);
+  public final JoystickButton lowerCatapultButton = new JoystickButton(operator, LOWERCATAPULT_BUTTON);
+  public final JoystickButton releaseCatapultButton = new JoystickButton(operator, RELEASECATAPULT_BUTTON);
   // public final JoystickButton alignCatapultButton =
-  //     new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
+  // new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
 
   // Climber
   public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
@@ -98,11 +85,13 @@ public class RobotContainer {
   // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT, INTAKE);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
-  // public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS,
+  // public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS,
+  // SWERVESPINNERS,
   // PIXY);
   // Climber Commands
 
-  // public final Command climbSequence = new ClimbSequence(CLIMBER/*, SWERVEROTATERS,
+  // public final Command climbSequence = new ClimbSequence(CLIMBER/*,
+  // SWERVEROTATERS,
   // SWERVESPINNERS);
   public final Command extendCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, -1);
   public final Command retractCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, 1);
@@ -110,43 +99,34 @@ public class RobotContainer {
 
   // This constructs the robot container class.
   public RobotContainer() {
+
+    m_drivetrainSubsystem.setDefaultCommand(new DriveCommand(
+        m_drivetrainSubsystem,
+        () -> -modifyAxis(shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS))
+            * Drive.MAX_VELOCITY_METERS_PER_SECOND,
+        () -> -modifyAxis(shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS))
+            * Drive.MAX_VELOCITY_METERS_PER_SECOND,
+        () -> -modifyAxis(shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS))
+            * Drive.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND
+
+    ));
+
     configureButtonBindings();
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be created by
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
+   * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
 
-    // == BUTTON BINDINGS == //
-
-    // Swervedrive.exe
-    SWERVEROTATERS.setDefaultCommand(
-        new RunCommand(
-            () ->
-                SWERVEROTATERS.rotateMotors(
-                    shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS),
-                    shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS),
-                    shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS),
-                    GYRO.getYaw()),
-            SWERVEROTATERS));
-    SWERVESPINNERS.setDefaultCommand(
-        new RunCommand(
-            () ->
-                SWERVESPINNERS.spinMotors(
-                    shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS),
-                    shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS),
-                    shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS),
-                    SWERVEROTATERS.getAngle(
-                        shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS),
-                        shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS),
-                        GYRO.getYaw())),
-            SWERVESPINNERS));
     GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
-    // COMPRESSOR.setDefaultCommand( new RunCommand(() -> COMPRESSOR.getSetCompressorStatus(),
+    // COMPRESSOR.setDefaultCommand( new RunCommand(() ->
+    // COMPRESSOR.getSetCompressorStatus(),
     // COMPRESSOR));
     CLIMBER.setDefaultCommand(
         new RunCommand(
@@ -167,5 +147,27 @@ public class RobotContainer {
     // extend.whenHeld(extendCommand);
     // retract.whenHeld(retractCommand);
     // stay.whenHeld(stayCommand);
+  }
+
+  private static double deadband(double value, double deadband) {
+    if (Math.abs(value) > deadband) {
+      if (value > 0.0) {
+        return (value - deadband) / (1.0 - deadband);
+      } else {
+        return (value + deadband) / (1.0 - deadband);
+      }
+    } else {
+      return 0.0;
+    }
+  }
+
+  private static double modifyAxis(double value) {
+    // Deadband
+    value = deadband(value, 0.05);
+
+    // Square the axis
+    value = Math.copySign(value * value, value);
+
+    return value;
   }
 }
