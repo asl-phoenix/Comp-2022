@@ -345,7 +345,7 @@ public class SwerveRotaters extends SubsystemBase {
                 / 360);
       }
     }
-    printEncodersRotaters();
+    // printEncodersRotaters();
   }
 
   // This method sets the wheel direction of the 4 motors, with provided encoder pulse values.
