@@ -57,6 +57,10 @@ public class RobotContainer {
     return CATAPULT;
   }
 
+  public Drive getDrive() {
+    return m_drivetrainSubsystem;
+  }
+
   // == BUTTONS == //
 
   // Intake
