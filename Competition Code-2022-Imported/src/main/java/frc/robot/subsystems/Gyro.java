@@ -33,7 +33,7 @@ public class Gyro extends SubsystemBase {
 
   // Constructor
   public Gyro() {
-    gyro = new PigeonIMU(GYRO_PORT);
+    gyro = new PigeonIMU(DRIVETRAIN_PIGEON_ID);
     resetValues();
     calibrateGyro();
     getState();
