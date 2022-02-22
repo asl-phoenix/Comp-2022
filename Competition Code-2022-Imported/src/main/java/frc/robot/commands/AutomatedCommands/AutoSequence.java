@@ -17,24 +17,23 @@ public class AutoSequence extends SequentialCommandGroup {
   public Gyro gyroAuto;
 
   public AutoSequence(
-      SwerveRotaters rotators,
-      SwerveSpinners spinners,
+      Drive drive,
       Gyro gyro,
       Catapult catapult,
       Intake intake) {
     // This is the sequential commands within our autonomous sequence
     gyroAuto = gyro;
-    rotators.resetEncoders();
+    // rotators.resetEncoders();
     addCommands(
         new WaitCommand(5.0),
         new IntakeAuto(intake, true),
         new WaitCommand(2.0),
-        new MoveForward(rotators, spinners, 0.5, 1),
+        // new MoveForward(rotators, spinners, 0.5, 1),
         new WaitCommand(2.0),
         new ReleaseCatapultCommand(catapult, intake),
         new WaitCommand(2.0),
         new LowerCatapultAuto(catapult), // make time set option
-        new MoveForward(rotators, spinners, 1.0, 1),
+        // new MoveForward(rotators, spinners, 1.0, 1),
         new WaitCommand(2.0),
         new RunIntakeAuto(intake, true));
   }
