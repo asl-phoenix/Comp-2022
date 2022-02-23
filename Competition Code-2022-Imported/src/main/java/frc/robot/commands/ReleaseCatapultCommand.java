@@ -13,27 +13,27 @@ public class ReleaseCatapultCommand extends CommandBase {
   // Creates release catapult for shooting command
 
   private Catapult CATAPULT;
-  private Intake INTAKE;
   private double startTime;
 
-  public ReleaseCatapultCommand(Catapult catapult, Intake intake) {
+  public ReleaseCatapultCommand(Catapult catapult) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(catapult);
     this.CATAPULT = catapult;
-
+    /*
     addRequirements(intake);
     this.INTAKE = intake;
+    */
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     // Only shoot if the intake is lowered
-    if (INTAKE.getPistonState()) {
+    //if (INTAKE.getPistonState()) {
       // For shooting we need to extend the piston.
       CATAPULT.extendPiston();
       startTime = System.currentTimeMillis();
-    }
+    //}
     // A variable is created for determining when we want to end command.
 
   }
