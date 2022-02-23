@@ -17,7 +17,7 @@ import frc.robot.commands.*;
 import frc.robot.commands.AutomatedCommands.*;
 import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
-import frc.robot.Robot;
+
 public class RobotContainer {
 
   // == JOYSTICKS == //
@@ -95,7 +95,8 @@ public class RobotContainer {
   // == COMMANDS == //
 
   // Visiom
-  public final Command cameraSwitch = new CameraSwitch(Robot.server, Robot.camera1, Robot.camera2, Robot.camera1Selected);
+  public final Command cameraSwitch =
+      new CameraSwitch(Robot.server, Robot.camera1, Robot.camera2, Robot.camera1Selected);
 
   // Intake Commands
 
@@ -158,7 +159,7 @@ public class RobotContainer {
         new RunCommand(
             () -> CLIMBER.supplyTelescoping(operator.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS)),
             CLIMBER));
-    //Vision
+    // Vision
     cameraButton.whenPressed(cameraSwitch);
     // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);

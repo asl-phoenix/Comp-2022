@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutomatedCommands.*;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
@@ -37,15 +36,16 @@ public class Robot extends TimedRobot {
    * initialization code.
    */
   public static UsbCamera camera1, camera2;
+
   public static VideoSink server;
   public static Boolean camera1Selected;
 
   @Override
   public void robotInit() {
-     camera1 = CameraServer.startAutomaticCapture(0);
-     camera2 = CameraServer.startAutomaticCapture(1);
-     server = CameraServer.getServer();
-     camera1Selected = true;
+    camera1 = CameraServer.startAutomaticCapture(0);
+    camera2 = CameraServer.startAutomaticCapture(1);
+    server = CameraServer.getServer();
+    camera1Selected = true;
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
@@ -118,8 +118,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {
-  }
+  public void teleopPeriodic() {}
 
   @Override
   public void testInit() {
