@@ -13,10 +13,9 @@ public class ReleaseCatapultCommand extends CommandBase {
   // Creates release catapult for shooting command
 
   private Catapult CATAPULT;
-  private Intake INTAKE;
   private double startTime;
 
-  public ReleaseCatapultCommand(Catapult catapult, Intake intake) {
+  public ReleaseCatapultCommand(Catapult catapult) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(catapult);
     this.CATAPULT = catapult;

@@ -70,6 +70,9 @@ public class RobotContainer {
 
   // == BUTTONS == //
 
+  // Gyro
+  public final JoystickButton gyroResetButton = new JoystickButton(operator, 4);
+
   // Intake
   public final JoystickButton intakeButton = new JoystickButton(operator, INTAKE_BUTTON);
   public final JoystickButton raiseIntakeButton = new JoystickButton(operator, RAISE_INTAKE_BUTTON);
@@ -91,12 +94,15 @@ public class RobotContainer {
 
   // == COMMANDS == //
 
+  // Gyro Commands
+  public final Command gyroResetCommand = new GyroReset(GYRO);
+
   // Intake Commands
 
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
   // Catapult Commands
-  public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT, INTAKE);
+  public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
   // public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS,
   // PIXY);
@@ -146,6 +152,7 @@ public class RobotContainer {
                         GYRO.getYaw())),
             SWERVESPINNERS));
     GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
+    // INTAKE.setDefaultCommand(new RunCommand(() -> INTAKE.intake(), INTAKE));
     // COMPRESSOR.setDefaultCommand( new RunCommand(() -> COMPRESSOR.getSetCompressorStatus(),
     // COMPRESSOR));
     CLIMBER.setDefaultCommand(
@@ -162,10 +169,15 @@ public class RobotContainer {
     intakeButton.whileHeld(intakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
 
+    // Gyro
+    gyroResetButton.whenPressed(gyroResetCommand);
+
     // Climber
     // climbButton.whenHeld(climbSequence);
+    /*
     extend.whenHeld(extendCommand);
     retract.whenHeld(retractCommand);
+    */
     // stay.whenHeld(stayCommand);
   }
 }

@@ -72,6 +72,8 @@ public class Gyro extends SubsystemBase {
     } else if (gyro.getState() == PigeonIMU.PigeonState.NoComm) {
       System.out.println("No communication with pigeon gyro");
     }
+    
+    
   }
 
   public double getGyroState() {

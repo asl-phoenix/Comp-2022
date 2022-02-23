@@ -38,12 +38,12 @@ public class Rotate extends CommandBase {
     if (currentAngle >= 180) {
       boolean condition1 = (currentAngle <= targetAngle && targetAngle <= 360);
       boolean condition2 = (targetAngle <= ((currentAngle + 180) % 360));
-      if (condition1 || condition2) turnDirection = -1; // clockwise
-      else turnDirection = 1; // counter-clockwise
+      if (condition1 || condition2) turnDirection = 1; // clockwise
+      else turnDirection = -1; // counter-clockwise
     } else {
       if (currentAngle <= targetAngle && targetAngle <= currentAngle + 180)
-        turnDirection = -1; // clockwise
-      else turnDirection = 1; // counter-clockwise
+        turnDirection = 1; // clockwise
+      else turnDirection = -1; // counter-clockwise
     }
   }
 
@@ -63,12 +63,11 @@ public class Rotate extends CommandBase {
     // if (gyro.getGyroState() == 1) gyroReady = true;
     // gyro.getState(); // Debugging
     rotators.setWheelDirection(fR, fL, bR, bL);
-    if (rotators.reachedPosition(fR, fL, bR, bL)
-        && gyro.getGyroState() == 1) { // State for Gyro 1 is ready
-      spinners.runSpinners(AUTO_ROTATE_SPEED * turnDirection);
-    } else {
-      spinners.stop();
-    }
+    // if (rotators.reachedPosition(fR, fL, bR, bL) && gyro.getGyroState() == 1) { // State for Gyro 1 is ready
+    spinners.runSpinners(AUTO_ROTATE_SPEED * turnDirection);
+    //} else {
+    // spinners.stop();
+    // }
   }
 
   // Called once the command ends or is interrupted.
@@ -76,7 +75,7 @@ public class Rotate extends CommandBase {
   public void end(boolean interrupted) {
     rotators.stop();
     spinners.stop();
-    System.out.println("Finished");
+    System.out.println("SDJAF;LKFJSDAFJLK;SDAFJDSLKA;FJSDALK;FJASDLK;FJASDLKFJASLDKFJASDLK;FJSLDAKFJLSDKAFJL;KASDFJLADSKFJSADL;KFJLASKD;JFLSAKDFJASI;O");
   }
 
   // Returns true when the command should end.
