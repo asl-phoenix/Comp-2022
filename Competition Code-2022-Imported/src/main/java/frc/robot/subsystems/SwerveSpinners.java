@@ -162,10 +162,12 @@ public class SwerveSpinners extends SubsystemBase {
   }
 
   public void printEncodersSpinners() {
+    /*
     System.out.println("FRS " + fRMotor.getSelectedSensorPosition());
     System.out.println("FLS: " + fLMotor.getSelectedSensorPosition());
     System.out.println("BLS: " + bLMotor.getSelectedSensorPosition());
     System.out.println("BRS: " + bRMotor.getSelectedSensorPosition());
+    */
   }
 
   public void driveDistance(double pulseGoal) {

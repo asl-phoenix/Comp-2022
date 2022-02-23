@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutomatedCommands.*;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
@@ -26,6 +27,9 @@ public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
   private Command driveForward;
+  private Command sixPoint;
+  private Command tenPoint;
+  private Command waitForTeleOp;
   private Command climbChild;
 
   private RobotContainer rCon;
@@ -50,6 +54,9 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.
     rCon = new RobotContainer();
+    rCon.initailizeAutoChooser(autoChooser);
+    SmartDashboard.putData("Auto choices", autoChooser);
+    SmartDashboard.putNumber("Auto Wait Time", 0);
     // SmartDashboard.putData("Auto choices", autoChooser);
     // SmartDashboard.putNumber("Auto Wait Time", 0);
   }
@@ -83,23 +90,25 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    getAutoCommand();
+    /*
     m_autonomousCommand =
-        new AutoSequence(
+        new Pos1(
             rCon.getRotaters(),
             rCon.getSpinners(),
             rCon.getGyro(),
             rCon.getCatapult(),
             rCon.getIntake());
+    */
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
   }
-  /*
+
   public void getAutoCommand() {
     m_autonomousCommand = autoChooser.getSelected();
   }
-  */
 
   /** This function is called periodically during autonomous. */
   @Override
@@ -129,18 +138,25 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
-  /*
+
   public void initailizeAutoChooser() {
-    climbChild = new ClimbSequence(rCon.getClimber(), rCon.getRotaters(), rCon.getSpinners());
-    driveForward =
-        new AutoSequence(
+    tenPoint =
+        new Pos1(
             rCon.getRotaters(),
             rCon.getSpinners(),
             rCon.getGyro(),
             rCon.getCatapult(),
             rCon.getIntake());
-    autoChooser.addOption("Climb Squence", climbChild);
-    autoChooser.addOption("Drive Forward", driveForward);
+    sixPoint =
+        new sixpointer(
+            rCon.getRotaters(),
+            rCon.getSpinners(),
+            rCon.getGyro(),
+            rCon.getCatapult(),
+            rCon.getIntake());
+    waitForTeleOp = new DoNothing();
+    autoChooser.addOption("6 Point", sixPoint);
+    autoChooser.addOption("10 point", tenPoint);
+    autoChooser.addOption("Do Nothing", waitForTeleOp);
   }
-  */
 }
