@@ -11,7 +11,6 @@ public class IntakeAuto extends CommandBase {
   public IntakeAuto(Intake intake, boolean run) {
     this.intake = intake;
     this.run = run;
-    
 
     addRequirements(intake);
   }
