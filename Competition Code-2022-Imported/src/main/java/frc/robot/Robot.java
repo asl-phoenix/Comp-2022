@@ -24,6 +24,9 @@ public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
   private Command driveForward;
+  private Command sixPoint;
+  private Command tenPoint;
+  private Command waitForTeleOp;
   private Command climbChild;
 
   private RobotContainer rCon;
@@ -73,6 +76,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    /*
     m_autonomousCommand =
         new Pos1(
             rCon.getRotaters(),
@@ -80,16 +84,17 @@ public class Robot extends TimedRobot {
             rCon.getGyro(),
             rCon.getCatapult(),
             rCon.getIntake());
+    */
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
   }
-  /*
+  
   public void getAutoCommand() {
     m_autonomousCommand = autoChooser.getSelected();
   }
-  */
+  
 
   /** This function is called periodically during autonomous. */
   @Override
@@ -119,20 +124,16 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
-  /*
+  
 
   public void initailizeAutoChooser() {
-    climbChild = new ClimbSequence(rCon.getClimber(), rCon.getRotaters(), rCon.getSpinners());
-    driveForward =
-        new Pos1(
-            rCon.getRotaters(),
-            rCon.getSpinners(),
-            rCon.getGyro(),
-            rCon.getCatapult(),
-            rCon.getIntake());
-    autoChooser.addOption("Climb Squence", climbChild);
-    autoChooser.addOption("Drive Forward", driveForward);
+    tenPoint = new Pos1(rCon.getRotaters(), rCon.getSpinners(), rCon.getGyro(), rCon.getCatapult(), rCon.getIntake());
+    sixPoint = new sixpointer(rCon.getRotaters(), rCon.getSpinners(), rCon.getGyro(), rCon.getCatapult(), rCon.getIntake());
+    waitForTeleOp = new DoNothing();
+    autoChooser.addOption("6 Point", sixPoint);
+    autoChooser.addOption("10 point", tenPoint);
+    autoChooser.addOption("Do Nothing", waitForTeleOp);
   }
-  */
+  
   
 }
