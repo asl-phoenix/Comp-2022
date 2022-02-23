@@ -376,11 +376,13 @@ public class SwerveRotaters extends SubsystemBase {
   }
 
   public void printEncodersRotaters() {
+    /*
     System.out.println("FRR " + fRRotater.getSelectedSensorPosition());
     System.out.println("FLR: " + fLRotater.getSelectedSensorPosition());
     System.out.println("BLR: " + bLRotater.getSelectedSensorPosition());
     System.out.println("BRR: " + bRRotater.getSelectedSensorPosition());
     System.out.println("");
+    */
   }
 
   // This method stops all motors.

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutomatedCommands.*;
 import edu.wpi.first.cameraserver.CameraServer;
 
@@ -43,6 +44,9 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.
     rCon = new RobotContainer();
+    rCon.initailizeAutoChooser(autoChooser);
+    SmartDashboard.putData("Auto choices", autoChooser);
+    SmartDashboard.putNumber("Auto Wait Time", 0);
     // SmartDashboard.putData("Auto choices", autoChooser);
     // SmartDashboard.putNumber("Auto Wait Time", 0);
   }
@@ -76,6 +80,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    getAutoCommand();
     /*
     m_autonomousCommand =
         new Pos1(
@@ -124,16 +129,6 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
-  
-
-  public void initailizeAutoChooser() {
-    tenPoint = new Pos1(rCon.getRotaters(), rCon.getSpinners(), rCon.getGyro(), rCon.getCatapult(), rCon.getIntake());
-    sixPoint = new sixpointer(rCon.getRotaters(), rCon.getSpinners(), rCon.getGyro(), rCon.getCatapult(), rCon.getIntake());
-    waitForTeleOp = new DoNothing();
-    autoChooser.addOption("6 Point", sixPoint);
-    autoChooser.addOption("10 point", tenPoint);
-    autoChooser.addOption("Do Nothing", waitForTeleOp);
-  }
   
   
 }

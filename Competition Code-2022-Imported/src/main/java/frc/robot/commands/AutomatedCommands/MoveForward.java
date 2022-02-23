@@ -56,8 +56,10 @@ public class MoveForward extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    rotators.setWheelDirection(90, 90, 90, 90);
     rotators.stop();
     spinners.stop();
+    rotators.setWheelDirection(0, 0, 0, 0);
     System.out.println("Finished");
   }
 

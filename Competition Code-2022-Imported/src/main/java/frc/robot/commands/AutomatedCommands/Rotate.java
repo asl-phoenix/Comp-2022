@@ -65,7 +65,7 @@ public class Rotate extends CommandBase {
     rotators.setWheelDirection(fR, fL, bR, bL);
     // if (rotators.reachedPosition(fR, fL, bR, bL) && gyro.getGyroState() == 1) { // State for Gyro
     // 1 is ready
-    spinners.runSpinners(AUTO_ROTATE_SPEED * turnDirection);
+    spinners.runSpinners(AUTO_ROTATE_SPEED * -turnDirection);
     // } else {
     // spinners.stop();
     // }

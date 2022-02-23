@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 import frc.robot.commands.AutomatedCommands.*;
@@ -19,6 +20,11 @@ import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
 
 public class RobotContainer {
+  private Command driveForward;
+  private Command sixPoint;
+  private Command tenPoint;
+  private Command waitForTeleOp;
+  private Command climbChild;
 
   // == JOYSTICKS == //
 
@@ -71,7 +77,7 @@ public class RobotContainer {
   // == BUTTONS == //
 
   // Gyro
-  public final JoystickButton gyroResetButton = new JoystickButton(operator, 4);
+  public final JoystickButton gyroResetButton = new JoystickButton(operator, 8);
 
   // Intake
   public final JoystickButton intakeButton = new JoystickButton(operator, INTAKE_BUTTON);
@@ -179,5 +185,15 @@ public class RobotContainer {
     retract.whenHeld(retractCommand);
     */
     // stay.whenHeld(stayCommand);
+  }
+
+
+  public void initailizeAutoChooser(SendableChooser<Command> chooser) {
+    tenPoint = new Pos1(getRotaters(), getSpinners(), getGyro(), getCatapult(), getIntake());
+    sixPoint = new sixpointer(getRotaters(), getSpinners(), getGyro(), getCatapult(), getIntake());
+    waitForTeleOp = new DoNothing();
+    chooser.addOption("6 Point", sixPoint);
+    chooser.addOption("10 point", tenPoint);
+    chooser.addOption("Do Nothing", waitForTeleOp);
   }
 }
