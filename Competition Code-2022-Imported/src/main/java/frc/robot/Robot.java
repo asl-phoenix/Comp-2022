@@ -36,14 +36,16 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
-  UsbCamera camera1, camera2;
-  VideoSink server;
+  public static UsbCamera camera1, camera2;
+  public static VideoSink server;
+  public static Boolean camera1Selected;
 
   @Override
   public void robotInit() {
      camera1 = CameraServer.startAutomaticCapture(0);
      camera2 = CameraServer.startAutomaticCapture(1);
      server = CameraServer.getServer();
+     camera1Selected = true;
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
