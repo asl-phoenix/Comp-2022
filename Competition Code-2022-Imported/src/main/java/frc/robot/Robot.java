@@ -95,11 +95,10 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.schedule();
     }
   }
-  
+
   public void getAutoCommand() {
     m_autonomousCommand = autoChooser.getSelected();
   }
-  
 
   /** This function is called periodically during autonomous. */
   @Override
@@ -129,6 +128,25 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
-  
-  
+
+  public void initailizeAutoChooser() {
+    tenPoint =
+        new Pos1(
+            rCon.getRotaters(),
+            rCon.getSpinners(),
+            rCon.getGyro(),
+            rCon.getCatapult(),
+            rCon.getIntake());
+    sixPoint =
+        new sixpointer(
+            rCon.getRotaters(),
+            rCon.getSpinners(),
+            rCon.getGyro(),
+            rCon.getCatapult(),
+            rCon.getIntake());
+    waitForTeleOp = new DoNothing();
+    autoChooser.addOption("6 Point", sixPoint);
+    autoChooser.addOption("10 point", tenPoint);
+    autoChooser.addOption("Do Nothing", waitForTeleOp);
+  }
 }

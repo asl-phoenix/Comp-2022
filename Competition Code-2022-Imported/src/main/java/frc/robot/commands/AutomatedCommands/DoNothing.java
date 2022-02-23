@@ -15,8 +15,6 @@ public class DoNothing extends SequentialCommandGroup {
   public DoNothing() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new WaitCommand(15.0)
-    );
+    addCommands(new WaitCommand(15.0));
   }
 }
