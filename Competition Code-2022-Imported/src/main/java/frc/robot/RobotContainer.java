@@ -84,10 +84,10 @@ public class RobotContainer {
   //     new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
 
   // Climber
-  public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
-  public final JoystickButton extend = new JoystickButton(operator, BUTTON_A);
-  public final JoystickButton retract = new JoystickButton(operator, BUTTON_X);
-  public final JoystickButton stay = new JoystickButton(operator, BUTTON_Y);
+  // public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
+  public final JoystickButton extend = new JoystickButton(operator, BUTTON_Y);
+  public final JoystickButton retract = new JoystickButton(operator, BUTTON_B);
+  // public final JoystickButton stay = new JoystickButton(operator, BUTTON_Y);
 
   // == COMMANDS == //
 
@@ -164,8 +164,8 @@ public class RobotContainer {
 
     // Climber
     // climbButton.whenHeld(climbSequence);
-    // extend.whenHeld(extendCommand);
-    // retract.whenHeld(retractCommand);
+    extend.whenHeld(extendCommand);
+    retract.whenHeld(retractCommand);
     // stay.whenHeld(stayCommand);
   }
 }
