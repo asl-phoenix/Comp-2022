@@ -11,7 +11,7 @@ import frc.robot.subsystems.Gyro;
 
 public class GyroReset extends CommandBase {
 
-private Gyro gyro;
+  private Gyro gyro;
 
   /** Creates a new GyroReset. */
   public GyroReset(Gyro gyro) {

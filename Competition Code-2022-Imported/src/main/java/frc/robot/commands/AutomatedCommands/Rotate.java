@@ -63,9 +63,10 @@ public class Rotate extends CommandBase {
     // if (gyro.getGyroState() == 1) gyroReady = true;
     // gyro.getState(); // Debugging
     rotators.setWheelDirection(fR, fL, bR, bL);
-    // if (rotators.reachedPosition(fR, fL, bR, bL) && gyro.getGyroState() == 1) { // State for Gyro 1 is ready
+    // if (rotators.reachedPosition(fR, fL, bR, bL) && gyro.getGyroState() == 1) { // State for Gyro
+    // 1 is ready
     spinners.runSpinners(AUTO_ROTATE_SPEED * turnDirection);
-    //} else {
+    // } else {
     // spinners.stop();
     // }
   }
@@ -75,7 +76,8 @@ public class Rotate extends CommandBase {
   public void end(boolean interrupted) {
     rotators.stop();
     spinners.stop();
-    System.out.println("SDJAF;LKFJSDAFJLK;SDAFJDSLKA;FJSDALK;FJASDLK;FJASDLKFJASLDKFJASDLK;FJSLDAKFJLSDKAFJL;KASDFJLADSKFJSADL;KFJLASKD;JFLSAKDFJASI;O");
+    System.out.println(
+        "SDJAF;LKFJSDAFJLK;SDAFJDSLKA;FJSDALK;FJASDLK;FJASDLKFJASLDKFJASDLK;FJSLDAKFJLSDKAFJL;KASDFJLADSKFJSADL;KFJLASKD;JFLSAKDFJASI;O");
   }
 
   // Returns true when the command should end.

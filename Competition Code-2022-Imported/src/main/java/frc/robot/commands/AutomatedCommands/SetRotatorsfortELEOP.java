@@ -17,13 +17,12 @@ public class SetRotatorsfortELEOP extends CommandBase {
   public SetRotatorsfortELEOP(SwerveRotaters rotaters) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.rotators = rotators;
-
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    rotators.setWheelDirection(90, 90, 90,90);
+    rotators.setWheelDirection(90, 90, 90, 90);
     startTimer = System.currentTimeMillis();
   }
 
@@ -38,7 +37,7 @@ public class SetRotatorsfortELEOP extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    
+
     return (System.currentTimeMillis() - 2000 > startTimer);
   }
 }
