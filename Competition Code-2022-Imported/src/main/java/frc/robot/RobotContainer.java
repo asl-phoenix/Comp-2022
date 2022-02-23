@@ -70,6 +70,9 @@ public class RobotContainer {
 
   // == BUTTONS == //
 
+  // Vision
+  public final JoystickButton cameraButton = new JoystickButton(operator, BUTTON_A);
+
   // Intake
   public final JoystickButton intakeButton = new JoystickButton(operator, INTAKE_BUTTON);
   public final JoystickButton raiseIntakeButton = new JoystickButton(operator, RAISE_INTAKE_BUTTON);
@@ -84,10 +87,10 @@ public class RobotContainer {
   //     new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
 
   // Climber
-  public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
-  public final JoystickButton extend = new JoystickButton(operator, BUTTON_A);
-  public final JoystickButton retract = new JoystickButton(operator, BUTTON_X);
-  public final JoystickButton stay = new JoystickButton(operator, BUTTON_Y);
+  // public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
+  // public final JoystickButton extend = new JoystickButton(operator, BUTTON_A);
+  // public final JoystickButton retract = new JoystickButton(operator, BUTTON_X);
+  // public final JoystickButton stay = new JoystickButton(operator, BUTTON_Y);
 
   // == COMMANDS == //
 
