@@ -31,6 +31,13 @@ public class Climber extends SubsystemBase {
     telescope1.set(ControlMode.PercentOutput, -power);
     telescope2.set(ControlMode.PercentOutput, power);
   }
+  public void leftMotor(double power) {
+    telescope1.set(ControlMode.PercentOutput, -power);
+  }
+  
+  public void rightMotor(double power) {
+    telescope2.set(ControlMode.PercentOutput, power);
+  }
 
   @Override
   public void periodic() {

@@ -162,9 +162,11 @@ public class RobotContainer {
     // COMPRESSOR.setDefaultCommand( new RunCommand(() -> COMPRESSOR.getSetCompressorStatus(),
     // COMPRESSOR));
     CLIMBER.setDefaultCommand(
-        new RunCommand(
-            () -> CLIMBER.supplyTelescoping(operator.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS)),
-            CLIMBER));
+      new RunCommand(
+        () -> CLIMBER.leftMotor(operator.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS))));
+    CLIMBER.setDefaultCommand(
+      new RunCommand(
+        () -> CLIMBER.rightMotor(operator.getRawAxis(ROTATIONAL_VERTICAL_AXIS))));
     // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
@@ -180,10 +182,10 @@ public class RobotContainer {
 
     // Climber
     // climbButton.whenHeld(climbSequence);
-    /*
-    extend.whenHeld(extendCommand);
-    retract.whenHeld(retractCommand);
-    */
+
+    // extend.whenHeld(extendCommand);
+    // retract.whenHeld(retractCommand);
+    
     // stay.whenHeld(stayCommand);
   }
 
