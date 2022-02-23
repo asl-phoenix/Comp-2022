@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 import frc.robot.commands.AutomatedCommands.*;
@@ -19,6 +20,11 @@ import frc.robot.subsystems.*;
 import static frc.robot.Constants.*;
 
 public class RobotContainer {
+  private Command driveForward;
+  private Command sixPoint;
+  private Command tenPoint;
+  private Command waitForTeleOp;
+  private Command climbChild;
 
   // == JOYSTICKS == //
 
@@ -70,8 +76,8 @@ public class RobotContainer {
 
   // == BUTTONS == //
 
-  // Vision
-  public final JoystickButton cameraButton = new JoystickButton(operator, BUTTON_A);
+  // Gyro
+  public final JoystickButton gyroResetButton = new JoystickButton(operator, 8);
 
   // Intake
   public final JoystickButton intakeButton = new JoystickButton(operator, INTAKE_BUTTON);
@@ -88,22 +94,21 @@ public class RobotContainer {
 
   // Climber
   // public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
-  // public final JoystickButton extend = new JoystickButton(operator, BUTTON_A);
-  // public final JoystickButton retract = new JoystickButton(operator, BUTTON_X);
+  public final JoystickButton extend = new JoystickButton(operator, BUTTON_Y);
+  public final JoystickButton retract = new JoystickButton(operator, BUTTON_B);
   // public final JoystickButton stay = new JoystickButton(operator, BUTTON_Y);
 
   // == COMMANDS == //
 
-  // Visiom
-  public final Command cameraSwitch =
-      new CameraSwitch(Robot.server, Robot.camera1, Robot.camera2, Robot.camera1Selected);
+  // Gyro Commands
+  public final Command gyroResetCommand = new GyroReset(GYRO);
 
   // Intake Commands
 
   public final Command intakeCommand = new IntakeCommand(INTAKE);
   public final Command raiseIntakeCommand = new RaiseIntakeCommand(INTAKE);
   // Catapult Commands
-  public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT, INTAKE);
+  public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
   // public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS,
   // PIXY);
@@ -153,14 +158,13 @@ public class RobotContainer {
                         GYRO.getYaw())),
             SWERVESPINNERS));
     GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
+    // INTAKE.setDefaultCommand(new RunCommand(() -> INTAKE.intake(), INTAKE));
     // COMPRESSOR.setDefaultCommand( new RunCommand(() -> COMPRESSOR.getSetCompressorStatus(),
     // COMPRESSOR));
     CLIMBER.setDefaultCommand(
-        new RunCommand(
-            () -> CLIMBER.supplyTelescoping(operator.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS)),
-            CLIMBER));
-    // Vision
-    cameraButton.whenPressed(cameraSwitch);
+        new RunCommand(() -> CLIMBER.leftMotor(operator.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS))));
+    CLIMBER.setDefaultCommand(
+        new RunCommand(() -> CLIMBER.rightMotor(operator.getRawAxis(ROTATIONAL_VERTICAL_AXIS))));
     // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
@@ -171,10 +175,24 @@ public class RobotContainer {
     intakeButton.whileHeld(intakeCommand);
     raiseIntakeButton.whenPressed(raiseIntakeCommand);
 
+    // Gyro
+    gyroResetButton.whenPressed(gyroResetCommand);
+
     // Climber
     // climbButton.whenHeld(climbSequence);
+
     // extend.whenHeld(extendCommand);
     // retract.whenHeld(retractCommand);
+
     // stay.whenHeld(stayCommand);
+  }
+
+  public void initailizeAutoChooser(SendableChooser<Command> chooser) {
+    tenPoint = new Pos1(getRotaters(), getSpinners(), getGyro(), getCatapult(), getIntake());
+    sixPoint = new sixpointer(getRotaters(), getSpinners(), getGyro(), getCatapult(), getIntake());
+    waitForTeleOp = new DoNothing();
+    chooser.addOption("6 Point", sixPoint);
+    chooser.addOption("10 point", tenPoint);
+    chooser.addOption("Do Nothing", waitForTeleOp);
   }
 }
