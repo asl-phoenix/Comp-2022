@@ -36,7 +36,6 @@ public class ReleaseCatapultCommand extends CommandBase {
     startTime = System.currentTimeMillis();
     // }
 
-    
     // A variable is created for determining when we want to end command.
 
   }
