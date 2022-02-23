@@ -8,7 +8,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -81,17 +80,17 @@ public class RobotContainer {
   // Catapult
 
   public final JoystickButton lowerCatapultButton =
-      new JoystickButton(shopper, LOWERCATAPULT_BUTTON);
+      new JoystickButton(operator, LOWERCATAPULT_BUTTON);
   public final JoystickButton releaseCatapultButton =
       new JoystickButton(operator, RELEASECATAPULT_BUTTON);
   // public final JoystickButton alignCatapultButton =
   //     new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
 
   // Climber
-  public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
-  public final JoystickButton extend = new JoystickButton(operator, BUTTON_A);
-  public final JoystickButton retract = new JoystickButton(operator, BUTTON_X);
-  public final JoystickButton stay = new JoystickButton(operator, BUTTON_Y);
+  // public final JoystickButton climbButton = new JoystickButton(operator, CLIMB_BUTTON);
+  public final JoystickButton extend = new JoystickButton(operator, BUTTON_Y);
+  public final JoystickButton retract = new JoystickButton(operator, BUTTON_B);
+  // public final JoystickButton stay = new JoystickButton(operator, BUTTON_Y);
 
   // == COMMANDS == //
 
@@ -105,9 +104,10 @@ public class RobotContainer {
   // Catapult Commands
   public final Command releaseCatapultCommand = new ReleaseCatapultCommand(CATAPULT);
   public final Command lowerCatapultCommand = new LowerCatapultCommand(CATAPULT);
-  // public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS, PIXY);
+  // public final Command alignCatapultCommand = new AutoAlign(SWERVEROTATERS, SWERVESPINNERS,
+  // PIXY);
   // Climber Commands
-  
+
   // public final Command climbSequence = new ClimbSequence(CLIMBER/*, SWERVEROTATERS,
   // SWERVESPINNERS);
   public final Command extendCommand = new PowerTelescopingCommand(CLIMBER, INTAKE, -1);

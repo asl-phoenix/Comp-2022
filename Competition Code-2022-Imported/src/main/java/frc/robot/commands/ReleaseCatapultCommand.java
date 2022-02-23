@@ -6,7 +6,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Catapult;
-import frc.robot.subsystems.Intake;
 import static frc.robot.Constants.*;
 
 public class ReleaseCatapultCommand extends CommandBase {
@@ -29,11 +28,11 @@ public class ReleaseCatapultCommand extends CommandBase {
   @Override
   public void initialize() {
     // Only shoot if the intake is lowered
-    //if (INTAKE.getPistonState()) {
-      // For shooting we need to extend the piston.
-      CATAPULT.extendPiston();
-      startTime = System.currentTimeMillis();
-    //}
+    // if (INTAKE.getPistonState()) {
+    // For shooting we need to extend the piston.
+    CATAPULT.extendPiston();
+    startTime = System.currentTimeMillis();
+    // }
     // A variable is created for determining when we want to end command.
 
   }
@@ -56,7 +55,7 @@ public class ReleaseCatapultCommand extends CommandBase {
     // Only checks if the intake pistons are down, which means that the catapult has fired
     // if (INTAKE.getPistonState()) {
     // This means that 1 second after the command is initialized, the command will end.
-    return (System.currentTimeMillis() - startTime) > 3000;
+    return (System.currentTimeMillis() - startTime) > 1000;
     // }
     // return false;
   }

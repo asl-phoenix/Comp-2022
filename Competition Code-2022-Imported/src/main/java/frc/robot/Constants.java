@@ -49,9 +49,9 @@ public final class Constants {
   // == BUTTON CONSTANTS == //
 
   // Controller Buttons
-  public static final int BUTTON_X = 1; // 1 on 001
-  public static final int BUTTON_A = 2; // 2 on 001
-  public static final int BUTTON_B = 3; // 3 on 001
+  public static final int BUTTON_X = 3; // 1 on 001
+  public static final int BUTTON_A = 1; // 2 on 001
+  public static final int BUTTON_B = 2; // 3 on 001
   public static final int BUTTON_Y = 4; // 4 on 001
   public static final int LEFT_BUMPER = 5;
   public static final int RIGHT_BUMPER = 6;
@@ -63,7 +63,7 @@ public final class Constants {
   // Swerve
   public static final int TRANSLATIONAL_HORIZONTAL_AXIS = 0;
   public static final int TRANSLATIONAL_VERTICAL_AXIS = 1;
-  public static final int ROTATIONAL_HORIZONTAL_AXIS = 2;
+  public static final int ROTATIONAL_HORIZONTAL_AXIS = 4;
 
   // Intake
   public static final int INTAKE_BUTTON = RIGHT_BUMPER;
@@ -72,9 +72,8 @@ public final class Constants {
   // Catapult
   public static final int LOWERCATAPULT_BUTTON = BUTTON_X;
 
-  public static final int RELEASECATAPULT_BUTTON = BUTTON_Y;
+  public static final int RELEASECATAPULT_BUTTON = BUTTON_B;
   // public static final int ALIGNCATAPULT_BUTTON = BUTTON_A;
-
 
   // Climber
   public static final int CLIMB_BUTTON = BUTTON_Y;
@@ -91,9 +90,7 @@ public final class Constants {
 
   public static final double INTAKE_SPEED = -1;
   public static final double SHOOTER_PISTON_SPEED = 0.5;
-  public static final double CATAPULT_SPEED = 0.7;
-
-  // Time Constants
+  public static final double CATAPULT_SPEED = 0.9;
   public static final double WIND_CATAPULT_TIME = 4;
   public static final double RELEASE_CATAPULT_TIME = 2;
 

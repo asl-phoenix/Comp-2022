@@ -5,9 +5,7 @@
 package frc.robot.commands.AutomatedCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.LowerCatapultCommand;
 import frc.robot.commands.ReleaseCatapultCommand;
 import frc.robot.subsystems.*;
 
@@ -28,26 +26,22 @@ public class sixpointer extends SequentialCommandGroup {
       Intake intake) {
     // This is the sequential commands within our autonomous sequence
     gyroAuto = gyro;
+    rotators.resetEncoders();
     addCommands(
-      new SequentialCommandGroup(
-        new WaitCommand(3.0),
-        new IntakeAuto(intake, true),
-        new MoveForward(rotators, spinners, 0.6, 1, 0.4),
-        new WaitCommand(0.5),
-        new ReleaseCatapultCommand(catapult),
-        new WaitCommand(0.5),
-        new MoveForward(rotators, spinners, 0.3, 1, 0.4),
-        new Rotate(rotators, spinners, gyro, 120),
-        new MoveForward(rotators, spinners, 0.4, 1, 0.2),
-        new SetRotatorsfortELEOP(rotators),
-        new MoveForward(rotators, spinners, 1.0, 1, 0.7),
-        new GyroReset(gyro)
-        ));
-       
-        
-        
+        new SequentialCommandGroup(
+            new WaitCommand(3.0),
+            new IntakeAuto(intake, true),
+            new MoveForward(rotators, spinners, 0.6, 1, 0.4),
+            new WaitCommand(0.5),
+            new ReleaseCatapultCommand(catapult),
+            new WaitCommand(0.5),
+            new MoveForward(rotators, spinners, 0.3, 1, 0.4),
+            new Rotate(rotators, spinners, gyro, 120),
+            new MoveForward(rotators, spinners, 0.4, 1, 0.2),
+            new SetRotatorsfortELEOP(rotators),
+            new MoveForward(rotators, spinners, 1.0, 1, 0.7),
+            new GyroReset(gyro)));
   }
 }
 
-
-// move forward, shoot, rotate 15 degrees anti conclic, move direction with 5 
+// move forward, shoot, rotate 15 degrees anti conclic, move direction with 5

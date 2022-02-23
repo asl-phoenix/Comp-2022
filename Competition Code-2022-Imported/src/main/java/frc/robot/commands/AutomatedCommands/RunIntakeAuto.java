@@ -30,7 +30,7 @@ public class RunIntakeAuto extends CommandBase {
   public void execute() {}
 
   public void end(boolean interrupted) {
-      System.out.println("Intake done");
+    System.out.println("Intake done");
   }
 
   public boolean isFinished() {
