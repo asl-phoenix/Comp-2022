@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.AutomatedCommands.*;
+
 import frc.robot.commands.*;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -33,6 +34,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private Command driveForward;
   private Command climbChild;
+
+  private final TalonFX BRR = new TalonFX(8);
 
   private RobotContainer rCon;
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
@@ -140,6 +143,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    System.out.println(BRR.getSelectedSensorPosition());
   }
 
   @Override
