@@ -15,6 +15,7 @@ import frc.robot.commands.AutomatedCommands.*;
 import frc.robot.commands.*;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import static frc.robot.Constants.*;
 
 import edu.wpi.first.cameraserver.CameraServer;
 
@@ -50,10 +51,15 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
 
 
-    new TalonFX()
+    var BRR = new TalonFX(BACK_RIGHT_MODULE_STEER_MOTOR);
+    var BLR = new TalonFX(BACK_LEFT_MODULE_STEER_MOTOR);
+    var FRR = new TalonFX(FRONT_RIGHT_MODULE_STEER_MOTOR);
+    var FLR = new TalonFX(FRONT_LEFT_MODULE_STEER_MOTOR);
 
-
-
+    BRR.setSelectedSensorPosition(0, 0, 20);
+    BLR.setSelectedSensorPosition(0, 0, 20);
+    FRR.setSelectedSensorPosition(0, 0, 20);
+    FLR.setSelectedSensorPosition(0, 0, 20);
 
     rCon = new RobotContainer();
     // SmartDashboard.putData("Auto choices", autoChooser);
