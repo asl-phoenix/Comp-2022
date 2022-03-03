@@ -40,6 +40,7 @@ public class Robot extends TimedRobot {
   private RobotContainer rCon;
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
+
   /**
    * This function is run when the robot is first started up and should be used
    * for any
@@ -156,19 +157,11 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
-  /*
-   * public void initailizeAutoChooser() {
-   * climbChild = new ClimbSequence(rCon.getClimber(), rCon.getRotaters(),
-   * rCon.getSpinners());
-   * driveForward =
-   * new AutoSequence(
-   * rCon.getRotaters(),
-   * rCon.getSpinners(),
-   * rCon.getGyro(),
-   * rCon.getCatapult(),
-   * rCon.getIntake());
-   * autoChooser.addOption("Climb Squence", climbChild);
-   * autoChooser.addOption("Drive Forward", driveForward);
-   * }
-   */
+  
+    public void initailizeAutoChooser() {
+    climbChild = this.rCon.getDrive().autoTest("Blue1p1.wpilib.json");
+    autoChooser.addOption("Climb Squence", climbChild);
+    autoChooser.addOption("Drive Forward", driveForward);
+    }
+   
 }

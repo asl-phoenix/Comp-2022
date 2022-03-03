@@ -10,11 +10,16 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 import com.omagarwal25.swervelib.Mk3SwerveModuleHelper;
 import com.omagarwal25.swervelib.SdsModuleConfigurations;
 import com.omagarwal25.swervelib.SwerveModule;
+import com.pathplanner.lib.PathPlanner;
+import com.pathplanner.lib.PathPlannerTrajectory;
+import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -24,7 +29,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
 
 public class Drive extends SubsystemBase {
-        
+
         /**
          * The maximum voltage that will be delivered to the drive motors.
          * <p>
@@ -88,6 +93,7 @@ public class Drive extends SubsystemBase {
         private final SwerveModule m_backRightModule;
 
         private ChassisSpeeds m_chassisSpeeds = new ChassisSpeeds(0.0, 0.0, 0.0);
+        private SwerveDriveOdometry m_oSwerveDriveOdometry;
 
         public Drive() {
                 ShuffleboardTab tab = Shuffleboard.getTab("Drivetrain");
@@ -164,6 +170,12 @@ public class Drive extends SubsystemBase {
                                 BACK_RIGHT_MODULE_STEER_MOTOR,
                                 BACK_RIGHT_MODULE_STEER_ENCODER,
                                 BACK_RIGHT_MODULE_STEER_OFFSET);
+
+                m_oSwerveDriveOdometry = new SwerveDriveOdometry(m_kinematics, this.getGyroscopeRotation());
+        }
+
+        public Pose2d getPose() {
+                return m_oSwerveDriveOdometry.getPoseMeters();
         }
 
         /**
@@ -196,11 +208,26 @@ public class Drive extends SubsystemBase {
 
         public void drive(ChassisSpeeds chassisSpeeds) {
                 m_chassisSpeeds = chassisSpeeds;
+                setSwerveModuleState(m_chassisSpeeds);
+        }
+
+        public PPSwerveControllerCommand autoTest(String path) {
+                PathPlannerTrajectory autoTestPath = PathPlanner.loadPath(path, 8, 5);
+                return new PPSwerveControllerCommand(autoTestPath, getPose(), m_kinematics, xController, yController, thetaController, this::setSwerveModuleState, this);
+        }
+
+        private SwerveModuleState[] states;
+
+        public void setSwerveModuleState(SwerveModuleState[] s) {
+                states = s;
+        }
+
+        public void setSwerveModuleState(ChassisSpeeds s) {
+                states = m_kinematics.toSwerveModuleStates(s);
         }
 
         @Override
         public void periodic() {
-                SwerveModuleState[] states = m_kinematics.toSwerveModuleStates(m_chassisSpeeds);
                 SwerveDriveKinematics.desaturateWheelSpeeds(states, MAX_VELOCITY_METERS_PER_SECOND);
 
                 m_frontLeftModule.set(states[0].speedMetersPerSecond / MAX_VELOCITY_METERS_PER_SECOND * MAX_VOLTAGE,
