@@ -195,6 +195,9 @@ public class Drive extends SubsystemBase {
         public void periodic() {
                 SwerveDriveKinematics.desaturateWheelSpeeds(states, MAX_VELOCITY_METERS_PER_SECOND);
 
+                m_oSwerveDriveOdometry.update(getGyroscopeRotation(), states);
+
+
                 m_frontLeftModule.set(states[0].speedMetersPerSecond / MAX_VELOCITY_METERS_PER_SECOND * MAX_VOLTAGE,
                                 states[0].angle.getRadians());
                 m_frontRightModule.set(states[1].speedMetersPerSecond / MAX_VELOCITY_METERS_PER_SECOND * MAX_VOLTAGE,
