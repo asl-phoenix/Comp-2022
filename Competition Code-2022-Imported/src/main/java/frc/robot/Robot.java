@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.AutomatedCommands.*;
+import frc.robot.commands.ReleaseCatapultCommand;
 
 import frc.robot.commands.*;
 
@@ -32,8 +35,6 @@ import edu.wpi.first.cameraserver.CameraServer;
 public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
-  private Command driveForward;
-  private Command climbChild;
 
   private final TalonFX BRR = new TalonFX(8);
 
@@ -108,12 +109,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new AutoSequence(
-        rCon.getDrive(),
-
-        rCon.getGyro(),
-        rCon.getCatapult(),
-        rCon.getIntake());
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -158,10 +153,79 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {
   }
   
-    public void initailizeAutoChooser() {
-    climbChild = this.rCon.getDrive().autoTest("Blue1p1.wpilib.json");
-    autoChooser.addOption("Climb Squence", climbChild);
-    autoChooser.addOption("Drive Forward", driveForward);
+  public void initailizeAutoChooser() {
+    // TODO figure out what extention WPI lib likes
+    // climbChild = this.rCon.getDrive().autoPath("Blue1p1.wpilib.json");s
+
+    autoChooser.addOption("Red Hangar", getAuto(AutoName.RED_HANGAR));
+    autoChooser.addOption("Red Human", getAuto(AutoName.RED_HUMAN));
+    autoChooser.addOption("Red Middle", getAuto(AutoName.RED_MIDDLE));
+    autoChooser.addOption("Blue Hangar", getAuto(AutoName.BLUE_HANGAR));
+    autoChooser.addOption("Blue Human", getAuto(AutoName.BLUE_HUMAN));
+    autoChooser.addOption("Blue Middle", getAuto(AutoName.BLUE_MIDDLE));
+    autoChooser.addOption("Nothing", getAuto(AutoName.NOTHING));
+    autoChooser.addOption("Exit", getAuto(AutoName.EXIT));
+    autoChooser.addOption("Threeball Red", getAuto(AutoName.THREEBALL_RED));
+    autoChooser.addOption("Threeball Blue", getAuto(AutoName.THREEBALL_BLUE));
+  }
+  
+  enum AutoName {
+    RED_HANGAR, RED_HUMAN, RED_MIDDLE, BLUE_HANGAR, BLUE_HUMAN, BLUE_MIDDLE ,NOTHING, EXIT, THREEBALL_RED, THREEBALL_BLUE
+  }
+
+  SequentialCommandGroup twoBallAuto(String path) {
+    var intake = rCon.getIntake();
+    var catapult = rCon.getCatapult();
+    var drive = rCon.getDrive();
+
+    var fireCatapult = new ReleaseCatapultCommand(catapult, intake);
+    var intakeOn = new IntakeAuto(intake, true);
+    var lowerCatapult = new LowerCatapultAuto(catapult);
+    var wait = new WaitCommand(0.5);
+
+   return new SequentialCommandGroup(
+      intakeOn,wait, fireCatapult,wait, lowerCatapult, drive.autoPath(path + "1.path"), wait, drive.autoPath(path + "2.path"), fireCatapult, drive.autoPath(path + "3.path")
+    ); 
+  }
+
+  Command getAuto(AutoName pos) {
+
+    var intake = rCon.getIntake();
+    var catapult = rCon.getCatapult();
+    var drive = rCon.getDrive();
+
+    var fireCatapult = new ReleaseCatapultCommand(catapult, intake);
+    var intakeOn = new IntakeAuto(intake, true);
+    var lowerCatapult = new LowerCatapultAuto(catapult);
+    var wait = new WaitCommand(0.5);
+    
+
+    switch (pos) {
+
+      case BLUE_HANGAR:
+        return twoBallAuto("pathplanner/BlueHangar");
+      case BLUE_HUMAN:
+        return twoBallAuto("pathplanner/BlueHuman");
+      case BLUE_MIDDLE:
+        return twoBallAuto("pathplanner/BlueMiddle");
+      case RED_HANGAR:
+        return twoBallAuto("pathplanner/RedHangar");
+      case RED_HUMAN:
+        return twoBallAuto("pathplanner/RedHuman");
+      case RED_MIDDLE:
+        return twoBallAuto("pathplanner/RedMiddle");
+      case THREEBALL_BLUE:
+        return new SequentialCommandGroup(intakeOn, wait, fireCatapult, wait, lowerCatapult, drive.autoPath("BlueThreeBall1.path"), wait, drive.autoPath("BlueThreeBall2.path"), fireCatapult, wait, lowerCatapult, drive.autoPath("BlueThreeBall3.path"), wait, drive.autoPath("BlueThreeBall4.path"),fireCatapult,wait,lowerCatapult,drive.autoPath("BlueThreeBall5.path"));
+      case THREEBALL_RED:
+        return new SequentialCommandGroup(intakeOn, wait, fireCatapult, wait, lowerCatapult, drive.autoPath("RedThreeBall1.path"), wait, drive.autoPath("RedThreeBall2.path"), fireCatapult, wait, lowerCatapult, drive.autoPath("RedThreeBall3.path"), wait, drive.autoPath("RedThreeBall4.path"),fireCatapult,wait,lowerCatapult,drive.autoPath("RedThreeBall5.path"));
+      // case EXIT:
+      //   break;
+      case NOTHING:
+        return new WaitCommand(15);
+      default:
+        return new WaitCommand(15);
+
+        
     }
-   
+  }
 }

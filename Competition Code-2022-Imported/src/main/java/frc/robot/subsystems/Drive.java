@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
 import com.ctre.phoenix.sensors.PigeonIMU;
 import com.omagarwal25.swervelib.Mk3SwerveModuleHelper;
 import com.omagarwal25.swervelib.SdsModuleConfigurations;
@@ -21,10 +19,13 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
 
 import static frc.robot.Constants.*;
 
@@ -97,31 +98,6 @@ public class Drive extends SubsystemBase {
 
         public Drive() {
                 ShuffleboardTab tab = Shuffleboard.getTab("Drivetrain");
-
-                // There are 4 methods you can call to create your swerve modules.
-                // The method you use depends on what motors you are using.
-                //
-                // Mk3SwerveModuleHelper.createFalcon500(...)
-                // Your module has two Falcon 500s on it. One for steering and one for driving.
-                //
-                // Mk3SwerveModuleHelper.createNeo(...)
-                // Your module has two NEOs on it. One for steering and one for driving.
-                //
-                // Mk3SwerveModuleHelper.createFalcon500Neo(...)
-                // Your module has a Falcon 500 and a NEO on it. The Falcon 500 is for driving
-                // and the NEO is for steering.
-                //
-                // Mk3SwerveModuleHelper.createNeoFalcon500(...)
-                // Your module has a NEO and a Falcon 500 on it. The NEO is for driving and the
-                // Falcon 500 is for steering.
-                //
-                // Similar helpers also exist for Mk4 modules using the Mk4SwerveModuleHelper
-                // class.
-
-                // By default we will use Falcon 500s in standard configuration. But if you use
-                // a different configuration or motors
-                // you MUST change it. If you do not, your code will crash on startup.
-                // FIXME Setup motor configuration
                 m_frontLeftModule = Mk3SwerveModuleHelper.createFalcon500(
                                 // This parameter is optional, but will allow you to see the current state of
                                 // the module on the dashboard.
@@ -184,26 +160,11 @@ public class Drive extends SubsystemBase {
          * 'forwards' direction.
          */
         public void zeroGyroscope() {
-                // FIXME Remove if you are using a Pigeon
                 m_pigeon.setFusedHeading(0.0);
-
-                // FIXME Uncomment if you are using a NavX
-                // m_navx.zeroYaw();
         }
 
         public Rotation2d getGyroscopeRotation() {
-                // FIXME Remove if you are using a Pigeon
                 return Rotation2d.fromDegrees(m_pigeon.getFusedHeading());
-
-                // FIXME Uncomment if you are using a NavX
-                // if (m_navx.isMagnetometerCalibrated()) {
-                // // We will only get valid fused headings if the magnetometer is calibrated
-                // return Rotation2d.fromDegrees(m_navx.getFusedHeading());
-                // }
-                //
-                // // We have to invert the angle of the NavX so that rotating the robot
-                // counter-clockwise makes the angle increase.
-                // return Rotation2d.fromDegrees(360.0 - m_navx.getYaw());
         }
 
         public void drive(ChassisSpeeds chassisSpeeds) {
@@ -211,9 +172,13 @@ public class Drive extends SubsystemBase {
                 setSwerveModuleState(m_chassisSpeeds);
         }
 
-        public PPSwerveControllerCommand autoTest(String path) {
+        // TODO rip values from another team
+        public PPSwerveControllerCommand autoPath(String path) {
                 PathPlannerTrajectory autoTestPath = PathPlanner.loadPath(path, 8, 5);
-                return new PPSwerveControllerCommand(autoTestPath, getPose(), m_kinematics, xController, yController, thetaController, this::setSwerveModuleState, this);
+                return new PPSwerveControllerCommand(autoTestPath, this::getPose, m_kinematics,
+                                new PIDController(2.0, 2.0, 2.0), new PIDController(2.0, 2.0, 2.0),
+                                new ProfiledPIDController(2.0, 2.0, 2.0, new TrapezoidProfile.Constraints(8.0, 5.0)),
+                                this::setSwerveModuleState, this);
         }
 
         private SwerveModuleState[] states;

@@ -29,21 +29,12 @@ public class RobotContainer {
   // Drivetrain Subs
   private final Drive m_drivetrainSubsystem = new Drive();
 
-  // Extra Subs
-  public final Gyro GYRO = new Gyro();
-  /*
-   * public final Pixy PIXY = new Pixy();
-   */
   // Mechanism Subs
   public final Catapult CATAPULT = new Catapult();
 
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
   // public final CompressorF COMPRESSOR = new CompressorF();
-
-  public Gyro getGyro() {
-    return GYRO;
-  }
 
   public Intake getIntake() {
     return INTAKE;
@@ -128,14 +119,16 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
-    // COMPRESSOR.setDefaultCommand( new RunCommand(() ->
-    // COMPRESSOR.getSetCompressorStatus(),
-    // COMPRESSOR));
     CLIMBER.setDefaultCommand(
         new RunCommand(
             () -> CLIMBER.supplyTelescoping(operator.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS)),
             CLIMBER));
+
+   INTAKE.setDefaultCommand(
+     new RunCommand(
+       () -> INTAKE.intake(), INTAKE
+     )
+   );
     // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
