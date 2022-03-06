@@ -7,38 +7,39 @@ import frc.robot.subsystems.Drive;
 import java.util.function.DoubleSupplier;
 
 public class DriveCommand extends CommandBase {
-    private final Drive m_drivetrainSubsystem;
+  private final Drive m_drivetrainSubsystem;
 
-    private final DoubleSupplier m_translationXSupplier;
-    private final DoubleSupplier m_translationYSupplier;
-    private final DoubleSupplier m_rotationSupplier;
+  private final DoubleSupplier m_translationXSupplier;
+  private final DoubleSupplier m_translationYSupplier;
+  private final DoubleSupplier m_rotationSupplier;
 
-    public DriveCommand(Drive drivetrainSubsystem,
-            DoubleSupplier translationXSupplier,
-            DoubleSupplier translationYSupplier,
-            DoubleSupplier rotationSupplier) {
-        this.m_drivetrainSubsystem = drivetrainSubsystem;
-        this.m_translationXSupplier = translationXSupplier;
-        this.m_translationYSupplier = translationYSupplier;
-        this.m_rotationSupplier = rotationSupplier;
+  public DriveCommand(
+      Drive drivetrainSubsystem,
+      DoubleSupplier translationXSupplier,
+      DoubleSupplier translationYSupplier,
+      DoubleSupplier rotationSupplier) {
+    this.m_drivetrainSubsystem = drivetrainSubsystem;
+    this.m_translationXSupplier = translationXSupplier;
+    this.m_translationYSupplier = translationYSupplier;
+    this.m_rotationSupplier = rotationSupplier;
 
-        addRequirements(drivetrainSubsystem);
-    }
+    addRequirements(drivetrainSubsystem);
+  }
 
-    @Override
-    public void execute() {
+  @Override
+  public void execute() {
 
-        // You can use `new ChassisSpeeds(...)` for robot-oriented movement instead of
-        // field-oriented movement
-        m_drivetrainSubsystem.drive(
-                new ChassisSpeeds(
-                        m_translationXSupplier.getAsDouble(),
-                        m_translationYSupplier.getAsDouble(),
-                        m_rotationSupplier.getAsDouble()));
-    }
+    // You can use `new ChassisSpeeds(...)` for robot-oriented movement instead of
+    // field-oriented movement
+    m_drivetrainSubsystem.drive(
+        new ChassisSpeeds(
+            m_translationXSupplier.getAsDouble(),
+            m_translationYSupplier.getAsDouble(),
+            m_rotationSupplier.getAsDouble()));
+  }
 
-    @Override
-    public void end(boolean interrupted) {
-        m_drivetrainSubsystem.drive(new ChassisSpeeds(0.0, 0.0, 0.0));
-    }
+  @Override
+  public void end(boolean interrupted) {
+    m_drivetrainSubsystem.drive(new ChassisSpeeds(0.0, 0.0, 0.0));
+  }
 }

@@ -22,15 +22,11 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import static frc.robot.Constants.*;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
 
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the
- * name of this class or
- * the package after creating this project, you must also update the
- * build.gradle file in the
+ * The VM is configured to automatically run this class, and to call the functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the name of this class or
+ * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
 public class Robot extends TimedRobot {
@@ -42,10 +38,8 @@ public class Robot extends TimedRobot {
   private RobotContainer rCon;
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
-
   /**
-   * This function is run when the robot is first started up and should be used
-   * for any
+   * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
   @Override
@@ -55,7 +49,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
-
 
     var BRR = new TalonFX(BACK_RIGHT_MODULE_STEER_MOTOR);
     var BLR = new TalonFX(BACK_LEFT_MODULE_STEER_MOTOR);
@@ -73,14 +66,10 @@ public class Robot extends TimedRobot {
   }
 
   /**
-   * This function is called every robot packet, no matter the mode. Use this for
-   * items like
-   * diagnostics that you want ran during disabled, autonomous, teleoperated and
-   * test.
+   * This function is called every robot packet, no matter the mode. Use this for items like
+   * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
    *
-   * <p>
-   * This runs after the mode specific periodic functions, but before LiveWindow
-   * and
+   * <p>This runs after the mode specific periodic functions, but before LiveWindow and
    * SmartDashboard integrated updating.
    */
   @Override
@@ -97,17 +86,12 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {
-  }
+  public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {
-  }
+  public void disabledPeriodic() {}
 
-  /**
-   * This autonomous runs the autonomous command selected by your
-   * {@link RobotContainer} class.
-   */
+  /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
     // schedule the autonomous command (example)
@@ -123,8 +107,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {
-  }
+  public void autonomousPeriodic() {}
 
   @Override
   public void teleopInit() {
@@ -151,9 +134,8 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {
-  }
-  
+  public void testPeriodic() {}
+
   public void initailizeAutoChooser() {
     // TODO figure out what extention WPI lib likes
     // climbChild = this.rCon.getDrive().autoPath("Blue1p1.wpilib.json");s
@@ -171,13 +153,28 @@ public class Robot extends TimedRobot {
     autoChooser.addOption("Oneball Red Hangar", getAuto(AutoName.ONEBALL_RED_HANGAR));
     autoChooser.addOption("Oneball Red Human", getAuto(AutoName.ONEBALL_RED_HUMAN));
     autoChooser.addOption("Oneball Red Middle", getAuto(AutoName.ONEBALL_RED_MIDDLE));
-        autoChooser.addOption("Oneball Blue Hangar", getAuto(AutoName.ONEBALL_BLUE_HANGAR));
+    autoChooser.addOption("Oneball Blue Hangar", getAuto(AutoName.ONEBALL_BLUE_HANGAR));
     autoChooser.addOption("Oneball Blue Human", getAuto(AutoName.ONEBALL_BLUE_HUMAN));
     autoChooser.addOption("Oneball Blue Middle", getAuto(AutoName.ONEBALL_BLUE_MIDDLE));
   }
-  
+
   enum AutoName {
-    RED_HANGAR, RED_HUMAN, RED_MIDDLE, BLUE_HANGAR, BLUE_HUMAN, BLUE_MIDDLE ,NOTHING, EXIT, THREEBALL_RED, THREEBALL_BLUE, ONEBALL_RED_HANGAR, ONEBALL_BLUE_HANGAR, ONEBALL_RED_HUMAN, ONEBALL_BLUE_HUMAN, ONEBALL_RED_MIDDLE, ONEBALL_BLUE_MIDDLE
+    RED_HANGAR,
+    RED_HUMAN,
+    RED_MIDDLE,
+    BLUE_HANGAR,
+    BLUE_HUMAN,
+    BLUE_MIDDLE,
+    NOTHING,
+    EXIT,
+    THREEBALL_RED,
+    THREEBALL_BLUE,
+    ONEBALL_RED_HANGAR,
+    ONEBALL_BLUE_HANGAR,
+    ONEBALL_RED_HUMAN,
+    ONEBALL_BLUE_HUMAN,
+    ONEBALL_RED_MIDDLE,
+    ONEBALL_BLUE_MIDDLE
   }
 
   SequentialCommandGroup twoBallAuto(String path) {
@@ -191,12 +188,20 @@ public class Robot extends TimedRobot {
     var wait = new WaitCommand(0.5);
 
     return new SequentialCommandGroup(
-        intakeOn, wait, fireCatapult, wait, lowerCatapult, drive.autoPath(path + "1.path"), wait,
-        drive.autoPath(path + "2.path"), fireCatapult, drive.autoPath(path + "3.path"));
+        intakeOn,
+        wait,
+        fireCatapult,
+        wait,
+        lowerCatapult,
+        drive.autoPath(path + "1.path"),
+        wait,
+        drive.autoPath(path + "2.path"),
+        fireCatapult,
+        drive.autoPath(path + "3.path"));
   }
-  
+
   SequentialCommandGroup oneBallAuto(String path) {
-     var intake = rCon.getIntake();
+    var intake = rCon.getIntake();
     var catapult = rCon.getCatapult();
     var drive = rCon.getDrive();
 
@@ -205,7 +210,8 @@ public class Robot extends TimedRobot {
     var lowerCatapult = new LowerCatapultAuto(catapult);
     var wait = new WaitCommand(0.5);
 
-    return new SequentialCommandGroup(intakeOn, wait, fireCatapult, wait, lowerCatapult, drive.autoPath(path));
+    return new SequentialCommandGroup(
+        intakeOn, wait, fireCatapult, wait, lowerCatapult, drive.autoPath(path));
   }
 
   Command getAuto(AutoName pos) {
@@ -218,10 +224,8 @@ public class Robot extends TimedRobot {
     var intakeOn = new IntakeAuto(intake, true);
     var lowerCatapult = new LowerCatapultAuto(catapult);
     var wait = new WaitCommand(0.5);
-    
 
     switch (pos) {
-
       case BLUE_HANGAR:
         return twoBallAuto("pathplanner/TwoBlueHangar");
       case BLUE_HUMAN:
@@ -235,27 +239,61 @@ public class Robot extends TimedRobot {
       case RED_MIDDLE:
         return twoBallAuto("pathplanner/TwoRedMiddle");
       case THREEBALL_BLUE:
-        return new SequentialCommandGroup(intakeOn, wait, fireCatapult, wait, lowerCatapult, drive.autoPath("pathplanner/ThreeBlue1.path"), wait, drive.autoPath("pathplanner/ThreeBlue2.path"), fireCatapult, wait, lowerCatapult, drive.autoPath("pathplanner/ThreeBlue3.path"), wait, drive.autoPath("pathplanner/ThreeBlue4.path"),fireCatapult,wait,lowerCatapult,drive.autoPath("pathplanner/ThreeBlue5.path"));
+        return new SequentialCommandGroup(
+            intakeOn,
+            wait,
+            fireCatapult,
+            wait,
+            lowerCatapult,
+            drive.autoPath("pathplanner/ThreeBlue1.path"),
+            wait,
+            drive.autoPath("pathplanner/ThreeBlue2.path"),
+            fireCatapult,
+            wait,
+            lowerCatapult,
+            drive.autoPath("pathplanner/ThreeBlue3.path"),
+            wait,
+            drive.autoPath("pathplanner/ThreeBlue4.path"),
+            fireCatapult,
+            wait,
+            lowerCatapult,
+            drive.autoPath("pathplanner/ThreeBlue5.path"));
       case THREEBALL_RED:
-        return new SequentialCommandGroup(intakeOn, wait, fireCatapult, wait, lowerCatapult, drive.autoPath("pathplanner/ThreeRed1.path"), wait, drive.autoPath("pathplanner/ThreeRed2.path"), fireCatapult, wait, lowerCatapult, drive.autoPath("pathplanner/ThreeRed3.path"), wait, drive.autoPath("pathplanner/ThreeRed4.path"),fireCatapult,wait,lowerCatapult,drive.autoPath("pathplanner/ThreeRed5.path"));
+        return new SequentialCommandGroup(
+            intakeOn,
+            wait,
+            fireCatapult,
+            wait,
+            lowerCatapult,
+            drive.autoPath("pathplanner/ThreeRed1.path"),
+            wait,
+            drive.autoPath("pathplanner/ThreeRed2.path"),
+            fireCatapult,
+            wait,
+            lowerCatapult,
+            drive.autoPath("pathplanner/ThreeRed3.path"),
+            wait,
+            drive.autoPath("pathplanner/ThreeRed4.path"),
+            fireCatapult,
+            wait,
+            lowerCatapult,
+            drive.autoPath("pathplanner/ThreeRed5.path"));
       case EXIT:
         return new MoveForward(drive, 1.0, 1.0);
-		case ONEBALL_BLUE_HANGAR:
-          return oneBallAuto("pathplanner/OneBlueHangar.path");
-		case ONEBALL_BLUE_HUMAN:
+      case ONEBALL_BLUE_HANGAR:
+        return oneBallAuto("pathplanner/OneBlueHangar.path");
+      case ONEBALL_BLUE_HUMAN:
         return oneBallAuto("pathplanner/OneBlueHuman.path");
-		case ONEBALL_BLUE_MIDDLE:
-      return oneBallAuto("pathplanner/OneBlueMiddle.path");
-		case ONEBALL_RED_HANGAR:
-          return oneBallAuto("pathplanner/OneRedHangar.path");
-		case ONEBALL_RED_HUMAN:
-      return oneBallAuto("pathplanner/OneRedHuman.path");
-		case ONEBALL_RED_MIDDLE:
-          return oneBallAuto("pathplanner/OneRedMiddle.path");
+      case ONEBALL_BLUE_MIDDLE:
+        return oneBallAuto("pathplanner/OneBlueMiddle.path");
+      case ONEBALL_RED_HANGAR:
+        return oneBallAuto("pathplanner/OneRedHangar.path");
+      case ONEBALL_RED_HUMAN:
+        return oneBallAuto("pathplanner/OneRedHuman.path");
+      case ONEBALL_RED_MIDDLE:
+        return oneBallAuto("pathplanner/OneRedMiddle.path");
       default:
         return new WaitCommand(15);
-
-        
     }
   }
 }

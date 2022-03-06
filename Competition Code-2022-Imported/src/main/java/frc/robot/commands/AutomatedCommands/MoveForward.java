@@ -24,7 +24,7 @@ public class MoveForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    DRIVE.drive(new ChassisSpeeds(0,SPEED,0));
+    DRIVE.drive(new ChassisSpeeds(0, SPEED, 0));
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,6 +38,6 @@ public class MoveForward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (System.currentTimeMillis() - DISTANCE/SPEED*1000 > startTime);
+    return (System.currentTimeMillis() - DISTANCE / SPEED * 1000 > startTime);
   }
 }
