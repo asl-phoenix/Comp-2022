@@ -29,21 +29,12 @@ public class RobotContainer {
   // Drivetrain Subs
   private final Drive m_drivetrainSubsystem = new Drive();
 
-  // Extra Subs
-  public final Gyro GYRO = new Gyro();
-  /*
-   * public final Pixy PIXY = new Pixy();
-   */
   // Mechanism Subs
   public final Catapult CATAPULT = new Catapult();
 
   public final Intake INTAKE = new Intake();
   public final Climber CLIMBER = new Climber();
   // public final CompressorF COMPRESSOR = new CompressorF();
-
-  public Gyro getGyro() {
-    return GYRO;
-  }
 
   public Intake getIntake() {
     return INTAKE;
@@ -69,8 +60,10 @@ public class RobotContainer {
 
   // Catapult
 
-  public final JoystickButton lowerCatapultButton = new JoystickButton(operator, LOWERCATAPULT_BUTTON);
-  public final JoystickButton releaseCatapultButton = new JoystickButton(operator, RELEASECATAPULT_BUTTON);
+  public final JoystickButton lowerCatapultButton =
+      new JoystickButton(operator, LOWERCATAPULT_BUTTON);
+  public final JoystickButton releaseCatapultButton =
+      new JoystickButton(operator, RELEASECATAPULT_BUTTON);
   // public final JoystickButton alignCatapultButton =
   // new JoystickButton(operator, ALIGNCATAPULT_BUTTON);
 
@@ -104,38 +97,36 @@ public class RobotContainer {
   // This constructs the robot container class.
   public RobotContainer() {
 
-    m_drivetrainSubsystem.setDefaultCommand(new DriveCommand(
-        m_drivetrainSubsystem,
-        () -> -modifyAxis(shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS))
-            * Drive.MAX_VELOCITY_METERS_PER_SECOND,
-        () -> -modifyAxis(shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS))
-            * Drive.MAX_VELOCITY_METERS_PER_SECOND,
-        () -> -modifyAxis(shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS))
-            * Drive.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND
-
-    ));
+    m_drivetrainSubsystem.setDefaultCommand(
+        new DriveCommand(
+            m_drivetrainSubsystem,
+            () ->
+                -modifyAxis(shopper.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS))
+                    * Drive.MAX_VELOCITY_METERS_PER_SECOND,
+            () ->
+                -modifyAxis(shopper.getRawAxis(TRANSLATIONAL_HORIZONTAL_AXIS))
+                    * Drive.MAX_VELOCITY_METERS_PER_SECOND,
+            () ->
+                -modifyAxis(shopper.getRawAxis(ROTATIONAL_HORIZONTAL_AXIS))
+                    * Drive.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND));
 
     configureButtonBindings();
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be
-   * created by
+   * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
-   * it to a {@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
 
-    GYRO.setDefaultCommand(new RunCommand(() -> GYRO.getState(), GYRO));
-    // COMPRESSOR.setDefaultCommand( new RunCommand(() ->
-    // COMPRESSOR.getSetCompressorStatus(),
-    // COMPRESSOR));
     CLIMBER.setDefaultCommand(
         new RunCommand(
             () -> CLIMBER.supplyTelescoping(operator.getRawAxis(TRANSLATIONAL_VERTICAL_AXIS)),
             CLIMBER));
+
+    INTAKE.setDefaultCommand(new RunCommand(() -> INTAKE.intake(), INTAKE));
     // Catapult
     lowerCatapultButton.whenHeld(lowerCatapultCommand);
     releaseCatapultButton.whenPressed(releaseCatapultCommand);
